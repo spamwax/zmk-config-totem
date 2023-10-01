@@ -45,6 +45,13 @@
                 bindings = <&tog TVP1>;
             };
     };
+    tri-state: tri-state {
+        compatible = "zmk,behavior-tri-state";
+        label = "TRI-STATE";
+        #binding-cells = <0>;
+        bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
+    };
+
 
     macros {
         gif: gif {
