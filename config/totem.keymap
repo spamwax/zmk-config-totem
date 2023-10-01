@@ -53,8 +53,7 @@
             #binding-cells = <0>;
             bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
         };
-    }
-
+    };
 
     macros {
         gif: gif {
