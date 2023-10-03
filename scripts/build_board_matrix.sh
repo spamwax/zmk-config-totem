@@ -38,6 +38,7 @@ compile_board () {
 
         # Also copy CONFIG_* settings for possible debugging purposes.
         CONFIG_OUTPUT="$DOCKER_CONFIG_DIR/$OUTPUT_DIR/CONFIG_$artifact_name"
+        [[ -f $CONFIG_OUTPUT ]] && [[ ! -L $CONFIG_OUTPUT ]] && mv "$CONFIG_OUTPUT" "$CONFIG_OUTPUT.bak"
         grep -v -e "^#" -e "^$" "$DOCKER_ZMK_DIR/app/build/$BUILD_DIR/zephyr/.config" | \
             sort > "$CONFIG_OUTPUT"
 
