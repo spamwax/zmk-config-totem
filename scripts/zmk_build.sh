@@ -92,11 +92,11 @@ done
 [[ -z $ZEPHYR_VERSION ]] && ZEPHYR_VERSION="3.2.0"
 [[ -z $RUNWITH_DOCKER ]] && RUNWITH_DOCKER="true"
 
-[[ -z $OUTPUT_DIR ]] && OUTPUT_DIR="$HOME/Downloads"
-[[ -z $LOG_DIR ]] && LOG_DIR="/tmp"
-
 [[ -z $HOST_ZMK_DIR ]] && HOST_ZMK_DIR="$HOME/projects/zmk_firmwares/zmk"
 [[ -z $HOST_CONFIG_DIR ]] && HOST_CONFIG_DIR="$HOME/projects/zmk_firmwares/zmk-config-totem"
+
+OUTPUT_DIR=${OUTPUT_DIR:-output} && mkdir -p "$HOST_CONFIG_DIR/$OUTPUT_DIR"
+[[ -z $LOG_DIR ]] && LOG_DIR="/tmp"
 
 [[ -z $DOCKER_ZMK_DIR ]] && DOCKER_ZMK_DIR="/workspace/zmk"
 [[ -z $DOCKER_CONFIG_DIR ]] && DOCKER_CONFIG_DIR="/workspace/zmk-config"
@@ -115,7 +115,6 @@ echo "HOST_ZMK_DIR=$HOST_ZMK_DIR" >> "$HOST_CONFIG_DIR/env.list"
 echo "HOST_CONFIG_DIR=$HOST_CONFIG_DIR" >> "$HOST_CONFIG_DIR/env.list"
 echo "DOCKER_ZMK_DIR=$DOCKER_ZMK_DIR" >> "$HOST_CONFIG_DIR/env.list"
 echo "DOCKER_CONFIG_DIR=$DOCKER_CONFIG_DIR" >> "$HOST_CONFIG_DIR/env.list"
-echo "OUTPUT_DIR=$OUTPUT_DIR" >> "$HOST_CONFIG_DIR/env.list"
 echo "WEST_OPTS=$WEST_OPTS" >> "$HOST_CONFIG_DIR/env.list"
 echo "CONFIG_DIR=$DOCKER_CONFIG_DIR/config" >> "$HOST_CONFIG_DIR/env.list"
 
@@ -125,8 +124,6 @@ zmk_tag="3.2"
 DOCKER_IMG="zmkfirmware/zmk-$zmk_type-arm:$zmk_tag"
 DOCKER_IMG="private/zmk"
 DOCKER_BIN="docker"
-
-"$DOCKER_BIN" build --build-arg zmk_type=$zmk_type --build-arg zmk_tag="$zmk_tag" -t private/zmk . >/dev/null || exit
 
 # +-------------------------+
 # | AUTOMATE CONFIG OPTIONS |
@@ -161,60 +158,74 @@ fi
 # | BUILD THE FIRMWARE |
 # +--------------------+
 
-# TODO: run jq shit on host and start a new container for every combination of board+shield. Also
-# clean/west init/west update for every invocation of docker?
-
-if [[ $RUNWITH_DOCKER = true ]]
-then
+if [[ $RUNWITH_DOCKER = true ]]; then
     printf "\nBuild mode: docker\n"
-    echo
-    echo "📦 Building Dockerfile 📦"
-    DOCKER_CMD="$DOCKER_BIN run --rm \
-        --mount type=bind,source=$HOST_ZMK_DIR,target=$DOCKER_ZMK_DIR \
-        --mount type=bind,source=$HOST_CONFIG_DIR,target=$DOCKER_CONFIG_DIR \
-        --mount type=volume,source=zmk-root-user-$ZEPHYR_VERSION,target=/root \
-        --mount type=volume,source=zmk-zephyr-$ZEPHYR_VERSION,target=$DOCKER_ZMK_DIR/zephyr \
-        --mount type=volume,source=zmk-zephyr-modules-$ZEPHYR_VERSION,target=$DOCKER_ZMK_DIR/modules \
-        --mount type=volume,source=zmk-zephyr-tools-$ZEPHYR_VERSION,target=$DOCKER_ZMK_DIR/tools"
+    SUFFIX="${ZEPHYR_VERSION}_docker"
 
+    printf "\n📦 Building Dockerfile 📦\n"
+    "$DOCKER_BIN" build --build-arg zmk_type=$zmk_type --build-arg zmk_tag="$zmk_tag" -t private/zmk . >/dev/null || exit
     #
     # | Cleanup and shit |
     #
-
     # Reset volumes
-    if [[ $CLEAR_CACHE = true ]]
-    then
-        printf "\n${CYAN}💀 Removing Docker volumes\n${NC}"
-        # TODO: When there is no Docker volume, next line returns error
-        # shellcheck disable=2046
-        $DOCKER_BIN volume rm $($DOCKER_BIN volume ls -q | grep "^zmk-.*-$ZEPHYR_VERSION$")
+    if [[ $CLEAR_CACHE = true ]]; then
+        printf "\n${CYAN}💀 Removing Docker volumes.\n${NC}"
+        $DOCKER_BIN volume ls -q | grep "^zmk-.*-$ZEPHYR_VERSION$" | while read -r _v; do
+            $DOCKER_BIN volume rm "$_v"
+        done
         printf "${CYAN}💀 Deleting 'build' folder.\n${NC}"
         sudo rm -rf "$HOST_ZMK_DIR/app/build"
         sudo rm -rf "$HOST_ZMK_DIR/.west"
     fi
-
-    # Build parameters
-    SUFFIX="${ZEPHYR_VERSION}_docker"
-    echo "SUFFIX=$SUFFIX" >> "$HOST_CONFIG_DIR/env.list"
-
-    DOCKER_PREFIX="$DOCKER_CMD -w $DOCKER_ZMK_DIR/app --env-file $HOST_CONFIG_DIR/env.list $DOCKER_IMG"
-    $DOCKER_PREFIX "$DOCKER_CONFIG_DIR/scripts/build_board_matrix.sh" || exit
-
-    cd "$HOST_CONFIG_DIR" || exit
-    firmware_files=$(find . -name '*.uf2' | tr '\n' ' ' | sed 's/.\///g' | sed 's/ $//' | sed 's/ /  /')
-    scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null && echo "🗄 Copied firmware(s) files to ${GREEN}macOS${NC}"
-    printf "╰┈┈┈┈┈┈➤ $firmware_files\n"
-
-    echo
-    printf "Done! 🎉 😎 🎉\n"
-
 else
-    echo "Build mode: local"
+    printf "\nBuild mode: local\n"
     SUFFIX="${ZEPHYR_VERSION}"
     CONFIG_DIR="$HOST_CONFIG_DIR/config"
     DOCKER_PREFIX=
-    cd "$HOST_ZMK_DIR/app" || exit
 fi
+
+readarray -t board_shields < <(yaml2json "$HOST_CONFIG_DIR"/build.yaml | jq -c -r '.include[]')
+
+for pair  in "${board_shields[@]}"; do
+    # Construct board/shield names
+    read -ra arr <<< "${pair//,/ }"
+    board=$(echo "${arr[0]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
+    shield=$(echo "${arr[1]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
+    if [[ $RUNWITH_DOCKER = true ]]; then
+        DOCKER_CMD="$DOCKER_BIN run --rm \
+            --mount type=bind,source=$HOST_ZMK_DIR,target=$DOCKER_ZMK_DIR \
+            --mount type=bind,source=$HOST_CONFIG_DIR,target=$DOCKER_CONFIG_DIR \
+            --mount type=bind,source=$LOG_DIR,target=/tmp  \
+            --mount type=volume,source=zmk-root-user-$ZEPHYR_VERSION,target=/root \
+            --mount type=volume,source=zmk-zephyr-$ZEPHYR_VERSION,target=$DOCKER_ZMK_DIR/zephyr \
+            --mount type=volume,source=zmk-zephyr-modules-$ZEPHYR_VERSION,target=$DOCKER_ZMK_DIR/modules \
+            --mount type=volume,source=zmk-zephyr-tools-$ZEPHYR_VERSION,target=$DOCKER_ZMK_DIR/tools"
+        # shellcheck disable=2129
+        echo "SUFFIX=$SUFFIX" >> "$HOST_CONFIG_DIR/env.list"
+        echo "board=$board" >> "$HOST_CONFIG_DIR/env.list"
+        echo "shield=$shield" >> "$HOST_CONFIG_DIR/env.list"
+
+        # Run Docker to build firmware for board/shield combo
+        printf "\n🚧 Run Docker to build \"$board MCU ${shield:+($shield keyboard)}\"\n"
+        printf "╰┈┈➤"
+        DOCKER_PREFIX="$DOCKER_CMD -w $DOCKER_ZMK_DIR/app --env-file $HOST_CONFIG_DIR/env.list $DOCKER_IMG"
+        $DOCKER_PREFIX "$DOCKER_CONFIG_DIR/scripts/build_board_matrix.sh" || exit
+        printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n"
+    else
+        echo
+        cd "$HOST_ZMK_DIR/app" || exit
+    fi
+done
+
+# Copy firmware files to macOS
+cd "$HOST_CONFIG_DIR/$OUTPUT_DIR" || exit
+firmware_files=$(find . -name '*.uf2' | tr '\n' ' ' | sed 's/.\///g' | sed 's/ $//' | sed 's/ /  /')
+scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null && echo "🗄 Copied all firmware file to ${GREEN}macOS${NC}"
+printf "╰┈┈┈┈┈┈➤ $firmware_files"
+echo
+printf "Done! 🎉 😎 🎉\n"
+printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n"
+
 
 
 exit
