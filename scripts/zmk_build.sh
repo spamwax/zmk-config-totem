@@ -161,6 +161,8 @@ fi
 # | BUILD THE FIRMWARE |
 # +--------------------+
 
+# TODO: run jq shit on host and start a new container for every combination of board+shield. Also
+# clean/west init/west update for every invocation of docker?
 
 if [[ $RUNWITH_DOCKER = true ]]
 then
@@ -200,7 +202,7 @@ then
 
     cd "$HOST_CONFIG_DIR" || exit
     firmware_files=$(find . -name '*.uf2' | tr '\n' ' ' | sed 's/.\///g' | sed 's/ $//' | sed 's/ /  /')
-    scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null && echo "🗄 Copied firmware(s) files to macOS"
+    scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null && echo "🗄 Copied firmware(s) files to ${GREEN}macOS${NC}"
     printf "╰┈┈┈┈┈┈➤ $firmware_files\n"
 
     echo

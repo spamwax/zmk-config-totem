@@ -13,9 +13,7 @@ compile_board () {
     board="$1"
     shield="$2"
     # [ -n "$shield" ] && extra_args="-DSHIELD=\"$shield\"" || extra_args=
-    artifact_name=${shield:+$shield-}${board}-zmk
-    extra_args=${shield:+-DSHIELD="$shield"}
-    BUILD_DIR="${1}_$SUFFIX"
+    # echo "$artifact_name $BUILD_DIR $extra_args"
     LOGFILE="$LOG_DIR/zmk_build_$artifact_name.log"
     echo -en "\n${GREEN}Building $1... ${NC}"
     west build -s "$DOCKER_ZMK_DIR/app" -d "build/$BUILD_DIR" -b "$1" "$WEST_OPTS" \
@@ -66,7 +64,7 @@ if [[ ! -f "${DOCKER_ZMK_DIR}"/.west/config ]]; then
     cd "${DOCKER_ZMK_DIR}/app" || exit
     west update
 else
-    printf "✅ app is already initializez!\n"
+    printf "✅ app is already initialized!\n"
 fi
 
 cd "$DOCKER_ZMK_DIR/app" || exit
@@ -92,6 +90,12 @@ for line in "${board_shields[@]}"; do
     read -ra arr <<< "${line//,/ }"
     board=$(echo "${arr[0]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
     shield=$(echo "${arr[1]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
+
+    artifact_name=${shield:+$shield-}${board}-zmk
+    extra_args=${shield:+-DSHIELD="$shield"}
+    BUILD_DIR="${artifact_name}_$SUFFIX"
+    rm -rf "$DOCKER_ZMK_DIR/app/build/$BUILD_DIR"
+
     printf "\n🚧 Starting the build for \"$board MCU ${shield:+($shield keyboard)}\"\n"
     printf "╰┈┈➤"
     compile_board "$board" "$shield"
