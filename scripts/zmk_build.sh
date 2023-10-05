@@ -6,6 +6,7 @@ if [ -t 1 ]; then
     GREEN=$'\e[0;32m'
     # shellcheck disable=2034
     RED=$'\e[0;31m'
+    YELLOW=$'\e[0;33m'
     CYAN=$'\e[1;34m'
     NC=$'\e[0m'
 fi
@@ -101,7 +102,16 @@ OUTPUT_DIR=${OUTPUT_DIR:-output} && mkdir -p "$HOST_CONFIG_DIR/$OUTPUT_DIR"
 [[ -z $DOCKER_ZMK_DIR ]] && DOCKER_ZMK_DIR="/workspace/zmk"
 [[ -z $DOCKER_CONFIG_DIR ]] && DOCKER_CONFIG_DIR="/workspace/zmk-config"
 
-[[ -z $BOARDS ]] && BOARDS="$(grep '^[[:space:]]*\-[[:space:]]*board:' "$HOST_CONFIG_DIR/build.yaml" | sed 's/^.*: *//')"
+if [[ -z $BOARDS ]]; then
+    # BOARDS="$(grep '^[[:space:]]*\-[[:space:]]*board:' "$HOST_CONFIG_DIR/build.yaml" | sed 's/^.*: *//')"
+    build_all=yes
+    printf "\n${YELLOW}WARNING!${NC} Will build all boards in build.yaml\n"
+else
+    build_all=no
+    IFS=, read -ra BOARDS <<< "$BOARDS"
+    echo; echo "${GREEN}Selected${NC} boards to build: " "${BOARDS[@]}"
+fi
+
 
 [[ -z $CLEAR_CACHE ]] && CLEAR_CACHE="false"
 
@@ -164,6 +174,7 @@ if [[ $RUNWITH_DOCKER = true ]]; then
 
     printf "\n📦 Building Dockerfile 📦\n"
     "$DOCKER_BIN" build --build-arg zmk_type=$zmk_type --build-arg zmk_tag="$zmk_tag" -t private/zmk . >/dev/null || exit
+    printf "     Done.\n"
     #
     # | Cleanup and shit |
     #
@@ -183,14 +194,24 @@ else
     CONFIG_DIR="$HOST_CONFIG_DIR/config"
     DOCKER_PREFIX=
 fi
-
+echo
 readarray -t board_shields < <(yaml2json "$HOST_CONFIG_DIR"/build.yaml | jq -c -r '.include[]')
 
-for pair  in "${board_shields[@]}"; do
+for pair in "${board_shields[@]}"; do
     # Construct board/shield names
     read -ra arr <<< "${pair//,/ }"
     board=$(echo "${arr[0]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
     shield=$(echo "${arr[1]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
+    if [ $build_all = "no" ]; then
+        if [[ " ${BOARDS[*]} " =~ " ${board} " ]]; then
+            echo "✅ ${GREEN}Found${NC} requested $board${shield:+" ($shield)"} board!"; echo
+        else
+            echo "📢 ${YELLOW}Skipping${NC} building $board${shield:+" ($shield)"}!"; echo
+            continue
+        fi
+    fi
+    echo "Starting the build process for: $board${shield:+" ($shield)"}."; echo
+
     if [[ $RUNWITH_DOCKER = true ]]; then
         DOCKER_CMD="$DOCKER_BIN run --rm \
             --mount type=bind,source=$HOST_ZMK_DIR,target=$DOCKER_ZMK_DIR \
@@ -209,6 +230,10 @@ for pair  in "${board_shields[@]}"; do
         printf "\n🚧 Run Docker to build \"$board MCU ${shield:+($shield keyboard)}\"\n"
         printf "╰┈┈➤"
         DOCKER_PREFIX="$DOCKER_CMD -w $DOCKER_ZMK_DIR/app --env-file $HOST_CONFIG_DIR/env.list $DOCKER_IMG"
+        # DOCKER_PREFIX="$DOCKER_CMD -w $DOCKER_ZMK_DIR/app --env-file $HOST_CONFIG_DIR/env.list -ti $DOCKER_IMG bash"
+        # $DOCKER_PREFIX
+        # exit
+
         $DOCKER_PREFIX "$DOCKER_CONFIG_DIR/scripts/build_board_matrix.sh" || exit
         printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n"
     else
@@ -220,7 +245,7 @@ done
 # Copy firmware files to macOS
 cd "$HOST_CONFIG_DIR/$OUTPUT_DIR" || exit
 firmware_files=$(find . -name '*.uf2' | tr '\n' ' ' | sed 's/.\///g' | sed 's/ $//' | sed 's/ /  /')
-scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null && echo "🗄 Copied all firmware file to ${GREEN}macOS${NC}"
+scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null && echo "🗄 Copied all firmware file to ${GREEN}macOS.${NC}"
 printf "╰┈┈┈┈┈┈➤ $firmware_files"
 echo
 printf "Done! 🎉 😎 🎉\n"
