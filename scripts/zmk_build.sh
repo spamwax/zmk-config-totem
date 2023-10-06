@@ -33,7 +33,7 @@ while [[ $# -gt 0 ]]; do
             CLEAR_CACHE="true"
             ;;
 
-        # comma or space separated list of boards (use quotes if space separated)
+        # comma separated list of boards (use quotes if space separated)
         # if ommitted, will compile list of boards in build.yaml
         -b|--board)
             BOARDS="$2"
@@ -204,13 +204,13 @@ for pair in "${board_shields[@]}"; do
     shield=$(echo "${arr[1]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
     if [ $build_all = "no" ]; then
         if [[ " ${BOARDS[*]} " =~ " ${board} " ]]; then
-            echo "✅ ${GREEN}Found${NC} requested $board${shield:+" ($shield)"} board!"; echo
+            echo "✅ ${GREEN}Found${NC} requested \"$board${shield:+" ($shield)"}\" board!"; echo
         else
-            echo "📢 ${YELLOW}Skipping${NC} building $board${shield:+" ($shield)"}!"; echo
+            echo "📢 ${YELLOW}Skipping${NC} building \"$board${shield:+" ($shield)"}\"!"; echo
             continue
         fi
     fi
-    echo "Starting the build process for: $board${shield:+" ($shield)"}."; echo
+    echo "Starting the build process for: \"$board${shield:+" ($shield)"}\"."; echo
 
     if [[ $RUNWITH_DOCKER = true ]]; then
         DOCKER_CMD="$DOCKER_BIN run --rm \
@@ -245,7 +245,7 @@ done
 # Copy firmware files to macOS
 cd "$HOST_CONFIG_DIR/$OUTPUT_DIR" || exit
 firmware_files=$(find . -name '*.uf2' | tr '\n' ' ' | sed 's/.\///g' | sed 's/ $//' | sed 's/ /  /')
-scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null && echo "🗄 Copied all firmware file to ${GREEN}macOS.${NC}"
+scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null && echo "🗄 Copied all firmware file to ${GREEN}macOS${NC}."
 printf "╰┈┈┈┈┈┈➤ $firmware_files"
 echo
 printf "Done! 🎉 😎 🎉\n"
