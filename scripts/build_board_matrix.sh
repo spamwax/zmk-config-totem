@@ -94,7 +94,7 @@ extra_args=${shield:+-DSHIELD="$shield"}
 BUILD_DIR="${artifact_name}_$SUFFIX"
 if [ -d "$DOCKER_ZMK_DIR"/app/build/"$BUILD_DIR" ]; then
     rm -rf "$DOCKER_ZMK_DIR/app/build/$BUILD_DIR"
-    printf "♻ Removed old build directory befort starting the build process.\n"
+    printf "♻ Removed old build directory before starting the build process.\n"
 fi
 
 compile_board "$board" "$shield"

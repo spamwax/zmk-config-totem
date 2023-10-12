@@ -109,7 +109,16 @@ if [[ -z $BOARDS ]]; then
 else
     build_all=no
     IFS=, read -ra BOARDS <<< "$BOARDS"
-    echo; echo "${GREEN}Selected${NC} boards to build: " "${BOARDS[@]}"
+    echo; echo "${CYAN}Selected${NC} boards to build:" "${BOARDS[@]}"
+    readarray -t avails < <(grep '^[[:space:]]*\-[[:space:]]*board:' build.yaml | sed 's/^.*: *//')
+    for item  in "${BOARDS[@]}"; do
+        if [[ " ${avails[*]} " =~ " ${item} " ]]; then
+            echo "    ${GREEN}$item${NC} will be built."
+        else
+            echo "    ${RED}$item${NC} is not a valid board in build.yaml"
+        fi
+    done
+    echo "------------------------"; echo
 fi
 
 
@@ -180,6 +189,7 @@ if [[ $RUNWITH_DOCKER = true ]]; then
     #
     # Reset volumes
     if [[ $CLEAR_CACHE = true ]]; then
+        printf "\n==-> Clearing cache and starting a fresh build <-==\n"
         printf "\n${CYAN}💀 Removing Docker volumes.\n${NC}"
         $DOCKER_BIN volume ls -q | grep "^zmk-.*-$ZEPHYR_VERSION$" | while read -r _v; do
             $DOCKER_BIN volume rm "$_v"
@@ -190,6 +200,12 @@ if [[ $RUNWITH_DOCKER = true ]]; then
     fi
 else
     printf "\nBuild mode: local\n"
+    if [[ $CLEAR_CACHE = true ]]; then
+        printf "\n==-> Clearing cache and starting a fresh build <-==\n"
+        printf "${CYAN}💀 Deleting 'build' folder.\n${NC}"
+        sudo rm -rf "$HOST_ZMK_DIR/app/build"
+        sudo rm -rf "$HOST_ZMK_DIR/.west"
+    fi
     SUFFIX="${ZEPHYR_VERSION}"
     CONFIG_DIR="$HOST_CONFIG_DIR/config"
     DOCKER_PREFIX=
@@ -210,7 +226,7 @@ for pair in "${board_shields[@]}"; do
             continue
         fi
     fi
-    echo "Starting the build process for: \"$board${shield:+" ($shield)"}\"."; echo
+    echo "Starting the build process for \"$board${shield:+" ($shield)"}\"."; echo
 
     if [[ $RUNWITH_DOCKER = true ]]; then
         DOCKER_CMD="$DOCKER_BIN run --rm \
