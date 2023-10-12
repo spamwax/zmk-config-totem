@@ -93,8 +93,8 @@ done
 [[ -z $ZEPHYR_VERSION ]] && ZEPHYR_VERSION="3.2.0"
 [[ -z $RUNWITH_DOCKER ]] && RUNWITH_DOCKER="true"
 
-[[ -z $HOST_ZMK_DIR ]] && HOST_ZMK_DIR="$HOME/projects/zmk_firmwares/zmk"
-[[ -z $HOST_CONFIG_DIR ]] && HOST_CONFIG_DIR="$HOME/projects/zmk_firmwares/zmk-config-totem"
+[[ -z $HOST_ZMK_DIR ]] && HOST_ZMK_DIR="/tank/anbaar/projects/hobbies/zmk_firmwares/zmk"
+[[ -z $HOST_CONFIG_DIR ]] && HOST_CONFIG_DIR="/tank/anbaar/projects/hobbies/zmk_firmwares/zmk-config-totem"
 
 OUTPUT_DIR=${OUTPUT_DIR:-output} && mkdir -p "$HOST_CONFIG_DIR/$OUTPUT_DIR"
 [[ -z $LOG_DIR ]] && LOG_DIR="/tmp"
