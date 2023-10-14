@@ -24,6 +24,40 @@
 #define TVP1 4
 #define TVP2 5
 
+#define THUMB_HOLDING_TYPE "balanced"
+//
+// THUMB_HOLDING_TIME defines how long you need to hold (milliseconds)
+// a thumb key to activate a layer.  Shorter holds are treated as taps.
+//
+#define THUMB_HOLDING_TIME 170
+//
+// THUMB_REPEAT_DECAY defines how much time you have left (milliseconds)
+// after tapping a key to hold it again in order to make it auto-repeat.
+//
+#define THUMB_REPEAT_DECAY 240 // "tap then hold" for key auto-repeat
+
+
+// |------------------------|------------------------|
+// | LEFT_HAND_KEYS         |        RIGHT_HAND_KEYS |
+// |                        |                        |
+// |     0  1  2  3  4      |       5  6  7  8  9    |
+// |    10 11 12 13 14      |      15 16 17 18 19    |
+// | 30 20 21 22 23 24      |      25 26 27 28 29 37 |
+// |          31 32 33      |      34 35 36          |
+// |------------------------|------------------------|
+//
+#define LEFT_HAND_KEYS      \
+         0  1  2  3  4      \
+        10 11 12 13 14      \
+     30 20 21 22 23 24      
+ 
+#define RIGHT_HAND_KEYS     \
+                                    5  6  7  8  9    \
+                                   15 16 17 18 19    \
+                                   25 26 27 28 29 37 
+#define THUMB_KEYS          \
+              31 32 33             34 35 36
+
 &mt {
   quick-tap-ms = <100>;
   global-quick-tap;
@@ -53,6 +87,64 @@
             #binding-cells = <0>;
             bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
         };
+        hl: hrmod_left {
+            compatible = "zmk,behavior-hold-tap";
+            label = "ADVANCED_HRM_L";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <180>;
+            global-quick-tap;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <28 29 30 31 32 40 41 42 43 44 58 59 60 61 62 75 76 77 78>;
+            hold-trigger-on-release;
+        };
+        hr: hrmod_right {
+            compatible = "zmk,behavior-hold-tap";
+            label = "ADVANCED_HRM_R";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <180>;
+            global-quick-tap;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <1 2 3 4 11 12 13 14 15 23 24 25 26 27 35 36 37 38 39 46 47 48 49 50 51 66 67 68>;
+            hold-trigger-on-release;
+        };
+        ltr: my_layer_tap_right {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_RIGHT";
+            flavor = "balanced";
+            hold-trigger-key-positions = <25 36 37 38 47 48 49 50>; // Arrows and cut/copy/paste on LEFT side
+            tapping-term-ms = <170>;
+            quick-tap-ms = <170>;
+            global-quick-tap;
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+        };
+        ltl: my_layer_tap_left {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_LEFT";
+            flavor = "balanced";
+            hold-trigger-key-positions = <29 30 31 41 42 43 59 60 61 74 47 48 49 50>; // Numbers and cut/copy/paste on RIGHT side
+            tapping-term-ms = <170>;
+            quick-tap-ms = <170>;
+            global-quick-tap;
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+        };
+        tmb: miryoku_thumb_layer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MIRYOKU_LAYER_TAP_WITH_REPEAT";
+            flavor = THUMB_HOLDING_TYPE;
+            tapping-term-ms = <THUMB_HOLDING_TIME>;
+            quick-tap-ms = <THUMB_REPEAT_DECAY>; // enable repeat
+            //global-quick-tap; // no typing streak
+            retro-tap; // allow slow (hold-like) taps
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+        };
+
     };
 
     macros {
@@ -78,21 +170,21 @@
 label= "BASE"                              ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃     Q     ┃     W     ┃     F     ┃     P     ┃     G     ┃   ┃     J     ┃     L     ┃     U     ┃     Y     ┃     ;     ┃
+//             ┃     B     ┃     Y     ┃     O     ┃     U     ┃     "     ┃   ┃     ;     ┃     L     ┃     D     ┃     W     ┃     V     ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃     A     ┃     R     ┃     S     ┃     T     ┃     D     ┃   ┃     H     ┃     N     ┃     E     ┃     I     ┃     O     ┃
+//             ┃     C     ┃     I     ┃     E     ┃     A     ┃     ,     ┃   ┃     .     ┃     H     ┃     T     ┃     S     ┃     N     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃     Q     ┃     Z     ┃     X     ┃     C     ┃     V     ┃     B     ┃   ┃     K     ┃     M     ┃     ,     ┃     .     ┃     /     ┃     \     ┃
+// ┃     Z     ┃     J     ┃     X     ┃     G     ┃     K     ┃     /     ┃   ┃     _     ┃     R     ┃     M     ┃     F     ┃     P     ┃     Q     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃    DEL    ┃    TAB    ┃    SPC    ┃   ┃   ENTER   ┃           ┃   BSPC    ┃
+//                                     ┃    ESC    ┃    BSPC   ┃    TAB    ┃   ┃   ENTER   ┃    SPC    ┃    DEL    ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &tri_state       &kp W       &kp F       &kp P       &kp G           &kp J       &kp L       &kp U       &kp Y       &kp SEMI
-                &mt LGUI A  &mt LALT R  &mt LCTRL S &mt LSHFT T &kp D           &kp H       &mt RSHFT N &mt RCTRL E &mt RALT I  &mt RGUI O
-    &kp Q       &kp Z       &kp X       &kp C       &kp V       &kp B           &kp K       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &kp BSLH
-                                        &kp DEL   &lt NAV TAB   &kp SPACE       &kp RET   &lt SYM ESC   &kp BSPC
+                &kp B       &kp Y       &kp O       &kp U       &kp DQT         &kp SEMI     &kp L        &kp D       &kp W       &kp V
+                &kp C       &hl LSHFT I &hl LALT E  &hl LCTRL T &kp COMMA       &kp DOT      &hr RCTRL H  &hr RALT T  &hr RSHFT S &kp N
+    &kp Z       &kp J       &kp X       &kp G       &kp K       &kp FSLH        &kp UNDER    &kp R        &kp M       &kp F       &kp P       &kp Q
+                                 &tmb SYM ESC   &tmb SYM BSPC   &hl LGUI TAB    &tmb SYM RET &tmb SYM SPC &tmb SYM DEL
                         >;
                 };
 
