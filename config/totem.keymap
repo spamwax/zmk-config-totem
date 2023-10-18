@@ -237,7 +237,7 @@ label= "BASE"                              ;
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
-                sim_layer {
+                sym_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 label= "SYM"                               ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -293,22 +293,48 @@ label= "Digits"                            ;
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 label= "Cursor"                            ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+//             ┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+//             ┃  CTL+SFT+TAB  ┃   PREV TAB     ┃ UP        ┃ NEXT TAB       ┃  CTL+TAB  ┃   ┃           ┃           ┃           ┃           ┃           ┃
+//             ┣━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
+//             ┃  bol          ┃   LEFT         ┃ DOWN      ┃ RIGHT          ┃  eol      ┃   ┃           ┃   LCTRL   ┃    LALT   ┃   LSHIFT  ┃   LGUI    ┃
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃           ┃  PG DOWN      ┃                ┃           ┃                ┃  PG UP    ┃   ┃           ┃           ┃           ┃           ┃           ┃           ┃
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                              ┃           ┃                ┃           ┃   ┃           ┃           ┃           ┃
+//                                              ┗━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+ bindings = <
+// ╷           ╷               ╷                ╷           ╷                ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
+
+                &kp LC(LS(TAB)) &kp LS(LG(LBKT)) &kp UP      &kp LS(LG(RBKT)) &kp LC(TAB)     &trans      &trans      &trans      &trans      &trans
+                &kp LG(LEFT)    &kp LEFT         &kp DOWN    &kp RIGHT        &kp LG(RIGHT)   &trans      &kp LCTRL   &kp LALT    &kp LSHFT   &kp LGUI
+    &trans      &kp PG_DN       &trans           &trans      &trans           &kp PG_UP       &trans      &trans      &trans      &trans      &trans      &trans
+                                                 &trans      &trans           &trans          &trans      &trans      &trans
+                        >;
+                };
+
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+
+
+                fkeys_layer {
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+label= "FN"                                ;
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃CTL+SFT+TAB┃ PREV TAB  ┃ UP        ┃ NEXT TAB  ┃  CTL+TAB  ┃   ┃           ┃           ┃           ┃           ┃           ┃
+//             ┃           ┃    F7     ┃    F8     ┃    F9     ┃    F12    ┃   ┃           ┃           ┃           ┃           ┃           ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃  bol      ┃ LEFT      ┃ DOW       ┃ RIGHT     ┃  eol      ┃   ┃           ┃   LCTRL   ┃    LALT   ┃   LSHIFT  ┃   LGUI    ┃
+//             ┃           ┃    F4     ┃    F5     ┃    F6     ┃    F11    ┃   ┃           ┃   LCTRL   ┃    LALT   ┃   LSHIFT  ┃   LGUI    ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃  PG DOWN  ┃           ┃           ┃           ┃  PG UP    ┃   ┃           ┃           ┃           ┃           ┃           ┃           ┃
+// ┃           ┃           ┃    F1     ┃    F2     ┃    F3     ┃    F10    ┃   ┃           ┃           ┃           ┃           ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                     ┃           ┃           ┃           ┃   ┃           ┃           ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp LC(LS(TAB)) &kp LS(LG(LBKT))    &kp UP &kp LS(LG(RBKT))  &kp LC(TAB)      &kp LC(F20)     &none       &none       &none       &none       &none
-                &lt TVP2 L  &kp LEFT    &kp LALT    &kp RIGHT   &kp SPACE       &none       &none       &none       &none       &none
-    &kp J       &kp LSHFT   &kp LC(C)   &kp BSPC    &kp LC(V)   &kp LC(F19)     &none       &none       &none       &none       &none       &none
-                                        &trans      &kp LC(F14) &kp LC(F13)     &none       &none       &none
+                &trans      &kp F7      &kp F8      &kp F9      &kp F12         &trans      &trans      &trans      &trans      &trans
+                &trans      &kp F4      &kp F5      &kp F6      &kp F11         &trans      &kp LCTRL   &kp LALT    &kp LSHFT   &kp LGUI
+    &trans      &trans      &kp F1      &kp F2      &kp F3      &kp F10         &trans      &trans      &trans      &trans      &trans     &trans
+                                        &trans      &trans      &trans          &trans      &trans      &trans
                         >;
                 };
 
@@ -382,10 +408,10 @@ label= "TVP 1"                             ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp TAB     &kp I       &kp LC(LALT) &kp O      &kp LC(F20)     &none       &none       &none       &none       &none
-                &lt TVP2 L  &kp LEFT    &kp LALT    &kp RIGHT   &kp SPACE       &none       &none       &none       &none       &none
-    &kp J       &kp LSHFT   &kp LC(C)   &kp BSPC    &kp LC(V)   &kp LC(F19)     &none       &none       &none       &none       &none       &none
-                                        &trans      &kp LC(F14) &kp LC(F13)     &none       &none       &none
+                &kp TAB     &kp I       &kp LC(LALT) &kp O      &kp LC(F20)     &trans       &trans       &trans       &trans       &trans
+                &lt TVP2 L  &kp LEFT    &kp LALT    &kp RIGHT   &kp SPACE       &trans       &trans       &trans       &trans       &trans
+    &kp J       &kp LSHFT   &kp LC(C)   &kp BSPC    &kp LC(V)   &kp LC(F19)     &trans       &trans       &trans       &trans       &trans       &trans
+                                        &trans      &kp LC(F14) &kp LC(F13)     &trans       &trans       &trans
                         >;
                 };
 
