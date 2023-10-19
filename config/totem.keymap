@@ -228,10 +228,11 @@ label= "BASE"                              ;
 // ╷           ╷           ╷           ╷                  ╷                  ╷                ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 																		     
                 &kp B       &kp Y       &kp O              &kp U              &kp DQT              &kp SEMI     &kp L        &kp D       &kp W       &kp V
-                &kp C       &hl LSHFT I &hl LALT E         &hl LCTRL T        &kp COMMA            &kp DOT      &hr RCTRL H  &hr RALT T  &hr RSHFT S &kp N
+                &kp C       &hl LSHFT I &hl LALT E         &hl LCTRL A        &kp COMMA            &kp DOT      &hr RCTRL H  &hr RALT T  &hr RSHFT S &kp N
     &kp Z       &kp J       &kp X       &kp G              &kp K              &kp FSLH             &kp UNDER    &kp R        &kp M       &kp F       &kp P       &kp Q
                                         &tmb CUR ESC       &tmb SYM BSPC      &hl LGUI TAB         &tmb SYM RET &tmb SYM SPC &tmb SYM DEL
-                        >;
+
+                       >;
                 };
 
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -435,7 +436,7 @@ label= "TVP 1"                             ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &kp TAB     &kp I       &kp LC(LALT) &kp O      &kp LC(F20)     &trans       &trans       &trans       &trans       &trans
-                &lt TVP2 L  &kp LEFT    &kp LALT    &kp RIGHT   &kp SPACE       &trans       &trans       &trans       &trans       &trans
+                &lt CUR L   &kp LEFT    &kp LALT    &kp RIGHT   &kp SPACE       &trans       &trans       &trans       &trans       &trans
     &kp J       &kp LSHFT   &kp LC(C)   &kp BSPC    &kp LC(V)   &kp LC(F19)     &trans       &trans       &trans       &trans       &trans       &trans
                                         &trans      &kp LC(F14) &kp LC(F13)     &trans       &trans       &trans
                         >;
