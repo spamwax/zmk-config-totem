@@ -15,6 +15,8 @@ compile_board () {
     LOGFILE="$LOG_DIR/zmk_build_$artifact_name.log"
 
     echo -en "\n${GREEN}Building $1... ${NC}"
+    echo "west build -s $DOCKER_ZMK_DIR/app -d build/$BUILD_DIR -b $1 $WEST_OPTS \
+        -- -DZMK_CONFIG=$CONFIG_DIR $extra_args -Wno-dev > $LOGFILE 2>&1"
     west build -s "$DOCKER_ZMK_DIR/app" -d "build/$BUILD_DIR" -b "$1" "$WEST_OPTS" \
         -- -DZMK_CONFIG="$CONFIG_DIR" "$extra_args" -Wno-dev > "$LOGFILE" 2>&1
     # shellcheck disable=2181
@@ -31,6 +33,8 @@ compile_board () {
         fi
 
         # OUTPUT="$OUTPUT_DIR/$1-zmk.$TYPE"
+        [[ $artifact_name == *"_left"* ]] && artifact_name=LEFT-${artifact_name//_left/}
+        [[ $artifact_name == *"_right"* ]] && artifact_name=RIGHT-${artifact_name//_right/}
         OUTPUT="$DOCKER_CONFIG_DIR/$OUTPUT_DIR/$artifact_name.$TYPE"
         # TODO: Use git tags to create a better extension than .bak
         echo "💾 Renaming & backing up firmware file & CONFIG_* file..."
