@@ -134,7 +134,7 @@
             label = "NUMWORD";
             #binding-cells = <0>;
             layers = <NUM>;                           // insert location of numbers layer here
-            continue-list = <MINUS>;  // adjust as desired
+            continue-list = <A MINUS>;  // adjust as desired
             // continue-list = <BACKSPACE DELETE DOT COMMA COLON MINUS PLUS STAR>;  // adjust as desired
             ignore-numbers;                           // numbers don't deactivate the layer
             /delete-property/ mods;
@@ -206,6 +206,21 @@
             global-quick-tap;
             bindings = <&kp>, <&kp>;
         };
+        qtmacnewtab: mac_new_tab {
+            compatible = "zmk,behavior-mod-morph";
+            label = "MAC_NEW_TAB";
+            #binding-cells = <0>;
+            bindings = <&kp DQT>, <&kp LG(T)>;
+            mods = <(MOD_LGUI|MOD_RGUI)>;
+        };
+        qtwinnewtab: win_new_tab {
+            compatible = "zmk,behavior-mod-morph";
+            label = "WIN_NEW_TAB";
+            #binding-cells = <0>;
+            bindings = <&kp DQT>, <&kp LC(T)>;
+            mods = <(MOD_LGUI|MOD_RGUI)>;
+        };
+
     };
 
     macros {
@@ -385,4 +400,19 @@
                   <&bt BT_SEL 3>;
         };
     };
+
+    conditional_layers {
+        // Use Windows shortcuts for Cut/Copy/Paste & BACK/FORWARD key in the
+        // Digits layer if we are on the Windows layer.
+        compatible = "zmk,conditional-layers";
+        tri_layer1 {
+            if-layers = <WIN NUM>;
+            then-layer = <THENWIN_NUM>;
+        };
+        tri_layer2 {
+            if-layers = <WIN CUR>;
+            then-layer = <THENWIN_CUR>;
+        };
+    };
+
 };
