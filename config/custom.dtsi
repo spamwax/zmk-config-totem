@@ -134,7 +134,7 @@
             label = "NUMWORD";
             #binding-cells = <0>;
             layers = <NUM>;                           // insert location of numbers layer here
-            continue-list = <A MINUS>;  // adjust as desired
+            continue-list = <COMMA>;  // adjust as desired
             // continue-list = <BACKSPACE DELETE DOT COMMA COLON MINUS PLUS STAR>;  // adjust as desired
             ignore-numbers;                           // numbers don't deactivate the layer
             /delete-property/ mods;
@@ -220,7 +220,13 @@
             bindings = <&kp DQT>, <&kp LC(T)>;
             mods = <(MOD_LGUI|MOD_RGUI)>;
         };
-
+        tab_bksp: game_tab_bksp {
+            compatible = "zmk,behavior-mod-morph";
+            label = "GAME_TAB_BACKSPACE";
+            #binding-cells = <0>;
+            bindings = <&kp TAB>, <&kp BACKSPACE>;
+            mods = <(MOD_LCTL|MOD_RCTL)>;
+        };
     };
 
     macros {
