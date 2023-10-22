@@ -34,39 +34,6 @@
 #define MCR 9
 #define SYS 10
 
-#define THUMB_HOLDING_TYPE "balanced"
-//
-// THUMB_HOLDING_TIME defines how long you need to hold (milliseconds)
-// a thumb key to activate a layer.  Shorter holds are treated as taps.
-//
-#define THUMB_HOLDING_TIME 170
-//
-// THUMB_REPEAT_DECAY defines how much time you have left (milliseconds)
-// after tapping a key to hold it again in order to make it auto-repeat.
-//
-#define THUMB_REPEAT_DECAY 240 // "tap then hold" for key auto-repeat
-
-
-// |------------------------|------------------------|
-// | LEFT_HAND_KEYS         |        RIGHT_HAND_KEYS |
-// |                        |                        |
-// |     0  1  2  3  4      |       5  6  7  8  9    |
-// |    10 11 12 13 14      |      15 16 17 18 19    |
-// | 30 20 21 22 23 24      |      25 26 27 28 29 37 |
-// |          31 32 33      |      34 35 36          |
-// |------------------------|------------------------|
-//
-#define LEFT_HAND_KEYS      \
-         0  1  2  3  4      \
-        10 11 12 13 14      \
-     30 20 21 22 23 24      
- 
-#define RIGHT_HAND_KEYS     \
-                                    5  6  7  8  9    \
-                                   15 16 17 18 19    \
-                                   25 26 27 28 29 37 
-#define THUMB_KEYS          \
-              31 32 33             34 35 36
 
 &mt {
   quick-tap-ms = <100>;
@@ -80,148 +47,10 @@
 #define HYPF7 &kp LG(LC(LA(LS(F7))))
 #define HYPF8 &kp LG(LC(LA(LS(F8))))
 #define HYPF9 &kp LG(LC(LA(LS(F9))))
+#define ALFRED &kp LG(LC(LA(LS(RBKT))))
 
+#include "custom.dtsi"
 / {
-     combos {
-            compatible = "zmk,combos";
-            combo_esc {
-                timeout-ms = <50>;
-                key-positions = <0 1>;
-                bindings = <&kp ESC>;
-            };
-            combo_tvp {
-                timeout-ms = <100>;
-                key-positions = <11 12 13>;
-                bindings = <&tog FUN>;
-            };
-    };
-
-    behaviors {
-        tri_state: tri_state {
-            compatible = "zmk,behavior-tri-state";
-            label = "TRI-STATE";
-            #binding-cells = <0>;
-            bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
-        };
-        hl: hrmod_left {
-            compatible = "zmk,behavior-hold-tap";
-            label = "ADVANCED_HRM_L";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <280>;
-            quick-tap-ms = <200>;
-            require-prior-idle-ms = <70>;
-            bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <28 29 30 31 32 40 41 42 43 44 58 59 60 61 62 75 76 77 78>;
-            hold-trigger-on-release;
-        };
-        hr: hrmod_right {
-            compatible = "zmk,behavior-hold-tap";
-            label = "ADVANCED_HRM_R";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <280>;
-            quick-tap-ms = <180>;
-            global-quick-tap;
-            bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <1 2 3 4 11 12 13 14 15 23 24 25 26 27 35 36 37 38 39 46 47 48 49 50 51 66 67 68>;
-            hold-trigger-on-release;
-        };
-        ltr: my_layer_tap_right {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP_RIGHT";
-            flavor = "balanced";
-            hold-trigger-key-positions = <25 36 37 38 47 48 49 50>; // Arrows and cut/copy/paste on LEFT side
-            tapping-term-ms = <170>;
-            quick-tap-ms = <170>;
-            global-quick-tap;
-            #binding-cells = <2>;
-            bindings = <&mo>, <&kp>;
-        };
-        ltl: my_layer_tap_left {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP_LEFT";
-            flavor = "balanced";
-            hold-trigger-key-positions = <29 30 31 41 42 43 59 60 61 74 47 48 49 50>; // Numbers and cut/copy/paste on RIGHT side
-            tapping-term-ms = <170>;
-            quick-tap-ms = <170>;
-            global-quick-tap;
-            #binding-cells = <2>;
-            bindings = <&mo>, <&kp>;
-        };
-        tmb: miryoku_thumb_layer {
-            compatible = "zmk,behavior-hold-tap";
-            label = "MIRYOKU_LAYER_TAP_WITH_REPEAT";
-            flavor = THUMB_HOLDING_TYPE;
-            tapping-term-ms = <THUMB_HOLDING_TIME>;
-            quick-tap-ms = <THUMB_REPEAT_DECAY>; // enable repeat
-            //global-quick-tap; // no typing streak
-            retro-tap; // allow slow (hold-like) taps
-            #binding-cells = <2>;
-            bindings = <&mo>, <&kp>;
-        };
-        mmt: my_mod_tap {
-            compatible = "zmk,behavior-hold-tap";
-            label = "MY_MOD_TAP";
-            #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <280>;
-            quick-tap-ms = <175>;
-            // global-quick-tap;
-            bindings = <&kp>, <&kp>;
-        };
-    };
-
-    macros {
-        gif: gif {
-            label = "giphy";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp LSHFT>
-                , <&macro_tap &kp N2>
-                , <&macro_release &kp LSHFT>
-                , <&macro_tap &kp G &kp I &kp F>
-                ;
-        };
-
-        bt_0: bt_profile_macro_0 {
-            label = "BT_0";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&out OUT_BLE>,
-                  <&bt BT_SEL 0>;
-        };
-
-        bt_1: bt_profile_macro_1 {
-            label = "BT_1";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&out OUT_BLE>,
-                  <&bt BT_SEL 1>;
-        };
-
-        bt_2: bt_profile_macro_2 {
-            label = "BT_2";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&out OUT_BLE>,
-                  <&bt BT_SEL 2>;
-        };
-
-        bt_3: bt_profile_macro_3 {
-            label = "BT_3";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&out OUT_BLE>,
-                  <&bt BT_SEL 3>;
-        };
-    };
-
         keymap {
                 compatible = "zmk,keymap";
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -231,18 +60,18 @@
 label= "BASE"                              ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃     B     ┃     Y     ┃     O            ┃     U            ┃     "          ┃   ┃        ;         ┃        L         ┃        D       ┃     W     ┃     V     ┃
+//             ┃     B     ┃     Y     ┃     O            ┃     U            ┃    &num_word   ┃   ┃      ;           ┃      L           ┃     D          ┃     W     ┃  V (MEH)  ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃     C     ┃     I     ┃     E            ┃     A            ┃     ,          ┃   ┃        .         ┃        H         ┃        T       ┃     S     ┃     N     ┃
+//             ┃     C     ┃     I     ┃     E (ALT)      ┃     A (CTRL)     ┃     , (SHFT)   ┃   ┃      . (SHFT)    ┃      H (CTRL)    ┃     T (ALT)    ┃     S     ┃     N     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃     Z     ┃     J     ┃     X     ┃     K            ┃     G            ┃     /          ┃   ┃        _         ┃        R         ┃        M       ┃     F     ┃     P     ┃     Q     ┃
+// ┃     Z     ┃     J     ┃     X     ┃     K            ┃     G            ┃     / (FUN)    ┃   ┃      _ (HYPER)   ┃      R           ┃     M          ┃     F     ┃     P     ┃     Q     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃    ESC(Macro)    ┃    BSPC(Num)     ┃    TAB(GUI)    ┃   ┃   ENTER(Lower)   ┃   SPC(Cursor)    ┃  DEL(Symbols)  ┃
+//                                     ┃    ESC (Macro)   ┃    BSPC (Num)    ┃   TAB (GUI)    ┃   ┃   ENTER(Lower)   ┃    SPC (Cursor)  ┃   DEL (Symbols)┃
 //                                     ┗━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷                  ╷                  ╷                ╷   ╷                  ╷                  ╷                ╷           ╷           ╷           ╷
 																		       
-                &kp B       &kp Y       &kp O              &kp U              &kp DQT              &kp SEMI           &kp L              &kp D            &kp W       &mmt MEH V
+                &kp B       &kp Y       &kp O              &kp U              &num_word             &kp SEMI           &kp L              &kp D            &kp W       &mmt MEH V
                 &kp C       &kp I       &hl LALT E         &hl LCTRL A        &hl LSHFT COMMA      &hr RSHFT DOT      &hr RCTRL H        &hr RALT T       &kp S       &kp N
     &kp Z       &kp J       &kp X       &kp K              &kp G              &ltl FUN FSLH        &mmt HYPER UNDER   &kp R              &kp M            &kp F       &kp P       &kp Q
                                         &tmb MCR ESC       &tmb NUM BSPC      &mmt LGUI TAB        &tmb LOW RET       &tmb CUR SPC       &tmb SYM DEL
@@ -260,7 +89,7 @@ label= "LOW"                               ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃    L0     ┃    L2     ┃     L3    ┃    L4     ┃    L5     ┃   ┃    L6     ┃    L7     ┃    L8     ┃    L9     ┃    L10    ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃   CMD+Q   ┃   CMD+N   ┃   CMD+H   ┃    CMD+P  ┃   CMD+T   ┃   ┃           ┃           ┃           ┃           ┃           ┃
+//             ┃   CMD+Q   ┃   CMD+N   ┃   CMD+H   ┃    CMD+P  ┃   CMD+T   ┃   ┃           ┃  Alfred   ┃ &capswrd  ┃&tonumword ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃   L0      ┃           ┃           ┃           ┃           ┃    L8     ┃   ┃           ┃ HYP_F7    ┃ HYP_F8    ┃  HYP_F9   ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -270,7 +99,7 @@ label= "LOW"                               ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &to 0       &to 2       &to 3       &to 4       &to 5           &to 6       &to 7       &to 8       &to 9       &tog 10
-                &kp LG(Q)   &kp LG(N)   &kp LG(H)   &kp LG(P)   &kp LG(T)       &trans      &trans      &trans      &trans      &trans
+                &kp LG(Q)   &kp LG(N)   &kp LG(H)   &kp LG(P)   &kp LG(T)       &trans      ALFRED      &capsword   &tonumword  &trans
     &to 0       &trans      &trans      &trans      &trans      &to 8           &trans      HYPF7       HYPF8       HYPF9       &trans      &trans
                                         &trans      &to 6       &trans          &trans      &to 7       &trans
                         >;
@@ -281,7 +110,7 @@ label= "LOW"                               ;
 
                 game_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "GAM"                             ;
+label= "GAM"                               ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃ NEXT FILE ┃ MARK IN   ┃ ROTATE    ┃ MARK OUT  ┃ SHOW SNAP ┃   ┃           ┃           ┃           ┃           ┃           ┃
@@ -385,24 +214,24 @@ label= "SYM"                               ;
 
                 numbers_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "NUM"                               ;
+label= "NUM"                               ; // 6
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓               ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┓
-//             ┃           ┃           ┃             ┃               ┃           ┃               ┃     *     ┃     7     ┃     8     ┃     9     ┃     /      ┃
+//             ┃           ┃   MUTE    ┃  VOL DN     ┃  VOL UP       ┃   SAVE    ┃               ┃     *     ┃     7     ┃     8     ┃     9     ┃     /      ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━┫               ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫
-//             ┃           ┃   MUTE    ┃  VOL DN     ┃  VOL UP       ┃   SAVE    ┃               ┃     +     ┃     4     ┃     5     ┃     6     ┃     -      ┃
+//             ┃           ┃           ┃             ┃  MINUS        ┃ WinSwitch ┃               ┃     +     ┃     4     ┃     5     ┃     6     ┃     -      ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━┫               ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃  TO BASE  ┃  UNDO     ┃   CUT     ┃   COPY      ┃  PASTE        ┃   REDO    ┃               ┃     %     ┃     1     ┃     2     ┃     3     ┃     =      ┃   BKSPC   ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━┫               ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃             ┃               ┃           ┃               ┃     .     ┃     0     ┃    SPC    ┃
+//                                     ┃   Mo SYM    ┃               ┃           ┃               ┃     .     ┃     0     ┃    SPC    ┃
 //                                     ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━┛               ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷             ╷               ╷           ╷               ╷           ╷           ╷           ╷           ╷            ╷           ╷
 
-                &trans      &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP    &kp LG(S)                   &kp ASTRK   &kp KP_N7   &kp KP_N8   &kp KP_N9   &kp FSLH
-                &trans      &trans      &trans        &trans          &trans                      &kp PLUS    &kp KP_N4   &kp KP_N5   &kp KP_N6   &kp KP_MINUS
-    &to BASE    &kp LG(Z)   &kp LG(X)   &kp LG(C)     &kp LG(V)       &kp LS(LG(Z))               &kp PRCNT   &kp KP_N1   &kp KP_N2   &kp KP_N3   &kp EQUAL    &kp BSPC
-                                        &trans        &trans          &trans                      &kp DOT     &kp KP_N0   &kp SPC
+                &trans      &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP    &kp LG(S)                   &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
+                &trans      &trans      &kp COMMA     &kp MINUS       &appswmac                   &kp PLUS    &kp N4      &kp N5      &kp N6      &kp MINUS
+    &to BASE    &kp LG(Z)   &kp LG(X)   &kp LG(C)     &kp LG(V)       &kp LS(LG(Z))               &kp PRCNT   &kp N1      &kp N2      &kp N3      &kp EQUAL    &kp BACKSPACE
+                                        &mo SYM       &trans          &trans                      &kp DOT     &kp N0      &kp SPC
                         >;
                 };
 
@@ -426,7 +255,7 @@ label= "CUR"                               ;
 // ╷             ╷               ╷                ╷           ╷                ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                   &kp PG_DN       &kp LS(LC(TAB))  &kp UP      &kp LC(TAB)      &kp PG_UP       &trans      &tog CUR    &trans      &trans      &trans
-                  &kp LG(LEFT)    &kp LEFT         &kp DOWN    &kp RIGHT        &kp LG(RIGHT)   &trans      &kp LCTRL   &kp LALT    &kp LSHFT   &kp LGUI
+                  &kp LG(LEFT)    &kp LEFT         &kp DOWN    &kp RIGHT        &kp LG(RIGHT)   &trans      &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT
     &kp LA(BSPC)  &kp LG(Z)       &kp LG(X)        &kp LG(C)   &kp LG(V)        &kp LS(LG(Z))   &trans      &trans      &trans      &trans      &trans      &to BASE
                                                    &trans      &trans           &trans          &trans      &trans      &trans
                         >;
@@ -465,22 +294,22 @@ label= "FUN"                               ;
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 label= "MCR"                             ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-//             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃ NEXT FILE ┃ MARK IN   ┃ ROTATE    ┃ MARK OUT  ┃ SHOW SNAP ┃   ┃           ┃           ┃           ┃           ┃           ┃
-//             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃ TVP II    ┃ LEFT      ┃ PAN       ┃ RIGHT     ┃ PLAY/FLIP ┃   ┃           ┃           ┃           ┃           ┃           ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃ FULLSCR   ┃ SHIFT     ┃ COPY      ┃ DELETE    ┃ PASTE     ┃ IMG MARK  ┃   ┃           ┃           ┃           ┃           ┃           ┃           ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃           ┃ UNDO/SAVE ┃  SEL/MOV  ┃   ┃           ┃           ┃           ┃
-//                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+//             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+//             ┃           ┃           ┃             ┃           ┃           ┃   ┃           ┃  neovim   ┃   vimQuit    ┃           ┃           ┃
+//             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
+//             ┃           ┃ PREV_HUNK ┃ Preview     ┃ NEXT_HUNK ┃           ┃   ┃    zfs    ┃  vimSave  ┃vimInsertSave ┃           ┃ exit + ↩  ┃
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃           ┃           ┃ PREV_DIAG ┃             ┃ NEXT_DIAG ┃           ┃   ┃vimSaveQuit┃git status ┃              ┃           ┃           ┃ nvim Term ┃
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                     ┃             ┃           ┃           ┃   ┃           ┃           ┃              ┃
+//                                     ┗━━━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━━━━┛
  bindings = <
-// ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
+// ╷           ╷           ╷           ╷             ╷           ╷           ╷   ╷           ╷           ╷              ╷           ╷           ╷           ╷
 
-                &kp TAB     &kp I       &kp LC(LALT) &kp O      &kp LC(F20)     &trans       &trans       &trans       &trans       &trans
-                &lt CUR L   &kp LEFT    &kp LALT    &kp RIGHT   &kp SPACE       &trans       &trans       &trans       &trans       &trans
-    &kp J       &kp LSHFT   &kp LC(C)   &kp BSPC    &kp LC(V)   &kp LC(F19)     &trans       &trans       &trans       &trans       &trans       &trans
-                                        &trans      &kp LC(F14) &kp LC(F13)     &trans       &trans       &trans
+                &trans      &trans      &trans        &trans      &trans          &trans      &nvim       &nvimqt        &trans      &trans
+                &trans      &prevhunk   &preview_hunk &nexthunk   &trans          &zfs        &visave     &vinsertsave   &trans      &texit
+    &kp J       &trans      &prevdiag   &trans        &nextdiag   &trans          &viquit     &gitstat    &trans         &trans      &trans       &nvimt
+                                        &trans        &trans      &trans          &trans      &trans      &trans
                         >;
                 };
 
