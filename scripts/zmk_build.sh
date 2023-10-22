@@ -197,6 +197,7 @@ if [[ $RUNWITH_DOCKER = true ]]; then
         printf "${CYAN}💀 Deleting 'build' folder.\n${NC}"
         sudo rm -rf "$HOST_ZMK_DIR/app/build"
         sudo rm -rf "$HOST_ZMK_DIR/.west"
+        sudo rm -rf "$OUTPUT_DIR"/*
     fi
 else
     printf "\nBuild mode: local\n"
@@ -205,6 +206,7 @@ else
         printf "${CYAN}💀 Deleting 'build' folder.\n${NC}"
         sudo rm -rf "$HOST_ZMK_DIR/app/build"
         sudo rm -rf "$HOST_ZMK_DIR/.west"
+        sudo rm -rf "$OUTPUT_DIR"/*
     fi
     SUFFIX="${ZEPHYR_VERSION}"
     CONFIG_DIR="$HOST_CONFIG_DIR/config"
