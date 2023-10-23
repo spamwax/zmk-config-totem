@@ -8,7 +8,7 @@ manifest:
       url-base: https://github.com/spamwax
   projects:
     - name: zmk
-      remote: spamwax
+      remote: urob
       revision: main
       import: app/west.yml
   self:

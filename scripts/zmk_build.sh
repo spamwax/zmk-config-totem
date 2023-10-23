@@ -207,6 +207,7 @@ else
         sudo rm -rf "$HOST_ZMK_DIR/app/build"
         sudo rm -rf "$HOST_ZMK_DIR/.west"
         sudo rm -rf "$OUTPUT_DIR"/*
+        sudo /usr/bin/rm -rf /tank/anbaar/projects/hobbies/zmk_firmwares/zmk-config-totem/output/*
     fi
     SUFFIX="${ZEPHYR_VERSION}"
     CONFIG_DIR="$HOST_CONFIG_DIR/config"

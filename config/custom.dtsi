@@ -119,26 +119,26 @@
             bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
             // ignored-key-positions = <15>;
         };
-        capsword: behavior_caps_word {
-            compatible = "zmk,behavior-caps-word";
-            label = "CAPSWORD";
-            #binding-cells = <0>;
-            mods = <MOD_LSFT>;
-            continue-list = <UNDERSCORE BACKSPACE DELETE>;
-            ignore-alphas;
-            ignore-numbers;
-            ignore-modifiers;
-        };
-        /omit-if-no-ref/ numword: behavior_numword {
-            compatible = "zmk,behavior-caps-word";
-            label = "NUMWORD";
-            #binding-cells = <0>;
-            layers = <NUM>;                           // insert location of numbers layer here
-            continue-list = <COMMA>;  // adjust as desired
-            // continue-list = <BACKSPACE DELETE DOT COMMA COLON MINUS PLUS STAR>;  // adjust as desired
-            ignore-numbers;                           // numbers don't deactivate the layer
-            /delete-property/ mods;
-        };
+        // capsword: behavior_caps_word {
+        //     compatible = "zmk,behavior-caps-word";
+        //     label = "CAPSWORD";
+        //     #binding-cells = <0>;
+        //     mods = <MOD_LSFT>;
+        //     continue-list = <UNDERSCORE BACKSPACE DELETE>;
+        //     ignore-alphas;
+        //     ignore-numbers;
+        //     ignore-modifiers;
+        // };
+        // /omit-if-no-ref/ numword: behavior_numword {
+        //     compatible = "zmk,behavior-caps-word";
+        //     label = "NUMWORD";
+        //     #binding-cells = <0>;
+        //     layers = <NUM>;                           // insert location of numbers layer here
+        //     continue-list = <COMMA>;  // adjust as desired
+        //     // continue-list = <BACKSPACE DELETE DOT COMMA COLON MINUS PLUS STAR>;  // adjust as desired
+        //     ignore-numbers;                           // numbers don't deactivate the layer
+        //     /delete-property/ mods;
+        // };
         hl: hrmod_left {
             compatible = "zmk,behavior-hold-tap";
             label = "ADVANCED_HRM_L";
@@ -267,7 +267,7 @@
             #binding-cells = <0>;
             wait-ms = <30>;
             tap-ms = <0>;
-            bindings = <&tog NUM &numword>;
+            bindings = <&tog NUM &num_word>;
         };
         visave: vim_save_normal {
             label = "vim_save";
