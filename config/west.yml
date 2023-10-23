@@ -1,14 +1,10 @@
 manifest:
   remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
-    - name: urob
-      url-base: https://github.com/urob
     - name: spamwax
       url-base: https://github.com/spamwax
   projects:
     - name: zmk
-      remote: urob
+      remote: spamwax
       revision: main
       import: app/west.yml
   self:
