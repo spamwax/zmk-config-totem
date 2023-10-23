@@ -43,7 +43,7 @@
              bindings = <&kp LG ( LSHIFT )>;
              key-positions = <3 13>;
              timeout-ms = <COMBO_TIMEOUT_MS>;
-             layers = <0 1 4 8>;
+             layers = <0 1 4 5 6>;
              slow-release;
          };
          // U & J
@@ -51,14 +51,14 @@
              bindings = <&kp RG ( RSHIFT )>;
              key-positions = <6 16>;
              timeout-ms = <COMBO_TIMEOUT_MS>;
-             layers = <0 1 4 8>;
+             layers = <0 1 4 5 6>;
              slow-release;
          };
          // V & B
          combo_quit_macos {
              bindings = <&kp LG ( Q )>;
              key-positions = <24 25>;
-             layers = <0>;
+             layers = <0 1 4 5 6 7 8 9>;
              timeout-ms = <COMBO_TIMEOUT_MS>;
              slow-release;
          };
@@ -66,7 +66,7 @@
          combo_close_macos {
              bindings = <&kp LG ( W )>;
              key-positions = <14 25>;
-             layers = <0>;
+             layers = <0 1 4 5 6 7 8 9>;
              timeout-ms = <COMBO_TIMEOUT_MS>;
              slow-release;
          };
@@ -74,7 +74,7 @@
          combo_close_windows {
              bindings = <&kp LC ( W )>;
              key-positions = <14 25>;
-             layers = <3>;
+             layers = <3 1 4 5 6 7 8 9>;
              timeout-ms = <COMBO_TIMEOUT_MS>;
              slow-release;
          };
@@ -82,7 +82,7 @@
          combo_selectall_macos {
              bindings = <&kp LG ( A )>;
              key-positions = <4 14>;
-             layers = <0>;
+             layers = <0 1 4 5 6 7 8 9>;
              timeout-ms = <COMBO_TIMEOUT_MS>;
              slow-release;
          };
@@ -90,7 +90,7 @@
          combo_selectall_windows {
              bindings = <&kp LC ( A )>;
              key-positions = <4 14>;
-             layers = <3>;
+             layers = <3 1 4 5 6 7 8 9>;
              timeout-ms = <COMBO_TIMEOUT_MS>;
              slow-release;
          };
@@ -99,7 +99,7 @@
              bindings = <&kp ENTER>;
              key-positions = <23 24>;
              timeout-ms = <COMBO_TIMEOUT_MS>;
-             layers = <0 1 3 4 8 10>;
+             layers = <0 1 3 4 5 6 7 8 9>;
              slow-release;
          };
   };
@@ -206,6 +206,14 @@
             global-quick-tap;
             bindings = <&kp>, <&kp>;
         };
+        z_cmdgrav: z_cmd_grave {
+            compatible = "zmk,behavior-mod-morph";
+            label = "Z_CMD_GRAVE";
+            #binding-cells = <0>;
+            bindings = <&kp Z>, <&kp GRAVE>;
+            mods = <(MOD_LGUI|MOD_RGUI)>;
+            keep-mods = <(MOD_LGUI|MOD_RGUI)>;
+        };
         qtmacnewtab: mac_new_tab {
             compatible = "zmk,behavior-mod-morph";
             label = "MAC_NEW_TAB";
@@ -226,6 +234,29 @@
             #binding-cells = <0>;
             bindings = <&kp TAB>, <&kp BACKSPACE>;
             mods = <(MOD_LCTL|MOD_RCTL)>;
+        };
+        skq: sticky_key_quick_release {
+            compatible = "zmk,behavior-sticky-key";
+            label = "STICKY_KEY_QUICK_RELEASE";
+            #binding-cells = <1>;
+            bindings = <&kp>;
+            release-after-ms = <1000>;
+            quick-release;
+            ignore-modifiers;
+        };
+        /*
+          - tap: sticky shift
+          - double-tap: caps-word (shift + tap mod-morph)
+          - hold: shift
+
+          From: https://github.com/urob/zmk-config/
+        */
+        /omit-if-no-ref/ smart_shift: smart_shift {
+            label = "SMART_SHIFT";
+            compatible = "zmk,behavior-mod-morph";
+            bindings = <&skq RSHFT>, <&caps_word>;
+            mods = <(MOD_RSFT)>;
+            #binding-cells = <0>;
         };
     };
 
@@ -404,6 +435,17 @@
             bindings
                 = <&out OUT_BLE>,
                   <&bt BT_SEL 3>;
+        };
+        bt_clrall: bt_clr_all {
+            label = "BT_CLEAR_ALL";
+            compatible = "zmk,behavior-macro";
+            wait-ms = <40>;
+            tap-ms  = <40>;
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 0>, <&bt BT_CLR>,
+                       <&bt BT_SEL 1>, <&bt BT_CLR>,
+                       <&bt BT_SEL 2>, <&bt BT_CLR>,
+                       <&bt BT_SEL 3>, <&bt BT_CLR>;
         };
     };
 

@@ -52,6 +52,7 @@
 #define ALFRED &kp LG(LC(LA(LS(RBKT))))
 
 #include "custom.dtsi"
+
 / {
         keymap {
                 compatible = "zmk,keymap";
@@ -75,7 +76,7 @@ label= "BASE"                              ;
 																		       
                 &kp B       &kp Y       &kp O              &kp U              &qtmacnewtab         &kp SEMI           &kp L              &kp D            &kp W       &mmt MEH V
                 &kp C       &kp I       &hl LALT E         &hl LCTRL A        &hl LSHFT COMMA      &hr RSHFT DOT      &hr RCTRL H        &hr RALT T       &kp S       &kp N
-    &kp Z       &kp J       &kp X       &kp K              &kp G              &ltl FUN FSLH        &mmt HYPER UNDER   &kp R              &kp M            &kp F       &kp P       &kp Q
+    &z_cmdgrav  &kp J       &kp X       &kp K              &kp G              &ltl FUN FSLH        &mmt HYPER UNDER   &kp R              &kp M            &kp F       &kp P       &kp Q
                                         &tmb MCR ESC       &tmb NUM BSPC      &mmt LGUI TAB        &tmb LOW RET       &tmb CUR SPC       &tmb SYM DEL
 
                        >;
@@ -102,8 +103,8 @@ label= "LOW"                               ;
 
                 &to 0       &to 2       &to 3       &to 4       &to 5           &to 6       &to 7       &to 8       &to 9       &tog 10
                 &kp LG(Q)   &kp LG(N)   &kp LG(H)   &kp LG(P)   &kp LG(T)       &trans      ALFRED      &capsword   &tonumword  &trans
-    &to 0       &trans      &trans      &trans      &trans      &to 8           &trans      HYPF7       HYPF8       HYPF9       &trans      &trans
-                                        &trans      &to 6       &trans          &trans      &to 7       &trans
+    &to BASE    &trans      &trans      &trans      &trans      &to FUN         &trans      HYPF7       HYPF8       HYPF9       &trans      &trans
+                                        &trans      &to NUM     &trans          &trans      &to CUR     &to SYM
                         >;
                 };
 				
@@ -171,7 +172,7 @@ label= "MIR"                               ;
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃ TVP II    ┃ LEFT      ┃ PAN       ┃ RIGHT     ┃ PLAY/FLIP ┃   ┃           ┃           ┃           ┃           ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃ FULLSCR   ┃ SHIFT     ┃ COPY      ┃ DELETE    ┃ PASTE     ┃ IMG MARK  ┃   ┃           ┃           ┃           ┃           ┃           ┃           ┃
+// ┃ TO BASE   ┃ SHIFT     ┃ COPY      ┃ DELETE    ┃ PASTE     ┃ IMG MARK  ┃   ┃           ┃           ┃           ┃           ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                     ┃           ┃ UNDO/SAVE ┃  SEL/MOV  ┃   ┃           ┃           ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -180,7 +181,7 @@ label= "MIR"                               ;
 
                 &kp TAB     &kp I       &kp LC(LALT) &kp O      &kp LC(F20)     &trans       &trans       &trans       &trans       &trans
                 &lt CUR L   &kp LEFT    &kp LALT    &kp RIGHT   &kp SPACE       &trans       &trans       &trans       &trans       &trans
-    &kp J       &kp LSHFT   &kp LC(C)   &kp BSPC    &kp LC(V)   &kp LC(F19)     &trans       &trans       &trans       &trans       &trans       &trans
+    &to BASE    &kp LSHFT   &kp LC(C)   &kp BSPC    &kp LC(V)   &kp LC(F19)     &trans       &trans       &trans       &trans       &trans       &trans
                                         &trans      &kp LC(F14) &kp LC(F13)     &trans       &trans       &trans
                         >;
                 };
@@ -197,7 +198,7 @@ label= "SYM"                               ;
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃     ^     ┃     $     ┃      -    ┃     +     ┃     :     ┃   ┃     \     ┃     *     ┃     (     ┃     )     ┃     =     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃     %     ┃     #     ┃      _    ┃     &     ┃     ~     ┃   ┃     |     ┃     ?     ┃           ┃           ┃           ┃           ┃
+// ┃ TO BASE   ┃     %     ┃     #     ┃      _    ┃     &     ┃     ~     ┃   ┃     |     ┃     ?     ┃     <     ┃     >     ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                     ┃           ┃           ┃           ┃   ┃           ┃           ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -206,7 +207,7 @@ label= "SYM"                               ;
 
                 &kp LBKT    &kp RBKT    &kp LBRC    &kp RBRC    &kp SQT         &kp GRAVE    &kp AT      &kp FSLH     &kp EXCL   &trans
                 &kp CARET   &kp DLLR    &kp MINUS   &kp PLUS    &kp COLON       &kp BSLH     &kp ASTRK   &kp LPAR     &kp RPAR   &kp EQUAL
-    &trans      &kp PRCNT   &kp HASH    &kp UNDER   &kp AMPS    &kp TILDE       &kp PIPE     &kp QMARK   &trans       &trans     &trans     &trans
+    &to BASE    &kp PRCNT   &kp HASH    &kp UNDER   &kp AMPS    &kp TILDE       &kp PIPE     &kp QMARK   &kp LT       &kp GT     &trans     &trans
                                         &trans      &trans      &trans          &trans       &trans      &trans
                         >;
                 };
@@ -301,7 +302,7 @@ label= "MCR"                             ;
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃           ┃ PREV_HUNK ┃ Preview     ┃ NEXT_HUNK ┃           ┃   ┃    zfs    ┃  vimSave  ┃vimInsertSave ┃           ┃ exit + ↩  ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃           ┃ PREV_DIAG ┃             ┃ NEXT_DIAG ┃           ┃   ┃vimSaveQuit┃git status ┃              ┃           ┃           ┃ nvim Term ┃
+// ┃ TO BASE   ┃           ┃ PREV_DIAG ┃             ┃ NEXT_DIAG ┃           ┃   ┃vimSaveQuit┃git status ┃              ┃           ┃           ┃ nvim Term ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                     ┃             ┃           ┃           ┃   ┃           ┃           ┃              ┃
 //                                     ┗━━━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━━━━┛
@@ -310,7 +311,7 @@ label= "MCR"                             ;
 
                 &trans      &trans      &trans        &trans      &trans          &trans      &nvim       &nvimqt        &trans      &trans
                 &trans      &prevhunk   &preview_hunk &nexthunk   &trans          &zfs        &visave     &vinsertsave   &trans      &texit
-    &kp J       &trans      &prevdiag   &trans        &nextdiag   &trans          &viquit     &gitstat    &trans         &trans      &trans       &nvimt
+    &to BASE    &trans      &prevdiag   &trans        &nextdiag   &trans          &viquit     &gitstat    &trans         &trans      &trans       &nvimt
                                         &trans        &trans      &trans          &trans      &trans      &trans
                         >;
                 };
@@ -327,7 +328,7 @@ label= "SYS"                               ;
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫               ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃ BT_SEL0   ┃ BT_SEL1     ┃ BT_SEL2    ┃ BT_SEL3   ┃     [     ┃               ┃           ┃           ┃           ┃           ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫               ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃bootloader ┃ RESET       ┃            ┃  BT_CLR   ┃     (     ┃               ┃           ┃           ┃           ┃ RESET     ┃bootloader ┃           ┃
+// ┃ TO BASE   ┃bootloader ┃ RESET       ┃            ┃  BT_CLR   ┃BT_CLR_ALL ┃               ┃BT_CLR_ALL ┃           ┃           ┃ RESET     ┃bootloader ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫               ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                       ┃            ┃           ┃           ┃               ┃           ┃           ┃           ┃
 //                                       ┗━━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛               ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -336,7 +337,7 @@ label= "SYS"                               ;
                                                                                             
                 &trans      &out OUT_TOG &bt BT_CLR   &out OUT_USB &kp LBRC                   &trans       &trans      &trans      &trans      &tog SYS
                 &bt_0       &bt_1        &bt_2        &bt_3        &kp LBKT                   &trans       &trans      &trans      &trans      &trans
-    &trans      &bootloader &sys_reset   &trans       &bt BT_CLR   &kp LPAR                   &trans       &trans      &trans      &sys_reset  &bootloader &trans
+    &to BASE    &bootloader &sys_reset   &trans       &bt BT_CLR   &bt_clrall                 &bt_clrall   &trans      &trans      &sys_reset  &bootloader &trans
                                          &trans       &trans       &trans                     &trans       &trans      &trans
                         >;
                 };
