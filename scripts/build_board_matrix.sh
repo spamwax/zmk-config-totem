@@ -55,6 +55,7 @@ compile_board () {
         echo
         cat "$LOGFILE"
         echo "${RED}🔴 Error: $artifact_name failed${NC} ⛑️ "
+        exit 1
     fi
 }
 
