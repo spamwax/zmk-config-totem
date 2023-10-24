@@ -53,6 +53,7 @@
 
 &num_word {
     layers = <NUM>;  // replace NUM by the location of numbers layer
+    continue-list = <BSPC DEL DOT COMMA PLUS MINUS STAR FSLH EQUAL LSHFT LEFT RIGHT UP DOWN>;
 };
 
 #include "custom.dtsi"
