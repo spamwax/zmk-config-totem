@@ -33,9 +33,7 @@
                                    26 27 28 29 30 31 
 #define LEFT_THUMB_KEYS  32 33 34
 #define RIGHT_THUMB_KEYS 35 36 37
-&num_word {
-  layers = <NUM>;  // replace NUM by the location of numbers layer
-};
+
 / {
     combos {
          compatible = "zmk,combos";
@@ -110,6 +108,14 @@
              layers = <0 1 3 4 5 6 7 8 9>;
              slow-release;
          };
+         // LOW layer
+         combo_layer_low {
+             bindings = <&sl LOW>;
+             key-positions = <33 34>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             layers = <0 1 3 4 5 6 7 8 9>;
+             slow-release;
+         };
   };
 
     behaviors {
@@ -118,14 +124,14 @@
             label = "TRI-STATE-MAC";
             #binding-cells = <0>;
             bindings = <&kt LGUI>, <&kp TAB>, <&kt LGUI>;
-            // ignored-key-positions = <15>;
+            ignored-key-positions = <14 15>; // Ignort SHIFT key position so we can go back in the window list
         };
         appswwin: app_switch_win {
             compatible = "zmk,behavior-tri-state";
             label = "TRI-STATE-WIN";
             #binding-cells = <0>;
             bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
-            // ignored-key-positions = <15>;
+            ignored-key-positions = <14 15>; // Ignort SHIFT key position so we can go back in the window list
         };
         // capsword: behavior_caps_word {
         //     compatible = "zmk,behavior-caps-word";
@@ -152,7 +158,7 @@
             label = "ADVANCED_HRM_L";
             #binding-cells = <2>;
             flavor = "balanced";
-            tapping-term-ms = <280>;
+            tapping-term-ms = <240>;
             quick-tap-ms = <200>;
             require-prior-idle-ms = <70>;
             bindings = <&kp>, <&kp>;
@@ -164,9 +170,9 @@
             label = "ADVANCED_HRM_R";
             #binding-cells = <2>;
             flavor = "balanced";
-            tapping-term-ms = <280>;
+            tapping-term-ms = <240>;
             quick-tap-ms = <180>;
-            global-quick-tap;
+            require-prior-idle-ms = <150>;
             bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <LEFT_HAND_KEYS LEFT_THUMB_KEYS>;
             hold-trigger-on-release;
@@ -178,7 +184,7 @@
             hold-trigger-key-positions = <25 36 37 38 47 48 49 50>; // Arrows and cut/copy/paste on LEFT side
             tapping-term-ms = <170>;
             quick-tap-ms = <170>;
-            global-quick-tap;
+            require-prior-idle-ms = <150>;
             #binding-cells = <2>;
             bindings = <&mo>, <&kp>;
         };
@@ -189,7 +195,7 @@
             hold-trigger-key-positions = <29 30 31 41 42 43 59 60 61 74 47 48 49 50>; // Numbers and cut/copy/paste on RIGHT side
             tapping-term-ms = <170>;
             quick-tap-ms = <170>;
-            global-quick-tap;
+            require-prior-idle-ms = <150>;
             #binding-cells = <2>;
             bindings = <&mo>, <&kp>;
         };
@@ -204,6 +210,17 @@
             #binding-cells = <2>;
             bindings = <&mo>, <&kp>;
         };
+        tmb_hold_preferred: thumb_layer_hold_preferred {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MIRYOKU_LAYER_TAP_WITH_REPEAT";
+            flavor = "hold-preferred";
+            tapping-term-ms = <THUMB_HOLDING_TIME>;
+            quick-tap-ms = <THUMB_REPEAT_DECAY>; // enable repeat
+            //global-quick-tap; // no typing streak
+            retro-tap; // allow slow (hold-like) taps
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+        };
         mmt: my_mod_tap {
             compatible = "zmk,behavior-hold-tap";
             label = "MY_MOD_TAP";
@@ -211,7 +228,7 @@
             flavor = "hold-preferred";
             tapping-term-ms = <280>;
             quick-tap-ms = <175>;
-            global-quick-tap;
+            require-prior-idle-ms = <150>;
             bindings = <&kp>, <&kp>;
         };
         z_cmdgrav: z_cmd_grave {
