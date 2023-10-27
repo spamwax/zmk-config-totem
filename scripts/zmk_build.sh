@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+# shellcheck disable=2034
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 # shellcheck disable=2059
 if [ -t 1 ]; then
     # stdout is a terminal
