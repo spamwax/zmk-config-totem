@@ -110,7 +110,7 @@ label= "LOW"                               ;
                 &to 0       &to 2       &to 3       &to 4       &to 5           &to 6       &to 7       &to 8       &to 9       &tog 10
                 &kp LG(Q)   &kp LG(N)   &kp LG(H)   &kp LG(P)   &kp LG(T)       &trans      ALFRED      &caps_word  &tonumword  &trans
     &to BASE    &trans      &trans      &trans      &trans      &to FUN         &trans      HYPF7       HYPF8       HYPF9       &trans      &trans
-                                        &trans      &to NUM     &trans          &trans      &to CUR     &to SYM
+                                        &trans      &to CUR     &trans          &trans      &to NUM     &to SYM
                         >;
                 };
 				
