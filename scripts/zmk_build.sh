@@ -194,11 +194,11 @@ if [[ $RUNWITH_DOCKER = true ]]; then
     # Reset volumes
     if [[ $CLEAR_CACHE = true ]]; then
         printf "\n==-> Clearing cache and starting a fresh build <-==\n"
-        printf "\n%s" "${CYAN}💀 Removing Docker volumes.\n${NC}"
+        printf "\n%s\n" "${CYAN}💀 Removing Docker volumes.${NC}"
         $DOCKER_BIN volume ls -q | grep "^zmk-.*-$ZEPHYR_VERSION$" | while read -r _v; do
             $DOCKER_BIN volume rm "$_v"
         done
-        printf "%s" "${CYAN}💀 Deleting 'build' folder.\n${NC}"
+        printf "%s\n" "${CYAN}💀 Deleting 'build' folder.${NC}"
         sudo rm -rf "$HOST_ZMK_DIR/app/build"
         sudo rm -rf "$HOST_ZMK_DIR/.west"
         sudo rm -rf "$OUTPUT_DIR"/*
@@ -207,7 +207,7 @@ else
     printf "\nBuild mode: local\n"
     if [[ $CLEAR_CACHE = true ]]; then
         printf "\n==-> Clearing cache and starting a fresh build <-==\n"
-        printf "%s" "${CYAN}💀 Deleting 'build' folder.\n${NC}"
+        printf "%s\n" "${CYAN}💀 Deleting 'build' folder.${NC}"
         sudo rm -rf "$HOST_ZMK_DIR/app/build"
         sudo rm -rf "$HOST_ZMK_DIR/.west"
         sudo rm -rf "$OUTPUT_DIR"/*
@@ -250,7 +250,7 @@ for pair in "${board_shields[@]}"; do
         echo "shield=$shield" >> "$HOST_CONFIG_DIR/env.list"
 
         # Run Docker to build firmware for board/shield combo
-        printf "%s" "\n🚧 Run Docker to build \"$board MCU ${shield:+($shield keyboard)}\"\n"
+        printf "\n%s\n" "🚧 Run Docker to build \"$board MCU ${shield:+($shield keyboard)}\""
         printf "╰┈┈➤"
         DOCKER_PREFIX="$DOCKER_CMD -w $DOCKER_ZMK_DIR/app --env-file $HOST_CONFIG_DIR/env.list $DOCKER_IMG"
         # DOCKER_PREFIX="$DOCKER_CMD -w $DOCKER_ZMK_DIR/app --env-file $HOST_CONFIG_DIR/env.list -ti $DOCKER_IMG bash"
