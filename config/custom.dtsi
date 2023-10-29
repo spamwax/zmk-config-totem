@@ -260,6 +260,24 @@
             bindings = <&kp TAB>, <&kp BACKSPACE>;
             mods = <(MOD_LCTL|MOD_RCTL)>;
         };
+        shft_bspc: shift_backspace {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SHIFT_BACKSPACE";
+            #binding-cells = <0>;
+            bindings = <&kp BSPC>, <&kp DELETE>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        tmb_mrph_del: thumb_morph_delete {
+            compatible = "zmk,behavior-hold-tap";
+            label = "THUMB_MORPH_DELETE";
+            flavor = THUMB_HOLDING_TYPE;
+            tapping-term-ms = <THUMB_HOLDING_TIME>;
+            quick-tap-ms = <THUMB_REPEAT_DECAY>; // enable repeat
+            //global-quick-tap; // no typing streak
+            retro-tap; // allow slow (hold-like) taps
+            #binding-cells = <2>;
+            bindings = <&mo>, <&shft_bspc>;
+        };
         skq: sticky_key_quick_release {
             compatible = "zmk,behavior-sticky-key";
             label = "STICKY_KEY_QUICK_RELEASE";
@@ -485,6 +503,10 @@
         tri_layer2 {
             if-layers = <WIN CUR>;
             then-layer = <THENWIN_CUR>;
+        };
+        tri_layer3 {
+            if-layers = <WIN MCR>;
+            then-layer = <THENWIN_MCR>;
         };
     };
 

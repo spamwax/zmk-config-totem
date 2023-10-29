@@ -35,6 +35,7 @@
 #define SYS 10
 #define THENWIN_NUM 11
 #define THENWIN_CUR 12
+#define THENWIN_MCR 13
 
 
 &mt {
@@ -50,7 +51,8 @@
 #define HYPF8 &kp LG(LC(LA(LS(F8))))
 #define HYPF9 &kp LG(LC(LA(LS(F9))))
 #define ALFRED &kp LG(LC(LA(LS(RBKT))))
-#define TMHP &tmb_hold_preferred // layer-tap for thomb keys with hold-preferred!
+#define TMHP &tmb_hold_preferred // layer-tap for thumb keys with hold-preferred!
+#define TM_MRPH_DEL &tmb_mrph_del
 
 &num_word {
     layers = <NUM>;  // replace NUM by the location of numbers layer
@@ -83,7 +85,7 @@ label= "BASE"                              ;
                 &kp B       &kp Y       &kp O              &kp U              &qtmacnewtab         &kp SEMI           &kp L              &kp D            &kp W       &mmt MEH V
                 &kp C       &kp I       &hl LALT E         &hl LCTRL A        &hl LSHFT COMMA      &hr RSHFT DOT      &hr RCTRL H        &hr RALT T       &kp S       &kp N
     &z_cmdgrav  &kp J       &kp X       &kp K              &kp G              &ltl FUN FSLH        &mmt HYPER UNDER   &kp R              &kp M            &kp F       &kp P       &kp Q
-                                        &tmb MCR ESC       TMHP CUR BSPC      &mmt LGUI TAB        &tmb LOW RET       &tmb NUM SPC       TMHP SYM DEL
+                                        TMHP CUR ESC       TM_MRPH_DEL MCR 0  &mmt LGUI TAB        &tmb LOW RET       &tmb NUM SPC       TMHP SYM DEL
 
                        >;
                 };
@@ -306,7 +308,7 @@ label= "MCR"                             ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃             ┃           ┃           ┃   ┃           ┃  neovim   ┃   vimQuit    ┃           ┃           ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃           ┃ PREV_HUNK ┃ Preview     ┃ NEXT_HUNK ┃           ┃   ┃    zfs    ┃  vimSave  ┃vimInsertSave ┃           ┃ exit + ↩  ┃
+//             ┃           ┃ PREV_HUNK ┃ Preview     ┃ NEXT_HUNK ┃  CMD+TAB  ┃   ┃    zfs    ┃  vimSave  ┃vimInsertSave ┃           ┃ exit + ↩  ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃ TO BASE   ┃           ┃ PREV_DIAG ┃             ┃ NEXT_DIAG ┃           ┃   ┃vimSaveQuit┃git status ┃              ┃           ┃           ┃ nvim Term ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -316,7 +318,7 @@ label= "MCR"                             ;
 // ╷           ╷           ╷           ╷             ╷           ╷           ╷   ╷           ╷           ╷              ╷           ╷           ╷           ╷
 
                 &trans      &trans      &trans        &trans      &trans          &trans      &nvim       &nvimqt        &trans      &trans
-                &trans      &prevhunk   &preview_hunk &nexthunk   &trans          &zfs        &visave     &vinsertsave   &trans      &texit
+                &trans      &prevhunk   &preview_hunk &nexthunk   &appswmac       &zfs        &visave     &vinsertsave   &trans      &texit
     &to BASE    &trans      &prevdiag   &trans        &nextdiag   &trans          &viquit     &gitstat    &trans         &trans      &trans       &nvimt
                                         &trans        &trans      &trans          &trans      &trans      &trans
                         >;
@@ -400,6 +402,30 @@ label= "THENWIN_CUR"                       ;
                 };
 
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+
+                then_macros_layer {
+// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+label= "THENWIN_MCR"                       ;
+// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+//             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓    ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓            
+//             ┃           ┃           ┃           ┃           ┃           ┃    ┃           ┃           ┃           ┃           ┃           ┃
+//             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
+//             ┃           ┃           ┃           ┃           ┃           ┃    ┃           ┃           ┃           ┃           ┃           ┃
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃           ┃           ┃           ┃           ┃           ┃           ┃    ┃           ┃           ┃           ┃           ┃           ┃           ┃
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                     ┃           ┃           ┃           ┃    ┃           ┃           ┃           ┃
+//                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛    ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
+ bindings = <
+// ╷           ╷           ╷           ╷           ╷           ╷           ╷    ╷           ╷           ╷           ╷           ╷           ╷           ╷             
+                                                                           
+                &trans      &trans      &trans      &trans      &trans           &trans      &trans      &trans      &trans      &trans
+                &trans      &trans      &trans      &trans      &appswwin        &trans      &trans      &trans      &trans      &trans
+    &trans      &trans      &trans      &trans      &trans      &trans           &trans      &trans      &trans      &trans      &trans      &trans
+                                        &trans      &trans      &trans           &trans      &trans      &trans
+                        >;
+                };
+
 
                 tvp1_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
