@@ -47,9 +47,15 @@ services:
       - bash
       - -c
       - |
+        groupadd -g $GROUP_ID hamid
+        useradd -d /home/hamid -m -g hamid -u $USER_ID hamid
         echo "***** $GROUP_ID"
         chown -R ${USER_ID}:${GROUP_ID} ${DOCKER_ZMK_DIR}/zephyr ${DOCKER_ZMK_DIR}/modules ${DOCKER_ZMK_DIR}/tools /root ${DOCKER_ZMK_DIR} /tmp
         echo "chown -R ${USER_ID}:${GROUP_ID} ${DOCKER_ZMK_DIR}/zephyr ${DOCKER_ZMK_DIR}/modules ${DOCKER_ZMK_DIR}/tools /root ${DOCKER_ZMK_DIR} /tmp [ $DOCKER_CONFIG_DIR ]"
+        mkdir //.ccache/tmp
+        chown -R ${USER_ID}:${GROUP_ID} //.ccache/tmp
+        mkdir //.ccache
+        chown -R ${USER_ID}:${GROUP_ID} //.ccache
     # command: bash -c "echo \"***** $GROUP_ID\" && chown -R ${USER_ID}:${GROUP_ID} ${DOCKER_ZMK_DIR}/zephyr ${DOCKER_ZMK_DIR}/modules ${DOCKER_ZMK_DIR}/tools /root ${DOCKER_ZMK_DIR} /tmp && echo \"chown -R ${USER_ID}:${GROUP_ID} ${DOCKER_ZMK_DIR}/zephyr ${DOCKER_ZMK_DIR}/modules ${DOCKER_ZMK_DIR}/tools /root ${DOCKER_ZMK_DIR} /tmp [ $DOCKER_CONFIG_DIR ]\""
 
   build:
