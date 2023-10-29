@@ -186,7 +186,10 @@ if [[ $RUNWITH_DOCKER = true ]]; then
     SUFFIX="${ZEPHYR_VERSION}_docker"
 
     printf "\n📦 Building Dockerfile 📦\n"
-    "$DOCKER_BIN" build --build-arg zmk_type=$zmk_type --build-arg zmk_tag="$zmk_tag" -t private/zmk . >/dev/null || exit
+    "$DOCKER_BIN" build --build-arg zmk_type=$zmk_type --build-arg zmk_tag="$zmk_tag" \
+        --build-arg USERNAME="$(id -un)" --build-arg USERUID="$(id -u)" --build-arg USERGID="$(id -g)" \
+        -t private/zmk . >/dev/null || exit
+
     printf "     Done.\n"
     #
     # | Cleanup and shit |
@@ -251,18 +254,12 @@ for pair in "${board_shields[@]}"; do
         echo "shield=$shield" >> "$HOST_CONFIG_DIR/env.list"
 
         # Run Docker to build firmware for board/shield combo
-        printf "\n%s\n" "🚧 Run Docker to build \"$board MCU ${shield:+($shield keyboard)}\""
+        printf "\n%s\n" "🚧 Run Docker to build \"$board MCU ${shield:+(${CYAN}$shield${NC} keyboard)}\""
         printf "╰┈┈➤"
         DOCKER_PREFIX="$DOCKER_CMD -w $DOCKER_ZMK_DIR/app --env-file $HOST_CONFIG_DIR/env.list $DOCKER_IMG"
-        # DOCKER_PREFIX="$DOCKER_CMD -w $DOCKER_ZMK_DIR/app --env-file $HOST_CONFIG_DIR/env.list -ti $DOCKER_IMG bash"
-        # $DOCKER_PREFIX
-        # exit
 
-        # $DOCKER_PREFIX "$DOCKER_CONFIG_DIR/scripts/build_board_matrix.sh" || exit
-        # "$HOST_CONFIG_DIR"/run.sh
         USER_ID=$(id -u) GROUP_ID=$(id -g) docker-compose --env-file "$HOST_CONFIG_DIR"/env.list run --rm build
         docker-compose rm --force
-        exit
 
         printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n"
     else
