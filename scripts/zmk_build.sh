@@ -196,6 +196,7 @@ if [[ $RUNWITH_DOCKER = true ]]; then
         printf "\n==-> Clearing cache and starting a fresh build <-==\n"
         printf "\n%s\n" "${CYAN}💀 Removing Docker volumes.${NC}"
         $DOCKER_BIN volume ls -q | grep "^zmk-.*-$ZEPHYR_VERSION$" | while read -r _v; do
+            printf "\n\t-> =======================================___________________________%s\n" "${RED}$_v${NC}"
             $DOCKER_BIN volume rm "$_v"
         done
         printf "%s\n" "${CYAN}💀 Deleting 'build' folder.${NC}"
@@ -257,7 +258,12 @@ for pair in "${board_shields[@]}"; do
         # $DOCKER_PREFIX
         # exit
 
-        $DOCKER_PREFIX "$DOCKER_CONFIG_DIR/scripts/build_board_matrix.sh" || exit
+        # $DOCKER_PREFIX "$DOCKER_CONFIG_DIR/scripts/build_board_matrix.sh" || exit
+        # "$HOST_CONFIG_DIR"/run.sh
+        USER_ID=$(id -u) GROUP_ID=$(id -g) docker-compose --env-file "$HOST_CONFIG_DIR"/env.list run --rm build
+        docker-compose rm --force
+        exit
+
         printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n"
     else
         echo

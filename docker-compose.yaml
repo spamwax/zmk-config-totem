@@ -1,0 +1,105 @@
+version: "3.9"
+services:
+
+  # Fix Ownership of Build Directory
+  # Thanks to Bug in Docker itself
+  # We need to use steps like this
+  # Because by default, the volume directory
+  # Is owned by Root
+  # So this helps correct it
+  change-vol-ownership:
+    # We can use any image we want as long as we can chown
+    image: private/zmk
+    # Need a user priviliged enough to chown
+    env_file: env.list
+    # environment:
+    #   - DOCKER_ZMK_DIR='${DOCKER_ZMK_DIR}'
+    #   - DOCKER_CONFIG_DIR=${DOCKER_CONFIG_DIR}
+    #   - HOST_ZMK_DIR=${HOST_ZMK_DIR}
+      # - HOST_CONFIG_DIR=${HOST_CONFIG_DIR}
+    user: "root"
+    # Specify the group in question
+    group_add:
+      - '${GROUP_ID}'
+    volumes:
+      # The volume to chown
+      # - cache:/tmp/change-ownership
+      - zmk_root_user:/root
+      - zmk_zephyr:$DOCKER_ZMK_DIR/zephyr
+      - zmk_zephyr_modules:$DOCKER_ZMK_DIR/modules
+      - zmk_zephyr_tools:$DOCKER_ZMK_DIR/tools
+      - "${HOST_CONFIG_DIR}:${DOCKER_CONFIG_DIR}"
+      # - "${HOST_ZMK_DIR}:${DOCKER_ZMK_DIR}"
+      # - type: bind
+      #   source: ${HOST_ZMK_DIR}
+      #   target: $DOCKER_ZMK_DIR
+      - type: bind
+        source: ${HOST_ZMK_DIR}
+        target: $DOCKER_ZMK_DIR
+      # - type: bind
+      #   source: "$HOST_CONFIG_DIR"
+      #   target: "$DOCKER_CONFIG_DIR"
+      - type: bind
+        source: '$LOG_DIR'
+        target: /tmp
+
+    command:
+      - bash
+      - -c
+      - |
+        echo "***** $GROUP_ID"
+        chown -R ${USER_ID}:${GROUP_ID} ${DOCKER_ZMK_DIR}/zephyr ${DOCKER_ZMK_DIR}/modules ${DOCKER_ZMK_DIR}/tools /root ${DOCKER_ZMK_DIR} /tmp
+        echo "chown -R ${USER_ID}:${GROUP_ID} ${DOCKER_ZMK_DIR}/zephyr ${DOCKER_ZMK_DIR}/modules ${DOCKER_ZMK_DIR}/tools /root ${DOCKER_ZMK_DIR} /tmp [ $DOCKER_CONFIG_DIR ]"
+    # command: bash -c "echo \"***** $GROUP_ID\" && chown -R ${USER_ID}:${GROUP_ID} ${DOCKER_ZMK_DIR}/zephyr ${DOCKER_ZMK_DIR}/modules ${DOCKER_ZMK_DIR}/tools /root ${DOCKER_ZMK_DIR} /tmp && echo \"chown -R ${USER_ID}:${GROUP_ID} ${DOCKER_ZMK_DIR}/zephyr ${DOCKER_ZMK_DIR}/modules ${DOCKER_ZMK_DIR}/tools /root ${DOCKER_ZMK_DIR} /tmp [ $DOCKER_CONFIG_DIR ]\""
+
+  build:
+    user: "${USER_ID}:${GROUP_ID}"
+    image: private/zmk
+    working_dir: ${DOCKER_ZMK_DIR}/app
+    env_file: env.list
+    environment:
+      - DOCKER_ZMK_DIR=${DOCKER_ZMK_DIR}
+      - DOCKER_CONFIG_DIR=${DOCKER_CONFIG_DIR}
+      - HOST_ZMK_DIR=${HOST_ZMK_DIR}
+      - HOST_CONFIG_DIR=${HOST_CONFIG_DIR}
+    command:
+      - bash
+      - -c
+      - |
+        echo "${DOCKER_CONFIG_DIR}/scripts/build_board_matrix.sh === [$HOST_CONFIG_DIR - $HOST_ZMK_DIR] [$DOCKER_CONFIG_DIR - $DOCKER_ZMK_DIR]"
+        ${DOCKER_CONFIG_DIR}/scripts/build_board_matrix.sh
+    volumes:
+      # The volume to chown
+      # - cache:/tmp/change-ownership
+      - zmk_root_user:/root
+      - zmk_zephyr:$DOCKER_ZMK_DIR/zephyr
+      - zmk_zephyr_modules:$DOCKER_ZMK_DIR/modules
+      - zmk_zephyr_tools:$DOCKER_ZMK_DIR/tools
+      - "${HOST_CONFIG_DIR}:${DOCKER_CONFIG_DIR}"
+      # - "${HOST_ZMK_DIR}:${DOCKER_ZMK_DIR}"
+      # - type: bind
+      #   source: ${HOST_ZMK_DIR}
+      #   target: $DOCKER_ZMK_DIR
+      - type: bind
+        source: ${HOST_ZMK_DIR}
+        target: $DOCKER_ZMK_DIR
+      # - type: bind
+      #   source: "$HOST_CONFIG_DIR"
+      #   target: "$DOCKER_CONFIG_DIR"
+      - type: bind
+        source: '$LOG_DIR'
+        target: /tmp
+
+    depends_on:
+      change-vol-ownership:
+        condition: service_completed_successfully
+volumes:
+  # cache:
+  zmk_root_user:
+    name: zmk-root-user-${ZEPHYR_VERSION}
+  zmk_zephyr:
+    name: zmk-zephyr-${ZEPHYR_VERSION}
+  zmk_zephyr_modules:
+    name: zmk-zephyr-modules-${ZEPHYR_VERSION}
+  zmk_zephyr_tools:
+    name: zmk-zephyr-tools-${ZEPHYR_VERSION}
