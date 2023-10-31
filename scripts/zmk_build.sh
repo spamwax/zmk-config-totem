@@ -28,6 +28,10 @@ while [[ $# -gt 0 ]]; do
             RUNWITH_DOCKER="false"
             ;;
 
+        -r|--remote-docker)
+            REMOTE_DOCKER="true"
+            ;;
+
         -m|--multithread)
             # shellcheck disable=2034
             MULTITHREAD="true"
@@ -100,7 +104,7 @@ done
 [[ -z $HOST_ZMK_DIR ]] && HOST_ZMK_DIR="/tank/anbaar/projects/hobbies/zmk_firmwares/zmk"
 [[ -z $HOST_CONFIG_DIR ]] && HOST_CONFIG_DIR="/tank/anbaar/projects/hobbies/zmk_firmwares/zmk-config-totem"
 
-OUTPUT_DIR=${OUTPUT_DIR:-output} && mkdir -p "$HOST_CONFIG_DIR/$OUTPUT_DIR"
+OUTPUT_DIR=${OUTPUT_DIR:-output}
 [[ -z $LOG_DIR ]] && LOG_DIR="/tmp"
 
 [[ -z $DOCKER_ZMK_DIR ]] && DOCKER_ZMK_DIR="/workspace/zmk"
@@ -128,18 +132,42 @@ fi
 
 [[ -z $CLEAR_CACHE ]] && CLEAR_CACHE="false"
 
+if [[ -n $REMOTE_DOCKER ]]; then
+  printf "\n%s\n" "${YELLOW}ATTENTION!${NC} Using remote Docker!"
+  [[ -z $DOCKER_HOST ]] \
+      && printf "\n%s\n" "DOCKER_HOST env. variable is NOT set." \
+      && printf "\t%s\n" "Set it like ${CYAN}export DOCKER_HOST=ssh://khersak${NC}" \
+      && printf "\t%s\n" "${RED}Aborting!${NC}" \
+      && exit
+  local_config="$SCRIPT_DIR"/.. 
+  local_zmk="$local_config"/../zmk
+  local_output="$local_config/output"
+  USERNAME="hamid"
+  USERUID="1000"
+  USERGID="1000"
+else
+  printf "\n%s\n" "${YELLOW}ATTENTION!${NC} Using local Docker!"
+  local_config="$HOST_CONFIG_DIR"
+  local_zmk="$HOST_ZMK_DIR"
+  local_output="$local_config/output"
+  USERNAME=$(id -un)
+  USERUID=$(id -u)
+  USERGID=$(id -g)
+fi
+
 # Set env list to be used by Docker later
-rm -f "$HOST_CONFIG_DIR/env.list"
+rm -f "$local_config/env.list"
+rm -f "$local_config/.env"
 # shellcheck disable=2129
-echo "ZEPHYR_VERSION=$ZEPHYR_VERSION" >> "$HOST_CONFIG_DIR/env.list"
-echo "OUTPUT_DIR=$OUTPUT_DIR" >> "$HOST_CONFIG_DIR/env.list"
-echo "LOG_DIR=$LOG_DIR" >> "$HOST_CONFIG_DIR/env.list"
-echo "HOST_ZMK_DIR=$HOST_ZMK_DIR" >> "$HOST_CONFIG_DIR/env.list"
-echo "HOST_CONFIG_DIR=$HOST_CONFIG_DIR" >> "$HOST_CONFIG_DIR/env.list"
-echo "DOCKER_ZMK_DIR=$DOCKER_ZMK_DIR" >> "$HOST_CONFIG_DIR/env.list"
-echo "DOCKER_CONFIG_DIR=$DOCKER_CONFIG_DIR" >> "$HOST_CONFIG_DIR/env.list"
-echo "WEST_OPTS=$WEST_OPTS" >> "$HOST_CONFIG_DIR/env.list"
-echo "CONFIG_DIR=$DOCKER_CONFIG_DIR/config" >> "$HOST_CONFIG_DIR/env.list"
+echo "ZEPHYR_VERSION=$ZEPHYR_VERSION" >> "$local_config/env.list"
+echo "OUTPUT_DIR=$OUTPUT_DIR" >> "$local_config/env.list"
+echo "LOG_DIR=$LOG_DIR" >> "$local_config/env.list"
+echo "HOST_ZMK_DIR=$HOST_ZMK_DIR" >> "$local_config/env.list"
+echo "HOST_CONFIG_DIR=$HOST_CONFIG_DIR" >> "$local_config/env.list"
+echo "DOCKER_ZMK_DIR=$DOCKER_ZMK_DIR" >> "$local_config/env.list"
+echo "DOCKER_CONFIG_DIR=$DOCKER_CONFIG_DIR" >> "$local_config/env.list"
+echo "WEST_OPTS=$WEST_OPTS" >> "$local_config/env.list"
+echo "CONFIG_DIR=$DOCKER_CONFIG_DIR/config" >> "$local_config/env.list"
 
 zmk_type=dev
 zmk_tag="3.2"
@@ -152,7 +180,7 @@ DOCKER_BIN="docker"
 # | AUTOMATE CONFIG OPTIONS |
 # +-------------------------+
 
-cd "$HOST_CONFIG_DIR" || exit
+cd "$local_config" || exit
 
 if [[ -f config/combos.dtsi ]]
     # update maximum combos per key
@@ -187,7 +215,7 @@ if [[ $RUNWITH_DOCKER = true ]]; then
 
     printf "\n📦 Building Dockerfile 📦\n"
     "$DOCKER_BIN" build --build-arg zmk_type=$zmk_type --build-arg zmk_tag="$zmk_tag" \
-        --build-arg USERNAME="$(id -un)" --build-arg USERUID="$(id -u)" --build-arg USERGID="$(id -g)" \
+        --build-arg USERNAME="$USERNAME" --build-arg USERUID="$USERUID" --build-arg USERGID="$USERGID" \
         -t private/zmk . >/dev/null || exit
 
     printf "     Done.\n"
@@ -202,18 +230,18 @@ if [[ $RUNWITH_DOCKER = true ]]; then
             $DOCKER_BIN volume rm "$_v"
         done
         printf "%s\n" "${CYAN}💀 Deleting 'build' folder.${NC}"
-        sudo rm -rf "$HOST_ZMK_DIR/app/build"
-        sudo rm -rf "$HOST_ZMK_DIR/.west"
-        sudo rm -rf "$OUTPUT_DIR"/*
+        sudo rm -rf "$local_zmk/app/build"
+        sudo rm -rf "$local_zmk/.west"
+        sudo rm -rf "$local_output"/*
     fi
 else
     printf "\nBuild mode: local\n"
     if [[ $CLEAR_CACHE = true ]]; then
         printf "\n==-> Clearing cache and starting a fresh build <-==\n"
         printf "%s\n" "${CYAN}💀 Deleting 'build' folder.${NC}"
-        sudo rm -rf "$HOST_ZMK_DIR/app/build"
-        sudo rm -rf "$HOST_ZMK_DIR/.west"
-        sudo rm -rf "$OUTPUT_DIR"/*
+        sudo rm -rf "$local_zmk/app/build"
+        sudo rm -rf "$local_zmk/.west"
+        sudo rm -rf "$local_output"/*
         sudo /usr/bin/rm -rf /tank/anbaar/projects/hobbies/zmk_firmwares/zmk-config-totem/output/*
     fi
     SUFFIX="${ZEPHYR_VERSION}"
@@ -221,7 +249,7 @@ else
     DOCKER_PREFIX=
 fi
 echo
-readarray -t board_shields < <(yaml2json "$HOST_CONFIG_DIR"/build.yaml | jq -c -r '.include[]')
+readarray -t board_shields < <(yaml2json "$local_config"/build.yaml | jq -c -r '.include[]')
 
 for pair in "${board_shields[@]}"; do
     # Construct board/shield names
@@ -239,6 +267,16 @@ for pair in "${board_shields[@]}"; do
     echo "Starting the build process for \"$board${shield:+" ($shield)"}\"."; echo
 
     if [[ $RUNWITH_DOCKER = true ]]; then
+        # shellcheck disable=2129
+        echo "SUFFIX=$SUFFIX" >> "$local_config/env.list"
+        echo "board=$board" >> "$local_config/env.list"
+        echo "shield=$shield" >> "$local_config/env.list"
+        echo "local_config=$local_config" >> "$local_config/env.list"
+        # USER_ID=1000
+        # GROUP_ID=1000
+        echo "USER_ID=$USERUID" >> "$local_config/env.list"
+        echo "GROUP_ID=$USERGID" >> "$local_config/env.list"
+        cp "$local_config/env.list" "$local_config/.env"
         DOCKER_CMD="$DOCKER_BIN run --rm \
             --mount type=bind,source=$HOST_ZMK_DIR,target=$DOCKER_ZMK_DIR \
             --mount type=bind,source=$HOST_CONFIG_DIR,target=$DOCKER_CONFIG_DIR \
@@ -247,17 +285,14 @@ for pair in "${board_shields[@]}"; do
             --mount type=volume,source=zmk-zephyr-$ZEPHYR_VERSION,target=$DOCKER_ZMK_DIR/zephyr \
             --mount type=volume,source=zmk-zephyr-modules-$ZEPHYR_VERSION,target=$DOCKER_ZMK_DIR/modules \
             --mount type=volume,source=zmk-zephyr-tools-$ZEPHYR_VERSION,target=$DOCKER_ZMK_DIR/tools"
-        # shellcheck disable=2129
-        echo "SUFFIX=$SUFFIX" >> "$HOST_CONFIG_DIR/env.list"
-        echo "board=$board" >> "$HOST_CONFIG_DIR/env.list"
-        echo "shield=$shield" >> "$HOST_CONFIG_DIR/env.list"
 
         # Run Docker to build firmware for board/shield combo
         printf "\n%s\n" "🚧 Run Docker to build \"$board MCU ${shield:+(${CYAN}$shield${NC} keyboard)}\""
         printf "╰┈┈➤"
-        DOCKER_PREFIX="$DOCKER_CMD -w $DOCKER_ZMK_DIR/app --env-file $HOST_CONFIG_DIR/env.list $DOCKER_IMG"
+        DOCKER_PREFIX="$DOCKER_CMD -w $DOCKER_ZMK_DIR/app --env-file $local_config/env.list $DOCKER_IMG"
 
-        USER_ID=$(id -u) GROUP_ID=$(id -g) docker-compose --env-file "$HOST_CONFIG_DIR"/env.list run --rm build || exit
+        docker-compose --env-file "$local_config"/env.list run --workdir "$DOCKER_ZMK_DIR"/app --rm build || exit
+        # docker-compose --env-file "$local_config"/env.list run --workdir "$DOCKER_ZMK_DIR"/app --rm change-vol-ownership || exit
         docker-compose rm --force
 
         printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n"
@@ -268,9 +303,13 @@ for pair in "${board_shields[@]}"; do
 done
 
 # Copy firmware files to macOS
-cd "$HOST_CONFIG_DIR/$OUTPUT_DIR" || exit
+cd "$local_output" || exit
 firmware_files=$(find . -name '*.uf2' | tr '\n' ' ' | sed 's/.\///g' | sed 's/ $//' | sed 's/ /  /')
-scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null && echo "🗄 Copied all firmware file to ${GREEN}macOS${NC}."
+if [[ -n $REMOTE_DOCKER ]]; then
+  cp  ./*.uf2 ~/Downloads >/dev/null && echo "🗄 Copied all firmware file to ${GREEN}macOS${NC}."
+else
+  scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null && echo "🗄 Copied all firmware file to ${GREEN}macOS${NC}."
+fi
 printf "%s" "╰┈┈┈┈┈┈➤ $firmware_files"
 echo
 printf "Done! 🎉 😎 🎉\n"

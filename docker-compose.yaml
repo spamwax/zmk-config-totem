@@ -18,23 +18,19 @@ services:
       - '${GROUP_ID}'
     volumes:
       # The volumes to chown
+      - ${HOST_ZMK_DIR}:${DOCKER_ZMK_DIR}
+      - ${HOST_CONFIG_DIR}:${DOCKER_CONFIG_DIR}
+      - ${LOG_DIR}:/tmp
       - zmk_root_user:/root
       - zmk_zephyr:$DOCKER_ZMK_DIR/zephyr
       - zmk_zephyr_modules:$DOCKER_ZMK_DIR/modules
       - zmk_zephyr_tools:$DOCKER_ZMK_DIR/tools
-      - "${HOST_CONFIG_DIR}:${DOCKER_CONFIG_DIR}"
-      - type: bind
-        source: ${HOST_ZMK_DIR}
-        target: $DOCKER_ZMK_DIR
-      - type: bind
-        source: '$LOG_DIR'
-        target: /tmp
-
     command:
       - bash
       - -c
       - |
-        chown -R ${USER_ID}:${GROUP_ID} ${DOCKER_ZMK_DIR}/zephyr ${DOCKER_ZMK_DIR}/modules ${DOCKER_ZMK_DIR}/tools /root ${DOCKER_ZMK_DIR} /tmp
+        mkdir -p "$DOCKER_CONFIG_DIR/$OUTPUT_DIR"
+        chown -R ${USER_ID}:${GROUP_ID} ${DOCKER_ZMK_DIR} ${DOCKER_ZMK_DIR}/zephyr ${DOCKER_ZMK_DIR}/modules ${DOCKER_ZMK_DIR}/tools /root /tmp "$DOCKER_CONFIG_DIR/$OUTPUT_DIR"
 
   build:
     user: "${USER_ID}:${GROUP_ID}"
@@ -48,17 +44,19 @@ services:
         ${DOCKER_CONFIG_DIR}/scripts/build_board_matrix.sh
     volumes:
       # The volumes to chown
+      - ${HOST_ZMK_DIR}:${DOCKER_ZMK_DIR}
+      - ${HOST_CONFIG_DIR}:${DOCKER_CONFIG_DIR}
+      - ${LOG_DIR}:/tmp
       - zmk_root_user:/root
       - zmk_zephyr:$DOCKER_ZMK_DIR/zephyr
       - zmk_zephyr_modules:$DOCKER_ZMK_DIR/modules
       - zmk_zephyr_tools:$DOCKER_ZMK_DIR/tools
-      - "${HOST_CONFIG_DIR}:${DOCKER_CONFIG_DIR}"
-      - type: bind
-        source: ${HOST_ZMK_DIR}
-        target: $DOCKER_ZMK_DIR
-      - type: bind
-        source: '$LOG_DIR'
-        target: /tmp
+      # - type: bind
+      #   source: $HOST_ZMK_DIR
+      #   target: $DOCKER_ZMK_DIR
+      # - type: bind
+      #   source: $LOG_DIR
+      #   target: /tmp
 
     depends_on:
       change-vol-ownership:
