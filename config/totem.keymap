@@ -228,20 +228,20 @@ label= "SYM"                               ;
 label= "NUM"                               ; // 6
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┓     ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┓  
-//             ┃          ┃    MUTE    ┃    VOL UP   ┃    VOL DN   ┃   SAVE    ┃     ┃     *     ┃     7     ┃     8     ┃     9     ┃     /      ┃  
+//             ┃          ┃            ┃             ┃             ┃           ┃     ┃     *     ┃     7     ┃     8     ┃     9     ┃     /      ┃  
 //             ┣━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫  
 //             ┃  LSHFT   ┃    LGUI    ┃    LALT     ┃    LCTRL    ┃  CMD+TAB  ┃     ┃     +     ┃     4     ┃     5     ┃     6     ┃     -      ┃  
 // ┏━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━┓ 
-// ┃  TO BASE  ┃          ┃            ┃             ┃             ┃           ┃     ┃     %     ┃     1     ┃     2     ┃     3     ┃     =      ┃  BKSPC  ┃ 
+// ┃  TO BASE  ┃  UNDO    ┃    CUT     ┃    COPY     ┃    PASTE    ┃    REDO   ┃     ┃     %     ┃     1     ┃     2     ┃     3     ┃     =      ┃  BKSPC  ┃ 
 // ┗━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━━┻━━━━━━━━━┛ 
 //                                     ┃             ┃             ┃           ┃     ┃    SPC    ┃     0     ┃    DOT    ┃  
 //                                     ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛  
  bindings = <
 // ╷           ╷          ╷            ╷             ╷             ╷            ╷    ╷           ╷           ╷           ╷           ╷            ╷         ╷             
                                                                              
-                &trans     &kp C_MUTE   &kp C_VOL_DN  &kp C_VOL_UP  &kp LG(S)         &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
+                &trans     &trans       &trans        &trans        &trans            &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
                 &kp LSHFT  &kp LGUI     &kp LALT      &kp LCTRL     &appswmac         &kp PLUS    &kp N4      &kp N5      &kp N6      &kp MINUS           
-    &to BASE    &trans     &trans       &trans        &trans        &trans            &kp PRCNT   &kp N1      &kp N2      &kp N3      &kp EQUAL    &kp BSPC
+    &to BASE    &kp LG(Z)  &kp LG(X)    &kp LG(C)     &kp LG(V)     &kp LS(LG(Z))     &kp PRCNT   &kp N1      &kp N2      &kp N3      &kp EQUAL    &kp BSPC
                                         &trans        &trans        &trans            &kp SPC     &kp N0      &kp DOT     
                         >;
                 };
