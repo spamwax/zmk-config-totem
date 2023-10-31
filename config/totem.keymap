@@ -137,8 +137,8 @@ label= "GAM"                               ;
 
                &trans     &trans      &trans      &trans      &kp SQT         &trans      &trans      &trans      &trans      &trans
                &trans     &trans      &kp E       &kp A       &kp COMMA       &trans      &trans      &trans      &trans      &trans
-    &kp LALT   &trans     &trans      &trans      &trans      &kp Z           &kp ESC     &trans      &trans      &trans      &trans      &ltl NUM Q
-                                      &tab_bksp   &kp LCTRL   &kp SPC         &trans      &trans      &trans
+    &tab_bksp  &trans     &trans      &trans      &trans      &kp Z           &kp ESC     &trans      &trans      &trans      &trans      &ltl NUM Q
+                                      &kp LALT    &kp LCTRL   &kp SPC         &trans      &trans      &trans
                         >;
                 };
 
