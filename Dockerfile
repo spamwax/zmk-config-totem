@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 ARG zmk_type=dev
 ARG zmk_tag=stable
 
@@ -12,6 +13,7 @@ ENV GROUP_ID=$USERGID
 ENV USER_NAME=$USERNAME
 
 RUN apt -y update && apt -y install jq
+# RUN apt install -y python3-pip
 RUN python3 -m pip install remarshal
 
 # Create the user
