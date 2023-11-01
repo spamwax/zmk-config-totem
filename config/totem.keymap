@@ -369,10 +369,10 @@ label= "THENWIN_NUM"                       ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷              ╷    ╷           ╷           ╷           ╷           ╷           ╷           ╷             
                                                                            
-                &trans      &trans      &trans      &trans      &kp LC(S)          &trans      &trans      &trans      &trans      &trans
-                &trans      &trans      &trans      &trans      &appswwin          &trans      &trans      &trans      &trans      &trans
-    &to BASE    &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LS(LC(Z))      &trans      &trans      &trans      &trans      &trans       &trans
-                                        &trans      &trans      &trans             &trans      &trans      &trans
+                &trans      &trans      &trans      &trans      &kp LC(S)          &trans       &trans      &trans      &trans      &trans
+                &trans      &trans      &trans      &trans      &appswwin          &trans       &trans      &trans      &trans      &trans
+    &to BASE    &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LS(LC(Z))      &trans       &trans      &trans      &trans      &trans      &trans
+                                        &trans      &trans      &trans             &trans       &trans      &trans
                         >;
                 };
 
@@ -392,12 +392,12 @@ label= "THENWIN_CUR"                       ;
 //                                     ┃           ┃           ┃              ┃     ┃           ┃           ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━━━━┛     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
- / ╷           ╷           ╷           ╷           ╷           ╷              ╷     ╷            ╷           ╷           ╷          ╷           ╷           ╷  
+// ╷           ╷           ╷           ╷           ╷           ╷              ╷     ╷           ╷           ╷           ╷          ╷           ╷           ╷  
                                                                                       
-                &trans      &trans      &trans      &trans      &kp LC(S)            &trans       &trans      &trans      &trans     &trans
-                &trans      &trans      &trans      &trans      &appswwin            &kp HOME     &trans      &trans      &trans     &kp END 
-    &to BASE    &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LS(LC(Z))        &trans       &trans      &trans      &trans     &trans      &trans
-                                        &trans      &trans      &trans               &trans       &trans      &trans        
+                &trans      &trans      &trans      &trans      &kp LC(S)            &trans      &trans      &trans      &trans     &trans
+                &trans      &trans      &trans      &trans      &appswwin            &kp HOME    &trans      &trans      &trans     &kp END 
+    &to BASE    &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LS(LC(Z))        &trans      &trans      &trans      &trans     &trans      &trans
+                                        &trans      &trans      &trans               &trans      &trans      &trans        
                         >;
                 };
 
