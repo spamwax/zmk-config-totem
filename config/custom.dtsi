@@ -301,6 +301,20 @@
             mods = <(MOD_RSFT)>;
             #binding-cells = <0>;
         };
+        /*
+          - tap: sticky gui
+          - double-tap: FUN layer (guie + tap mod-morph)
+          - hold: gui
+
+          From: https://github.com/urob/zmk-config/
+        */
+        /omit-if-no-ref/ smart_gui: smart_gui_layer_change {
+            label = "SMART_GUI_WITH_LAYER_CHANGE";
+            compatible = "zmk,behavior-mod-morph";
+            bindings = <&skq LGUI>, <&to FUN>;
+            mods = <(MOD_LGUI)>;
+            keep-mods = <((MOD_LGUI))>;
+        }
     };
 
     macros {
