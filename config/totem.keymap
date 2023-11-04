@@ -73,7 +73,7 @@ label= "BASE"                              ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃     B     ┃     Y     ┃     O            ┃     U            ┃     " (New TAB)┃   ┃      ;           ┃      L           ┃     D          ┃     W     ┃  V (MEH)  ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃     C     ┃     I     ┃     E (ALT)      ┃     A (CTRL)     ┃     , (SHFT)   ┃   ┃      . (SHFT)    ┃      H (CTRL)    ┃     T (ALT)    ┃     S     ┃     N     ┃
+//             ┃ C (LGUI)  ┃     I     ┃     E (ALT)      ┃     A (CTRL)     ┃     , (SHFT)   ┃   ┃      . (SHFT)    ┃      H (CTRL)    ┃     T (ALT)    ┃     S     ┃     N     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃     Z     ┃     J     ┃     X     ┃     K            ┃     G            ┃     / (FUN)    ┃   ┃      _ (HYPER)   ┃      R           ┃     M          ┃     F     ┃     P     ┃     Q     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -83,7 +83,7 @@ label= "BASE"                              ;
 // ╷           ╷           ╷           ╷                  ╷                  ╷                ╷   ╷                  ╷                  ╷                ╷           ╷           ╷           ╷
 																		       
                 &kp B       &kp Y       &kp O              &kp U              &qtmacnewtab         &kp SEMI           &kp L              &kp D            &kp W       &mmt MEH V
-                &kp C       &kp I       &hl LALT E         &hl LCTRL A        &hl LSHFT COMMA      &hr RSHFT DOT      &hr RCTRL H        &hr RALT T       &kp S       &kp N
+                &hl LGUI C  &kp I       &hl LALT E         &hl LCTRL A        &hl LSHFT COMMA      &hr RSHFT DOT      &hr RCTRL H        &hr RALT T       &kp S       &kp N
     &z_cmdgrav  &kp J       &kp X       &kp K              &kp G              &ltl FUN FSLH        &mmt HYPER UNDER   &kp R              &kp M            &kp F       &kp P       &kp Q
                                         TMHP CUR ESC       TM_MRPH_DEL NUM 0  &mmt LGUI TAB        &tmb LOW RET       &tmb MCR SPC       TMHP SYM DEL
 
@@ -100,7 +100,7 @@ label= "LOW"                               ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃    L0     ┃    L2     ┃     L3    ┃    L4     ┃    L5     ┃   ┃    L6     ┃    L7     ┃    L8     ┃    L9     ┃    L10    ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃   CMD+Q   ┃   CMD+N   ┃   CMD+H   ┃    CMD+P  ┃   CMD+T   ┃   ┃           ┃  Alfred   ┃ &capswrd  ┃&tonumword ┃           ┃
+//             ┃   CMD+Q   ┃   CMD+N   ┃   CMD+H   ┃    CMD+P  ┃   CMD+T   ┃   ┃           ┃  Alfred   ┃ &capswrd  ┃ &num_word ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃   L0      ┃           ┃           ┃           ┃           ┃    L8     ┃   ┃           ┃ HYP_F7    ┃ HYP_F8    ┃  HYP_F9   ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -110,7 +110,7 @@ label= "LOW"                               ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &to 0       &to 2       &to 3       &to 4       &to 5           &to 6       &to 7       &to 8       &to 9       &tog 10
-                &kp LG(Q)   &kp LG(N)   &kp LG(H)   &kp LG(P)   &kp LG(T)       &trans      ALFRED      &caps_word  &tonumword  &trans
+                &kp LG(Q)   &kp LG(N)   &kp LG(H)   &kp LG(P)   &kp LG(T)       &trans      ALFRED      &caps_word  &num_word   &trans
     &to BASE    &trans      &trans      &trans      &trans      &to FUN         &trans      HYPF7       HYPF8       HYPF9       &trans      &trans
                                         &trans      &to CUR     &trans          &trans      &to NUM     &to SYM
                         >;

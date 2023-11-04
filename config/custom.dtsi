@@ -314,7 +314,7 @@
             bindings = <&skq LGUI>, <&to FUN>;
             mods = <(MOD_LGUI)>;
             keep-mods = <((MOD_LGUI))>;
-        }
+        };
     };
 
     macros {
