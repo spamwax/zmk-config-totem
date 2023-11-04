@@ -228,7 +228,7 @@ label= "SYM"                               ;
 label= "NUM"                               ; // 6
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┓     ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┓  
-//             ┃          ┃            ┃             ┃             ┃           ┃     ┃     *     ┃     7     ┃     8     ┃     9     ┃     /      ┃  
+//             ┃          ┃            ┃             ┃             ┃    SAVE   ┃     ┃     *     ┃     7     ┃     8     ┃     9     ┃     /      ┃  
 //             ┣━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫  
 //             ┃  LSHFT   ┃    LGUI    ┃    LALT     ┃    LCTRL    ┃  CMD+TAB  ┃     ┃     +     ┃     4     ┃     5     ┃     6     ┃     -      ┃  
 // ┏━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━┓ 
@@ -239,7 +239,7 @@ label= "NUM"                               ; // 6
  bindings = <
 // ╷           ╷          ╷            ╷             ╷             ╷            ╷    ╷           ╷           ╷           ╷           ╷            ╷         ╷             
                                                                              
-                &trans     &trans       &trans        &trans        &trans            &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
+                &trans     &trans       &trans        &trans        &kp LG(S)         &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
                 &kp LSHFT  &kp LGUI     &kp LALT      &kp LCTRL     &appswmac         &kp PLUS    &kp N4      &kp N5      &kp N6      &kp MINUS           
     &to BASE    &kp LG(Z)  &kp LG(X)    &kp LG(C)     &kp LG(V)     &kp LS(LG(Z))     &kp PRCNT   &kp N1      &kp N2      &kp N3      &kp EQUAL    &kp BSPC
                                         &trans        &trans        &trans            &kp SPC     &kp N0      &kp DOT     
