@@ -231,11 +231,11 @@
             require-prior-idle-ms = <150>;
             bindings = <&kp>, <&kp>;
         };
-        z_cmdgrav: z_cmd_grave {
+        z_shrt_gr: z_shortcut_cmd_grave {
             compatible = "zmk,behavior-mod-morph";
             label = "Z_CMD_GRAVE";
             #binding-cells = <0>;
-            bindings = <&kp Z>, <&kp GRAVE>;
+            bindings = <&ltl COMMON_SHORTCUTS Z>, <&kp GRAVE>;
             mods = <(MOD_LGUI|MOD_RGUI)>;
             keep-mods = <(MOD_LGUI|MOD_RGUI)>;
         };
@@ -521,6 +521,10 @@
         tri_layer3 {
             if-layers = <WIN MCR>;
             then-layer = <THENWIN_MCR>;
+        };
+        tri_layer4 {
+            if-layers = <WIN COMMON_SHORTCUTS>;
+            then-layer = <THENWIN_SHORTCUTS>;
         };
     };
 
