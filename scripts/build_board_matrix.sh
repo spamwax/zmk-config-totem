@@ -62,7 +62,11 @@ compile_board () {
 prev_dir=$(pwd)
 
 # Update west if needed
+echo $DOCKER_ZMK_DIR
 cd $DOCKER_ZMK_DIR || exit
+ls .west
+cat .west/config
+
 # ls $(pwd)
 # ls -la ./app/west.yml
 
@@ -92,7 +96,8 @@ else
     printf "✅ ${DOCKER_ZMK_DIR}/app/west.yml hasn't changed!\n\n"
 fi
 
-west zephyr-export
+west update
+west zephyr-expor
 
 
 artifact_name=${shield:+$shield-}${board}-zmk

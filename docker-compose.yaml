@@ -35,7 +35,7 @@ services:
   build:
     user: "1000:1000"
     image: private/zmk
-    working_dir: /workspace/zmk/app
+    working_dir: /workspace/zmk
     # env_file: env.list
     command:
       - bash
