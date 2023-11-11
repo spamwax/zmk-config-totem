@@ -46,11 +46,12 @@ services:
     volumes:
       # The volumes to chown
       # - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk:/workspace/zmk
-      - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk-config-totem:/workspace/zmk-config
+      - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk-config-totem:${DOCKER_CONFIG_DIR}
       - /tmp:/tmp
       - my_zmk:/workspace/zmk
       - zmk_root_user:/root
-      - zmk_zephyr:/workspace/zmk/zephyr
+      # - zmk_zephyr:/workspace/zmk/zephyr
+      - zmk_zephyr:${DOCKER_ZMK_DIR}/zephyr
       - zmk_zephyr_modules:/workspace/zmk/modules
       - zmk_zephyr_tools:/workspace/zmk/tools
     depends_on:
