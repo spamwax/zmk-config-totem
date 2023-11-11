@@ -18,9 +18,10 @@ services:
       - '1000'
     volumes:
       # The volumes to chown
-      - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk:/workspace/zmk
+      # - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk:/workspace/zmk
       - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk-config-totem:/workspace/zmk-config
       - /tmp:/tmp
+      - my_zmk:/workspace/zmk
       - zmk_root_user:/root
       - zmk_zephyr:/workspace/zmk/zephyr
       - zmk_zephyr_modules:/workspace/zmk/modules
@@ -30,7 +31,7 @@ services:
       - -c
       - |
         mkdir -p "/workspace/zmk-config/output"
-        chown -R 1000:1000 /workspace/zmk /workspace/zmk/zephyr /workspace/zmk/modules /workspace/zmk/tools /root /tmp "/workspace/zmk-config/output"
+        chown -R 1000:1000 /workspace/zmk /workspace/zmk/zephyr /workspace/zmk/modules /workspace/zmk/tools /root /tmp /workspace/zmk-config/output || echo
 
   build:
     user: "1000:1000"
@@ -44,14 +45,14 @@ services:
         ls
     volumes:
       # The volumes to chown
-      - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk:/workspace/zmk
+      # - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk:/workspace/zmk
       - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk-config-totem:/workspace/zmk-config
       - /tmp:/tmp
+      - my_zmk:/workspace/zmk
       - zmk_root_user:/root
       - zmk_zephyr:/workspace/zmk/zephyr
       - zmk_zephyr_modules:/workspace/zmk/modules
       - zmk_zephyr_tools:/workspace/zmk/tools
-
     depends_on:
       change-vol-ownership:
         condition: service_completed_successfully
@@ -65,3 +66,6 @@ volumes:
     name: zmk-zephyr-modules-3.2.0
   zmk_zephyr_tools:
     name: zmk-zephyr-tools-3.2.0
+  my_zmk:
+    name: my_zmk
+    external: true

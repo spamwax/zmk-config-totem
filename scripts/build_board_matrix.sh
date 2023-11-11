@@ -96,7 +96,6 @@ else
     printf "✅ ${DOCKER_ZMK_DIR}/app/west.yml hasn't changed!\n\n"
 fi
 
-west update
 west zephyr-export
 
 

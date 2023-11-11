@@ -88,6 +88,17 @@ local_output="$local_config/output"
 OUTPUT_DIR=${OUTPUT_DIR:-output}
 [[ -z $LOG_DIR ]] && LOG_DIR="/tmp"
 
+cd "$local_zmk" || exit
+ls
+git config --global --add safe.directory /workspace/zmk
+if ! git ls-files >/dev/null 2>&1; then
+    printf "${RED}zmk repo is missing!\n"
+    exit 2
+else
+    git pull origin main
+fi
+cd -
+
 if [[ -z $BOARDS ]]; then
     # BOARDS="$(grep '^[[:space:]]*\-[[:space:]]*board:' "$HOST_CONFIG_DIR/build.yaml" | sed 's/^.*: *//')"
     build_all=yes
@@ -164,6 +175,7 @@ SUFFIX="${ZEPHYR_VERSION}_docker"
 if [[ $CLEAR_CACHE = true ]]; then
     printf "\n==-> Clearing cache and starting a fresh build <-==\n"
     printf "\n%s\n" "${CYAN}💀 Cleaning Docker volumes content.${NC}"
+    rm -rf /root/west.yml*
     rm -rf "$local_zmk/app/build"
     rm -rf "$local_zmk/.west"
     rm -rf "${local_output:?}"/*
