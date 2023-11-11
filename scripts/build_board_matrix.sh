@@ -77,7 +77,7 @@ OLD_WEST="/root/west.yml.old"
 if [[ ! -f "${DOCKER_ZMK_DIR}"/.west/config ]]; then
     printf "🚀 Initializing the app... 🚀\n\n"
     west init -l app/
-    cd "${DOCKER_ZMK_DIR}/app" || exit
+    cd "${DOCKER_ZMK_DIR}" || exit
     west update
 else
     printf "✅ app is already initialized!\n\n"
