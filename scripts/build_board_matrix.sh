@@ -97,7 +97,7 @@ else
 fi
 
 west update
-west zephyr-expor
+west zephyr-export
 
 
 artifact_name=${shield:+$shield-}${board}-zmk
