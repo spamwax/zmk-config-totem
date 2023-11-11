@@ -59,9 +59,10 @@ compile_board () {
     fi
 }
 
+prev_dir=$(pwd)
 
 # Update west if needed
-cd .. || exit
+cd $DOCKER_ZMK_DIR || exit
 # ls $(pwd)
 # ls -la ./app/west.yml
 
@@ -103,4 +104,6 @@ if [ -d "$DOCKER_ZMK_DIR"/app/build/"$BUILD_DIR" ]; then
 fi
 
 compile_board "$board" "$shield"
+
+cd "$prev_dir"
 

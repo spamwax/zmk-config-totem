@@ -8,12 +8,12 @@
             "type": "bashdb",
             "request": "launch",
             "name": "Bash-Debug",
-            "program": "${file}",
+            "program": "scripts/build_on_devcontainer.sh",
             "env": {
                 "DOCKER_HOST": "ssh://khersak"
             },
             "args": [
-                "--remote-docker"
+                "",
             ],
         }
     ]

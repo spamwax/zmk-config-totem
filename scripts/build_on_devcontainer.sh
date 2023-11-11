@@ -28,10 +28,6 @@ while [[ $# -gt 0 ]]; do
             RUNWITH_DOCKER="false"
             ;;
 
-        -r|--remote-docker)
-            REMOTE_DOCKER="true"
-            ;;
-
         -m|--multithread)
             # shellcheck disable=2034
             MULTITHREAD="true"
@@ -60,21 +56,6 @@ while [[ $# -gt 0 ]]; do
 
         --log-dir)
             LOG_DIR="$2"
-            shift
-            ;;
-
-        --host-config-dir)
-            HOST_CONFIG_DIR="$2"
-            shift
-            ;;
-
-        --host-zmk-dir)
-            HOST_ZMK_DIR="$2"
-            shift
-            ;;
-
-        --docker-config-dir)
-            DOCKER_CONFIG_DIR="$2"
             shift
             ;;
 
@@ -137,30 +118,9 @@ USERNAME="hamid"
 USERUID="1000"
 USERGID="1000"
 
-
-# Set env list to be used by Docker later
-rm -f "$local_config/env.list"
-rm -f "$local_config/.env"
-
 DOCKER_ZMK_DIR="$local_zmk"
 DOCKER_CONFIG_DIR="$local_config"
 CONFIG_DIR="$DOCKER_CONFIG_DIR/config"
-OUTPUT_DIR="$local_output"
-
-# shellcheck disable=2129
-# echo "ZEPHYR_VERSION=$ZEPHYR_VERSION" >> "$local_config/env.list"
-# echo "OUTPUT_DIR=$OUTPUT_DIR" >> "$local_config/env.list"
-# echo "LOG_DIR=$LOG_DIR" >> "$local_config/env.list"
-# echo "DOCKER_ZMK_DIR=$DOCKER_ZMK_DIR" >> "$local_config/env.list"
-# echo "DOCKER_CONFIG_DIR=$DOCKER_CONFIG_DIR" >> "$local_config/env.list"
-# echo "WEST_OPTS=$WEST_OPTS" >> "$local_config/env.list"
-# echo "CONFIG_DIR=$DOCKER_CONFIG_DIR/config" >> "$local_config/env.list"
-
-zmk_type=dev
-zmk_tag="3.2"
-
-DOCKER_IMG="zmkfirmware/zmk-$zmk_type-arm:$zmk_tag"
-DOCKER_IMG="private/zmk"
 
 # +-------------------------+
 # | AUTOMATE CONFIG OPTIONS |
@@ -198,26 +158,21 @@ fi
 printf "\nBuild mode: local\n"
 SUFFIX="${ZEPHYR_VERSION}_docker"
 
-# printf "\n📦 Building Dockerfile 📦\n"
-# "$DOCKER_BIN" build --build-arg zmk_type=$zmk_type --build-arg zmk_tag="$zmk_tag" \
-#     --build-arg USERNAME="$USERNAME" --build-arg USERUID="$USERUID" --build-arg USERGID="$USERGID" \
-#     -t private/zmk . >/dev/null || exit
-
-# printf "     Done.\n"
-#
 # | Cleanup and shit |
 #
 # Reset volumes
 if [[ $CLEAR_CACHE = true ]]; then
     printf "\n==-> Clearing cache and starting a fresh build <-==\n"
     printf "\n%s\n" "${CYAN}💀 Cleaning Docker volumes content.${NC}"
-    sudo rm -rf "$local_zmk/app/build"
-    sudo rm -rf "$local_zmk/.west"
-    sudo rm -rf "$local_output"/*
+    rm -rf "$local_zmk/app/build"
+    rm -rf "$local_zmk/.west"
+    rm -rf "$local_output"/*
+    rm -rf /workspace/zmk/zephyr
+    rm -rf /workspace/zmk/modules
+    rm -rf /workspace/zmk/tools
 fi
 SUFFIX="${ZEPHYR_VERSION}"
 
-echo
 readarray -t board_shields < <(yaml2json "$local_config"/build.yaml | jq -c -r '.include[]')
 
 for pair in "${board_shields[@]}"; do
@@ -239,8 +194,7 @@ for pair in "${board_shields[@]}"; do
     printf "\n%s\n" "🚧 Run west to build \"$board MCU ${shield:+(${CYAN}$shield${NC} keyboard)}\""
     printf "╰┈┈➤"
 
-    cd "$DOCKER_ZMK_DIR/app" || exit
-    . ./build_board_matrix.sh
+    . "$SCRIPT_DIR"/build_board_matrix.sh
 
     printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n"
 done
