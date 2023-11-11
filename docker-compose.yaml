@@ -11,63 +11,63 @@ services:
     # We can use any image we want as long as we can chown
     image: private/zmk
     # Need a user priviliged enough to chown
-    env_file: env.list
+    # env_file: env.list
     user: "root"
     # Specify the group in question
     group_add:
-      - '${GROUP_ID}'
+      - '1000'
     volumes:
       # The volumes to chown
-      - ${HOST_ZMK_DIR}:${DOCKER_ZMK_DIR}
-      - ${HOST_CONFIG_DIR}:${DOCKER_CONFIG_DIR}
-      - ${LOG_DIR}:/tmp
+      - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk:/workspace/zmk
+      - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk-config-totem:/workspace/zmk-config
+      - /tmp:/tmp
       - zmk_root_user:/root
-      - zmk_zephyr:$DOCKER_ZMK_DIR/zephyr
-      - zmk_zephyr_modules:$DOCKER_ZMK_DIR/modules
-      - zmk_zephyr_tools:$DOCKER_ZMK_DIR/tools
+      - zmk_zephyr:/workspace/zmk/zephyr
+      - zmk_zephyr_modules:/workspace/zmk/modules
+      - zmk_zephyr_tools:/workspace/zmk/tools
     command:
       - bash
       - -c
       - |
-        mkdir -p "$DOCKER_CONFIG_DIR/$OUTPUT_DIR"
-        chown -R ${USER_ID}:${GROUP_ID} ${DOCKER_ZMK_DIR} ${DOCKER_ZMK_DIR}/zephyr ${DOCKER_ZMK_DIR}/modules ${DOCKER_ZMK_DIR}/tools /root /tmp "$DOCKER_CONFIG_DIR/$OUTPUT_DIR"
+        mkdir -p "/workspace/zmk-config/output"
+        chown -R 1000:1000 /workspace/zmk /workspace/zmk/zephyr /workspace/zmk/modules /workspace/zmk/tools /root /tmp "/workspace/zmk-config/output"
 
-  build:
-    user: "${USER_ID}:${GROUP_ID}"
-    image: private/zmk
-    working_dir: ${DOCKER_ZMK_DIR}/app
-    env_file: env.list
-    command:
-      - bash
-      - -c
-      - |
-        ${DOCKER_CONFIG_DIR}/scripts/build_board_matrix.sh
-    volumes:
-      # The volumes to chown
-      - ${HOST_ZMK_DIR}:${DOCKER_ZMK_DIR}
-      - ${HOST_CONFIG_DIR}:${DOCKER_CONFIG_DIR}
-      - ${LOG_DIR}:/tmp
-      - zmk_root_user:/root
-      - zmk_zephyr:$DOCKER_ZMK_DIR/zephyr
-      - zmk_zephyr_modules:$DOCKER_ZMK_DIR/modules
-      - zmk_zephyr_tools:$DOCKER_ZMK_DIR/tools
-      # - type: bind
-      #   source: $HOST_ZMK_DIR
-      #   target: $DOCKER_ZMK_DIR
-      # - type: bind
-      #   source: $LOG_DIR
-      #   target: /tmp
+  # build:
+  #   user: "${USER_ID}:${GROUP_ID}"
+  #   image: private/zmk
+  #   working_dir: ${DOCKER_ZMK_DIR}/app
+  #   env_file: env.list
+  #   command:
+  #     - bash
+  #     - -c
+  #     - |
+  #       ${DOCKER_CONFIG_DIR}/scripts/build_board_matrix.sh
+  #   volumes:
+  #     # The volumes to chown
+  #     - ${HOST_ZMK_DIR}:${DOCKER_ZMK_DIR}
+  #     - ${HOST_CONFIG_DIR}:${DOCKER_CONFIG_DIR}
+  #     - ${LOG_DIR}:/tmp
+  #     - zmk_root_user:/root
+  #     - zmk_zephyr:$DOCKER_ZMK_DIR/zephyr
+  #     - zmk_zephyr_modules:$DOCKER_ZMK_DIR/modules
+  #     - zmk_zephyr_tools:$DOCKER_ZMK_DIR/tools
+  #     # - type: bind
+  #     #   source: $HOST_ZMK_DIR
+  #     #   target: $DOCKER_ZMK_DIR
+  #     # - type: bind
+  #     #   source: $LOG_DIR
+  #     #   target: /tmp
 
-    depends_on:
-      change-vol-ownership:
-        condition: service_completed_successfully
+  #   depends_on:
+  #     change-vol-ownership:
+  #       condition: service_completed_successfully
 
 volumes:
   zmk_root_user:
-    name: zmk-root-user-${ZEPHYR_VERSION}
+    name: zmk-root-user-3.2.0
   zmk_zephyr:
-    name: zmk-zephyr-${ZEPHYR_VERSION}
+    name: zmk-zephyr-3.2.0
   zmk_zephyr_modules:
-    name: zmk-zephyr-modules-${ZEPHYR_VERSION}
+    name: zmk-zephyr-modules-3.2.0
   zmk_zephyr_tools:
-    name: zmk-zephyr-tools-${ZEPHYR_VERSION}
+    name: zmk-zephyr-tools-3.2.0
