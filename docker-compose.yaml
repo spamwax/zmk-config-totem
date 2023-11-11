@@ -37,11 +37,11 @@ services:
     image: private/zmk
     working_dir: /workspace/zmk/app
     # env_file: env.list
-    # command:
-    #   - bash
-    #   - -c
-    #   - |
-    #     ${DOCKER_CONFIG_DIR}/scripts/build_board_matrix.sh
+    command:
+      - bash
+      - -c
+      - |
+        ls
     volumes:
       # The volumes to chown
       - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk:/workspace/zmk
