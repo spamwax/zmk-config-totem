@@ -19,13 +19,13 @@ services:
     volumes:
       # The volumes to chown
       # - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk:/workspace/zmk
-      - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk-config-totem:/workspace/zmk-config
+      - ${HOST_CONFIG_DIR}:${DOCKER_CONFIG_DIR}
       - /tmp:/tmp
-      - my_zmk:/workspace/zmk
+      - my_zmk:${DOCKER_ZMK_DIR}
       - zmk_root_user:/root
-      - zmk_zephyr:/workspace/zmk/zephyr
-      - zmk_zephyr_modules:/workspace/zmk/modules
-      - zmk_zephyr_tools:/workspace/zmk/tools
+      - zmk_zephyr:${DOCKER_ZMK_DIR}/zephyr
+      - zmk_zephyr_modules:${DOCKER_ZMK_DIR}/modules
+      - zmk_zephyr_tools:${DOCKER_ZMK_DIR}/tools
     command:
       - bash
       - -c
@@ -46,14 +46,13 @@ services:
     volumes:
       # The volumes to chown
       # - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk:/workspace/zmk
-      - /tank/anbaar/projects/hobbies/zmk_firmwares/zmk-config-totem:${DOCKER_CONFIG_DIR}
+      - ${HOST_CONFIG_DIR}:${DOCKER_CONFIG_DIR}
       - /tmp:/tmp
-      - my_zmk:/workspace/zmk
+      - my_zmk:${DOCKER_ZMK_DIR}
       - zmk_root_user:/root
-      # - zmk_zephyr:/workspace/zmk/zephyr
       - zmk_zephyr:${DOCKER_ZMK_DIR}/zephyr
-      - zmk_zephyr_modules:/workspace/zmk/modules
-      - zmk_zephyr_tools:/workspace/zmk/tools
+      - zmk_zephyr_modules:${DOCKER_ZMK_DIR}/modules
+      - zmk_zephyr_tools:${DOCKER_ZMK_DIR}/tools
     depends_on:
       change-vol-ownership:
         condition: service_completed_successfully
