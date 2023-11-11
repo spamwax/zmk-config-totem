@@ -1,0 +1,41 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Quick",
+            "type": "shell",
+            "command": "./scripts/build_on_devcontainer.sh",
+            "args": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "windows": {
+                "command": ".\\scripts\\test.cmd"
+            },
+        },
+        {
+            "label": "Build Clean",
+            "type": "shell",
+            "command": "./scripts/build_on_devcontainer.sh",
+            "args": ["-c", "--", "-p"],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "windows": {
+                "command": ".\\scripts\\test.cmd"
+            },
+        }
+    ]
+}

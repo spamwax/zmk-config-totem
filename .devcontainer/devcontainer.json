@@ -38,14 +38,14 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"rogalmic.bash-debug",
+				"rogalmic.bash-debug"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
-				"files.insertFinalNewline": true,
+				"files.insertFinalNewline": true
 			}
 		}
-	},
+	}
 
 	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "devcontainer"
