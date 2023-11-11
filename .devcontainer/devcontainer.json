@@ -17,7 +17,7 @@
 
 	// The optional 'workspaceFolder' property is the path VS Code should open by default when
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
-	"workspaceFolder": "/workspace/zmk-config"
+	"workspaceFolder": "/workspace/zmk-config",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -35,7 +35,17 @@
 	// "postCreateCommand": "cat /etc/os-release",
 
 	// Configure tool-specific properties.
-	// "customizations": {},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"rogalmic.bash-debug",
+			],
+			"settings": {
+				"editor.formatOnSave": true,
+				"files.insertFinalNewline": true,
+			}
+		}
+	},
 
 	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "devcontainer"

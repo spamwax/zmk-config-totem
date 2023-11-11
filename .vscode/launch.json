@@ -15,6 +15,20 @@
             "args": [
                 "",
             ],
+        },
+        {
+            "type": "bashdb",
+            "request": "launch",
+            "name": "Build Clean",
+            "program": "scripts/build_on_devcontainer.sh",
+            "env": {
+                "DOCKER_HOST": "ssh://khersak"
+            },
+            "args": [
+                "-c",
+                "--",
+                "-p"
+            ],
         }
     ]
 }
