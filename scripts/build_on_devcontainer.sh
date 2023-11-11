@@ -166,10 +166,10 @@ if [[ $CLEAR_CACHE = true ]]; then
     printf "\n%s\n" "${CYAN}💀 Cleaning Docker volumes content.${NC}"
     rm -rf "$local_zmk/app/build"
     rm -rf "$local_zmk/.west"
-    rm -rf "$local_output"/*
-    rm -rf /workspace/zmk/zephyr
-    rm -rf /workspace/zmk/modules
-    rm -rf /workspace/zmk/tools
+    rm -rf "${local_output:?}"/*
+    rm -rf /workspace/zmk/zephyr/*
+    rm -rf /workspace/zmk/modules/*
+    rm -rf /workspace/zmk/tools/*
 fi
 SUFFIX="${ZEPHYR_VERSION}"
 
