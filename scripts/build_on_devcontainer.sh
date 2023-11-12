@@ -89,7 +89,6 @@ OUTPUT_DIR=${OUTPUT_DIR:-output}
 [[ -z $LOG_DIR ]] && LOG_DIR="/tmp"
 
 cd "$local_zmk" || exit
-ls
 git config --global --add safe.directory /workspace/zmk
 if ! git ls-files >/dev/null 2>&1; then
     printf "${RED}zmk repo is missing!\n"

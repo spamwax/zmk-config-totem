@@ -64,8 +64,6 @@ prev_dir=$(pwd)
 # Update west if needed
 echo $DOCKER_ZMK_DIR
 cd $DOCKER_ZMK_DIR || exit
-ls .west
-cat .west/config
 
 # ls $(pwd)
 # ls -la ./app/west.yml

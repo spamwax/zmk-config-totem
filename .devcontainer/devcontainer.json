@@ -29,11 +29,13 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"rogalmic.bash-debug"
+				"rogalmic.bash-debug",
+				"monokai.theme-monokai-pro-vscode"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
-				"files.insertFinalNewline": true
+				"files.insertFinalNewline": true,
+				"workbench.colorTheme": "Monokai Pro (Filter Machine)"
 			}
 		}
 	}
