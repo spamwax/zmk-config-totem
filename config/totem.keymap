@@ -18,11 +18,6 @@
 #include <dt-bindings/zmk/outputs.h>
 
 #define BASE 0
-// #define NAV  1
-// #define SYM  2
-// #define ADJ  3
-// #define TVP1 4
-// #define TVP2 5
 #define LOW 1
 #define GAM 2
 #define WIN 3
@@ -230,7 +225,7 @@ label= "SYM"                               ;
 label= "NUM"                               ; // 6
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┓     ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┓
-//             ┃          ┃            ┃             ┃             ┃    SAVE   ┃     ┃     *     ┃     7     ┃     8     ┃     9     ┃     /      ┃
+//             ┃          ┃    CMD+H   ┃    CMD+P    ┃    CMD+N    ┃    SAVE   ┃     ┃     *     ┃     7     ┃     8     ┃     9     ┃     /      ┃
 //             ┣━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫
 //             ┃  LSHFT   ┃    LGUI    ┃    LALT     ┃    LCTRL    ┃  CMD+TAB  ┃     ┃     +     ┃     4     ┃     5     ┃     6     ┃     -      ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━┓
@@ -241,7 +236,7 @@ label= "NUM"                               ; // 6
  bindings = <
 // ╷           ╷          ╷            ╷             ╷             ╷            ╷    ╷           ╷           ╷           ╷           ╷            ╷         ╷
 
-                &trans     &trans       &trans        &trans        &kp LG(S)         &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
+                &trans     &kp LG(H)    &kp LG(P)     &kp LG(N)     &kp LG(S)         &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
                 &kp LSHFT  &kp LGUI     &kp LALT      &kp LCTRL     &appswmac         &kp PLUS    &kp N4      &kp N5      &kp N6      &kp MINUS
     &to BASE    &kp LG(Z)  &kp LG(X)    &kp LG(C)     &kp LG(V)     &kp LS(LG(Z))     &kp PRCNT   &kp N1      &kp N2      &kp N3      &kp EQUAL    &kp BSPC
                                         &trans        &trans        &trans            &kp SPC     &kp N0      &kp DOT
@@ -384,7 +379,7 @@ label= "COMMON_SHORTCUTS"                  ;
 label= "THENWIN_NUM"                       ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┓    ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃           ┃           ┃           ┃           ┃     SAVE     ┃    ┃           ┃           ┃           ┃           ┃           ┃
+//             ┃           ┃  CTRL+H   ┃  CTRL+P   ┃  CTRL+N   ┃     SAVE     ┃    ┃           ┃           ┃           ┃           ┃           ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃           ┃           ┃           ┃           ┃    ALT+TAB   ┃    ┃           ┃           ┃           ┃           ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
@@ -395,10 +390,10 @@ label= "THENWIN_NUM"                       ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷              ╷    ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &trans      &trans      &trans      &trans      &kp LC(S)          &trans       &trans      &trans      &trans      &trans
-                &trans      &trans      &trans      &trans      &appswwin          &trans       &trans      &trans      &trans      &trans
-    &to BASE    &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LS(LC(Z))      &trans       &trans      &trans      &trans      &trans      &trans
-                                        &trans      &trans      &trans             &trans       &trans      &trans
+                &trans      &kp LC(H)   &kp LC(P)   &kp LC(N)   &kp LC(S)           &trans      &trans      &trans      &trans      &trans
+                &trans      &trans      &trans      &trans      &appswwin           &trans      &trans      &trans      &trans      &trans
+    &to BASE    &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LS(LC(Z))       &trans      &trans      &trans      &trans      &trans      &trans
+                                        &trans      &trans      &trans              &trans      &trans      &trans
                         >;
                 };
 
@@ -461,7 +456,7 @@ label= "THENWIN_SHORTCUTS"                 ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┓    ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃           ┃           ┃              ┃    ┃           ┃           ┃           ┃           ┃           ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃   CTRL+Q  ┃  CTRL+N   ┃  CTRL+H   ┃  CTRL+P   ┃   CTRL+T     ┃    ┃           ┃           ┃           ┃           ┃           ┃
+//             ┃           ┃           ┃  CTRL+H   ┃  CTRL+P   ┃   CTRL+T     ┃    ┃           ┃           ┃           ┃           ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃           ┃           ┃           ┃           ┃           ┃              ┃    ┃           ┃           ┃           ┃           ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
