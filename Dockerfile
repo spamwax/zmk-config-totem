@@ -12,7 +12,7 @@ ENV USER_ID=$USERUID
 ENV GROUP_ID=$USERGID 
 ENV USER_NAME=$USERNAME
 
-RUN apt -y update && apt -y install jq
+RUN apt -y update && apt -y install jq htop
 # RUN apt install -y python3-pip
 RUN python3 -m pip install remarshal
 

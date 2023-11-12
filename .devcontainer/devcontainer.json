@@ -8,6 +8,7 @@
 		"../docker-compose.yaml",
 		"docker-compose.yml"
 	],
+	"initializeCommand": "docker build --build-arg zmk_type=dev --build-arg zmk_tag=3.2 --build-arg USERNAME=hamid --build-arg USERUID=1000 --build-arg USERGID=1000 -t private/zmk -f Dockerfile .",
 	// The 'service' property is the name of the service for the container that VS Code should
 	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
 	// "service": "change-vol-ownership",

@@ -166,7 +166,7 @@ fi
 # +--------------------+
 
 printf "\nBuild mode: local\n"
-SUFFIX="${ZEPHYR_VERSION}_docker"
+SUFFIX="${ZEPHYR_VERSION}_devcontainer"
 
 # | Cleanup and shit |
 #
@@ -178,11 +178,10 @@ if [[ $CLEAR_CACHE = true ]]; then
     rm -rf "$local_zmk/app/build"
     rm -rf "$local_zmk/.west"
     rm -rf "${local_output:?}"/*
-    rm -rf /workspace/zmk/zephyr/*
-    rm -rf /workspace/zmk/modules/*
-    rm -rf /workspace/zmk/tools/*
+    for f in {zephyr,modules,tools}; do
+        rm -rf "/workspace/zmk/$f" >/dev/null 2>&1
+    done
 fi
-SUFFIX="${ZEPHYR_VERSION}"
 
 readarray -t board_shields < <(yaml2json "$local_config"/build.yaml | jq -c -r '.include[]')
 
