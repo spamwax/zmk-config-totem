@@ -15,16 +15,19 @@ ENV USER_NAME=$USERNAME
 RUN apt -y update && apt -y install jq htop
 # RUN apt install -y python3-pip
 RUN python3 -m pip install remarshal
+RUN apt -y install openssh-client
 
 # Create the user
 RUN groupadd --gid $GROUP_ID $USER_NAME \
-      && useradd --uid $USER_ID --gid $GROUP_ID -d /home/$USER_NAME -m $USER_NAME
+  && useradd --uid $USER_ID --gid $GROUP_ID -d /home/$USER_NAME -m $USER_NAME
 
-      RUN mkdir /.ccache \
-        && chown -R ${USER_ID}:${GROUP_ID} /.ccache \
-        && mkdir /.cache \
-        && chown -R ${USER_ID}:${GROUP_ID} /.cache \
-        && ls -la /.cache /.ccache \
-        && ls -la /home/$USER_NAME \
-        && ls -lad /home/$USER_NAME
+RUN mkdir -p -m 0700 /home/${USERNAME}/.ssh && ssh-keyscan 10.42.0.2 >> /home/${USERNAME}/.ssh/known_hosts
+RUN chown -R ${USERNAME}:${USERGID} /home/${USERNAME}
+RUN --mount=type=ssh \
+  ssh -q -T ${USERNAME}@10.42.0.2 ls 2>&1 | tee /hello
+RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCd+h7PYcF4n3FgAX7roJHMTmytsBp2/FrVZM9H+zeCMPyRWfArfMVNofyBGGtqX9z+yyDsYWAu7YlD2bjj7sHDD+PJyeNRI5lsAngGEzXHxwm3mAXUgj45Q6mgm2JS9M4c468bUd/rp8LicYdxDXYv71HdaRkkRW+O+JOvewCRoHQW8+5otoHIy3kyHSRwtkZ7qMAkDH6Q9yhvylFsAKX+Ox15whLAKVniVehIi9EMwhFSbY+/J8k8Z17aZytpz+q6ieUj5gt2b+YRHrcvoLblCVpQKeZwHTpEMhIHcpv8/1LZZ31G0p48p9r4o3JJ8ecAFSG/1E/pkWrXnc9Ga3uqWehjhI+opX0ZC1hA6LGpoNatOWU6QYXBy0qV9YRT/6AZvfYjKMzHTxb92F4TGB3WlaDhC/D4gg2eFKdXzRIF6Ay5eta1nIhGmwKyD0BRByY5dFxnW5dfMWqRoR0YA7r/2mABFh9qN+KTISx/H1wq+WJprnv3PsV9siQ0eEZk5IM= hamid@khersak" > /home/${USERNAME}/.ssh/id_rsa.pub
 
+RUN mkdir /.ccache \
+  && chown -R ${USER_ID}:${GROUP_ID} /.ccache \
+  && mkdir /.cache \
+  && chown -R ${USER_ID}:${GROUP_ID} /.cache \

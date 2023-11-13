@@ -2,3 +2,5 @@
 *.bak
 env.list
 output
+.khersak_id_ed25519
+.khersak_id_rsa
