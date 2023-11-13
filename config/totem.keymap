@@ -227,7 +227,7 @@ label= "NUM"                               ; // 6
 //             ┏━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┓     ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┓
 //             ┃          ┃    CMD+H   ┃    CMD+P    ┃    CMD+N    ┃    SAVE   ┃     ┃     *     ┃     7     ┃     8     ┃     9     ┃     /      ┃
 //             ┣━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫
-//             ┃  LSHFT   ┃    LGUI    ┃    LALT     ┃    LCTRL    ┃  CMD+TAB  ┃     ┃     +     ┃     4     ┃     5     ┃     6     ┃     -      ┃
+//             ┃   LGUI   ┃   LSHFT    ┃    LALT     ┃    LCTRL    ┃  CMD+TAB  ┃     ┃     +     ┃     4     ┃     5     ┃     6     ┃     -      ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━┓
 // ┃  TO BASE  ┃  UNDO    ┃    CUT     ┃    COPY     ┃    PASTE    ┃    REDO   ┃     ┃     %     ┃     1     ┃     2     ┃     3     ┃     =      ┃  BKSPC  ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━━┻━━━━━━━━━┛
@@ -237,7 +237,7 @@ label= "NUM"                               ; // 6
 // ╷           ╷          ╷            ╷             ╷             ╷            ╷    ╷           ╷           ╷           ╷           ╷            ╷         ╷
 
                 &trans     &kp LG(H)    &kp LG(P)     &kp LG(N)     &kp LG(S)         &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
-                &kp LSHFT  &kp LGUI     &kp LALT      &kp LCTRL     &appswmac         &kp PLUS    &kp N4      &kp N5      &kp N6      &kp MINUS
+                &kp LGUI   &kp LSHFT    &kp LALT      &kp LCTRL     &appswmac         &kp PLUS    &kp N4      &kp N5      &kp N6      &kp MINUS
     &to BASE    &kp LG(Z)  &kp LG(X)    &kp LG(C)     &kp LG(V)     &kp LS(LG(Z))     &kp PRCNT   &kp N1      &kp N2      &kp N3      &kp EQUAL    &kp BSPC
                                         &trans        &trans        &trans            &kp SPC     &kp N0      &kp DOT
                         >;
@@ -253,7 +253,7 @@ label= "CUR"                               ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓    ┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
 //             ┃           ┃    MUTE    ┃   VOL DN   ┃   VOL UP    ┃     SAVE     ┃    ┃    PG DOWN   ┃   PREV TAB     ┃    UP     ┃   NEXT TAB   ┃     PG UP     ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━┫
-//             ┃   LSHFT   ┃    LGUI    ┃    LALT    ┃    LCTRL    ┃   CMD+TAB    ┃    ┃      bol     ┃     LEFT       ┃   DOWN    ┃    RIGHT     ┃     eol       ┃
+//             ┃    LGUI   ┃   LSHFT    ┃    LALT    ┃    LCTRL    ┃   CMD+TAB    ┃    ┃      bol     ┃     LEFT       ┃   DOWN    ┃    RIGHT     ┃     eol       ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃  TO BASE  ┃   UNDO    ┃    CUT     ┃    COPY    ┃    PASTE    ┃     REDO     ┃    ┃              ┃     ALT+B      ┃           ┃    ALT+F     ┃               ┃  TO BASE  ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -263,7 +263,7 @@ label= "CUR"                               ;
  //╷           ╷           ╷           ╷             ╷             ╷              ╷    ╷              ╷                ╷           ╷              ╷               ╷           ╷
 
                 &trans      &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp LG(S)           &kp PG_DN      &kp LS(LC(TAB))  &kp UP      &kp LC(TAB)    &kp PG_UP
-                &kp LSHFT   &kp LGUI    &kp LALT      &kp LCTRL     &appswmac           &kp LG(LEFT)   &kp LEFT         &kp DOWN    &kp RIGHT      &kp LG(RIGHT)
+                &kp LGUI    &kp LSHFT   &kp LALT      &kp LCTRL     &appswmac           &kp LG(LEFT)   &kp LEFT         &kp DOWN    &kp RIGHT      &kp LG(RIGHT)
     &to BASE    &kp LG(Z)   &kp LG(X)   &kp LG(C)     &kp LG(V)     &kp LS(LG(Z))       &trans         &kp LA(B)        &trans      &kp LA(F)      &trans          &to BASE
                                         &trans        &trans        &trans              &trans         &trans           &trans
                          >;
@@ -279,7 +279,7 @@ label= "FUN"                               ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┓        ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃    MUTE     ┃    VOL DN   ┃    VOL UP   ┃           ┃        ┃    F12    ┃    F7     ┃    F8     ┃    F9     ┃           ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫        ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃   LSHFT   ┃    LGUI     ┃    LALT     ┃    LCTRL    ┃           ┃        ┃    F11    ┃    F4     ┃    F5     ┃    F6     ┃           ┃
+//             ┃    LGUI   ┃   LSHFT     ┃    LALT     ┃    LCTRL    ┃           ┃        ┃    F11    ┃    F4     ┃    F5     ┃    F6     ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫        ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃  TO BASE  ┃           ┃             ┃             ┃             ┃  TOG FUN  ┃        ┃    F10    ┃    F1     ┃    F2     ┃    F3     ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫        ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -289,7 +289,7 @@ label= "FUN"                               ;
 // ╷           ╷           ╷             ╷             ╷             ╷           ╷        ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &trans      &kp C_MUTE    &kp C_VOL_DN  &kp C_VOL_UP  &trans               &kp F12     &kp F7      &kp F8      &kp F9      &trans
-                &kp LSHFT   &kp LGUI      &kp LALT      &kp LCTRL     &trans               &kp F11     &kp F4      &kp F5      &kp F6      &trans
+                &kp LGUI    &kp LSHFT     &kp LALT      &kp LCTRL     &trans               &kp F11     &kp F4      &kp F5      &kp F6      &trans
     &to BASE    &trans      &trans        &trans        &trans        &tog FUN             &kp F10     &kp F1      &kp F2      &kp F3      &trans      &trans
                                           &trans        &trans        &trans               &trans      &trans      &trans
                         >;
