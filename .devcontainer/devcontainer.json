@@ -43,7 +43,8 @@
 					"--external-sources"
 				],
 				"files.insertFinalNewline": true,
-				"workbench.colorTheme": "Monokai Pro (Filter Machine)"
+				// "workbench.colorTheme": "Monokai Pro (Filter Machine)"
+				"workbench.colorTheme": "An Old Hope Classic"
 			}
 		}
 	}
