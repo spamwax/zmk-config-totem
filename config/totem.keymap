@@ -57,6 +57,9 @@
 };
 
 #include "custom.dtsi"
+#include "custom-combos.dtsi"
+#include "custom-behaviors.dtsi"
+#include "custom-macros.dtsi"
 
 / {
         keymap {

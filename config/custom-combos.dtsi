@@ -1,0 +1,101 @@
+/ {
+    combos {
+         compatible = "zmk,combos";
+         // R & F
+         cmdshift_left {
+             bindings = <&kp LG ( LSHIFT )>;
+             key-positions = <3 13>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             layers = <0 1 4 5 6>;
+             slow-release;
+         };
+         // U & J
+         cmdshift_right {
+             bindings = <&kp RG ( RSHIFT )>;
+             key-positions = <6 16>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             layers = <0 1 4 5 6>;
+             slow-release;
+         };
+         // R & F
+         ctrlshift_left {
+             bindings = <&kp LC ( LSHIFT )>;
+             key-positions = <3 13>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             layers = <3>;
+             slow-release;
+         };
+         // U & J
+         ctrlshift_right {
+             bindings = <&kp RC ( RSHIFT )>;
+             key-positions = <6 16>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             layers = <3>;
+             slow-release;
+         };
+         // V & B
+         combo_quit_macos {
+             bindings = <&kp LG ( Q )>;
+             key-positions = <24 25>;
+             layers = <0 1 4 5 6 7 8 9>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             slow-release;
+         };
+         // G & B
+         combo_close_macos {
+             bindings = <&kp LG ( W )>;
+             key-positions = <14 25>;
+             layers = <0 1 4 5 6 7 8 9>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             slow-release;
+         };
+         // G & B
+         combo_close_windows {
+             bindings = <&kp LC ( W )>;
+             key-positions = <14 25>;
+             layers = <3 1 4 5 6 7 8 9>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             slow-release;
+         };
+         // T & G
+         combo_selectall_macos {
+             bindings = <&kp LG ( A )>;
+             key-positions = <4 14>;
+             layers = <0 1 4 5 6 7 8 9>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             slow-release;
+         };
+         // T & G
+         combo_selectall_windows {
+             bindings = <&kp LC ( A )>;
+             key-positions = <4 14>;
+             layers = <3 1 4 5 6 7 8 9>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             slow-release;
+         };
+         // Enter
+         combo_enter {
+             bindings = <&kp ENTER>;
+             key-positions = <23 24>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             layers = <0 1 3 4 5 6 7 8 9>;
+             slow-release;
+         };
+         // Space
+         combo_space {
+             bindings = <&kp SPACE>;
+             key-positions = <3 4>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             layers = <0 1 3 4 5 6 7 8 9>;
+             slow-release;
+         };
+         // LOW layer
+         combo_layer_low {
+             bindings = <&sl LOW>;
+             key-positions = <33 34>;
+             timeout-ms = <COMBO_TIMEOUT_MS>;
+             layers = <0 1 3 4 5 6 7 8 9>;
+             slow-release;
+         };
+  };
+};

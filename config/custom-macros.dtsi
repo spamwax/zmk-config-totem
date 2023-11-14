@@ -1,0 +1,190 @@
+/ {
+    macros {
+        tonumword: activate_numword {
+            label = "to_num_word";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&tog NUM &num_word>;
+        };
+        visave: vim_save_normal {
+            label = "vim_save";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp LC(LBKT) &kp SEMICOLON &kp W &kp ENTER>;
+        };
+        nextdiag: next_diag {
+            label = "vim_nextdiag";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp LC(LBKT) &kp RBKT &kp G>;
+        };
+        prevdiag: prev_diag {
+            label = "vim_prevdiag";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp LC(LBKT) &kp LBKT &kp G>;
+        };
+        nexthunk: next_hunk {
+            label = "vim_nexthunk";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp LC(LBKT) &kp RBKT &kp C>;
+        };
+        prevhunk: prev_hunk {
+            label = "vim_prevhunk";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp LC(LBKT) &kp LBKT &kp C>;
+        };
+        preview_hunk: preview_hunk {
+            label = "vim_previewhunk";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp LC(LBKT) &kp COMMA &kp H &kp P>;
+        };
+        viquit: vim_write_quit {
+            label = "vim_w_q";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp LC(LBKT) &kp SEMICOLON &kp W &kp Q &kp A &kp ENTER>;
+        };
+        texit: term_exit {
+            label = "T_Exit";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp E &kp X &kp I &kp T &kp ENTER>;
+        };
+        vinsertsave: vim_insert_save {
+            label = "vim_insert_save";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp LC(O) &kp SEMICOLON &kp W &kp ENTER>;
+        };
+        nvimt: nvim_terminal {
+            label = "NVIM_Term";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp LC(LBKT) &kp SEMICOLON &kp V &kp S &kp ENTER &kp SEMICOLON &kp T &kp E &kp R &kp M &kp ENTER &kp I>;
+        };
+        nvimqt: nvim_quit {
+            label = "NVIM_QUIT";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp LC(LBKT) &kp SEMICOLON &kp Q &kp A &kp ENTER>;
+        };
+        surwrd: surround_wrd_dqoute {
+            label = "SUR_WRD_QOUTE";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp V &kp I &kp LS(W) &kp LS(S) &kp DOUBLE_QUOTES>;
+        };
+        gitstat: git_status {
+            label = "GIT_STATUS";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp G &kp S &kp T &kp ENTER>;
+        };
+        nvim: run_nvim {
+            label = "NVIM";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <0>;
+            bindings = <&kp N &kp V &kp I &kp M &kp ENTER>;
+        };
+        zfs: zfs_space {
+                label = "ZFS";
+                compatible = "zmk,behavior-macro";
+                #binding-cells = <0>;
+                wait-ms = <30>;
+                tap-ms = <0>;
+                bindings = <&kp Z &kp F &kp S &kp SPACE>;
+        };
+        gif: gif {
+            label = "giphy";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LSHFT>
+                , <&macro_tap &kp N2>
+                , <&macro_release &kp LSHFT>
+                , <&macro_tap &kp G &kp I &kp F>
+                ;
+        };
+
+        bt_0: bt_profile_macro_0 {
+            label = "BT_0";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 0>;
+        };
+
+        bt_1: bt_profile_macro_1 {
+            label = "BT_1";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 1>;
+        };
+
+        bt_2: bt_profile_macro_2 {
+            label = "BT_2";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 2>;
+        };
+
+        bt_3: bt_profile_macro_3 {
+            label = "BT_3";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 3>;
+        };
+        bt_clrall: bt_clr_all {
+            label = "BT_CLEAR_ALL";
+            compatible = "zmk,behavior-macro";
+            wait-ms = <40>;
+            tap-ms  = <40>;
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 0>, <&bt BT_CLR>,
+                       <&bt BT_SEL 1>, <&bt BT_CLR>,
+                       <&bt BT_SEL 2>, <&bt BT_CLR>,
+                       <&bt BT_SEL 3>, <&bt BT_CLR>;
+        };
+    };
+};
