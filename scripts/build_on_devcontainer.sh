@@ -24,10 +24,6 @@ while [[ $# -gt 0 ]]; do
             SUDO="sudo"
             ;;
 
-        -l|--local)
-            RUNWITH_DOCKER="false"
-            ;;
-
         -m|--multithread)
             # shellcheck disable=2034
             MULTITHREAD="true"
@@ -65,6 +61,7 @@ while [[ $# -gt 0 ]]; do
             ;;
 
         --)
+            # shellcheck disable=2124
             WEST_OPTS="${@:2}"
             break
             ;;
@@ -91,12 +88,12 @@ OUTPUT_DIR=${OUTPUT_DIR:-output}
 cd "$local_zmk" || exit
 git config --global --add safe.directory /workspace/zmk
 if ! git ls-files >/dev/null 2>&1; then
-    printf "${RED}zmk repo is missing!\n"
+    printf "%s\n" "${RED}zmk repo is missing!"
     exit 2
 else
-    git pull origin main
+    git pull origin main >/dev/null 2>&1
 fi
-cd -
+cd - >/dev/null || exit
 
 if [[ -z $BOARDS ]]; then
     # BOARDS="$(grep '^[[:space:]]*\-[[:space:]]*board:' "$HOST_CONFIG_DIR/build.yaml" | sed 's/^.*: *//')"
@@ -120,7 +117,7 @@ fi
 
 [[ -z $CLEAR_CACHE ]] && CLEAR_CACHE="false"
 
-printf "\n%s\n" "${YELLOW}ATTENTION!${NC} Building locally!"
+printf "\n%s\n\n" "${YELLOW}ATTENTION!${NC} Building locally!"
 USERNAME=$(id -un)
 USERUID=$(id -u)
 USERGID=$(id -g)
@@ -165,7 +162,6 @@ fi
 # | BUILD THE FIRMWARE |
 # +--------------------+
 
-printf "\nBuild mode: local\n"
 SUFFIX="${ZEPHYR_VERSION}_devcontainer"
 
 # | Cleanup and shit |
@@ -183,43 +179,95 @@ if [[ $CLEAR_CACHE = true ]]; then
     done
 fi
 
+# Only run a multithread build if we are not doing a fresh/clean build.
+MTHREAD=
+MTHREAD=$([[ $CLEAR_CACHE == false ]] && [[ -n $MULTITHREAD ]] && echo yes)
 readarray -t board_shields < <(yaml2json "$local_config"/build.yaml | jq -c -r '.include[]')
 
-for pair in "${board_shields[@]}"; do
-    # Construct board/shield names
-    read -ra arr <<< "${pair//,/ }"
-    board=$(echo "${arr[0]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
-    shield=$(echo "${arr[1]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
-    if [ $build_all = "no" ]; then
-        if [[ " ${BOARDS[*]} " =~ " ${board} " ]]; then
-            echo "✅ ${GREEN}Found${NC} requested \"$board${shield:+" ($shield)"}\" board!"; echo
-        else
-            echo "📢 ${YELLOW}Skipping${NC} building \"$board${shield:+" ($shield)"}\"!"; echo
-            continue
+if [[ $MTHREAD == "yes" ]]; then
+    counter=1
+    for pair in "${board_shields[@]}"; do
+        # Construct board/shield names
+        read -ra arr <<< "${pair//,/ }"
+        board=$(echo "${arr[0]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
+        shield=$(echo "${arr[1]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
+        if [ $build_all = "no" ]; then
+            if [[ " ${BOARDS[*]} " =~ " ${board} " ]]; then
+                echo "✅ ${GREEN}Found${NC} requested \"$board${shield:+" ($shield)"}\" board!"; echo
+            else
+                echo "📢 ${YELLOW}Skipping${NC} building \"$board${shield:+" ($shield)"}\"!"; echo
+                continue
+            fi
         fi
-    fi
-    echo "Starting the build process for \"$board${shield:+" ($shield)"}\"."; echo
+        . "$SCRIPT_DIR"/build_board_matrix.sh &
+        sleep 0.75
+        eval "T${counter}=\${!}"
+        eval "B${counter}=\$board-\$shield"  # Store the board name in a corresponding variable
+        ((counter++))
+    done
+    # shellcheck disable=2031,2004
+    printf "%s\n" "${YELLOW}Started $(($counter - 1)) background threads${NC}"
+    while :
+    do
+        for ((x=1; x<counter; x++))
+        do
+            pid="T$x"
+            _board="B$x"
+            if ps -p "${!pid}" >/dev/null 2>&1; then
+                printf '%c' '.'
+                # shellcheck disable=2004
+                _DONE[$x]=0
+            else
+                # shellcheck disable=2031
+                [[ ${_DONE[$x]} = 0 ]] && printf " %s " "${GREEN}${!_board}: done. 🏁${NC}"
+                # shellcheck disable=2004
+                _DONE[$x]=1
+            fi
+        done
+        _r=1
+        for ((x=1; x<counter; x++))
+        do
+            if [[ ${_DONE[$x]} = 0 ]]; then _r=0; fi
+        done
+        if [[ $_r = 1 ]]; then break; fi
+        sleep 0.75
+    done
+else
+    for pair in "${board_shields[@]}"; do
+        # Construct board/shield names
+        read -ra arr <<< "${pair//,/ }"
+        board=$(echo "${arr[0]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
+        shield=$(echo "${arr[1]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
+        if [ $build_all = "no" ]; then
+            if [[ " ${BOARDS[*]} " =~ " ${board} " ]]; then
+                # shellcheck disable=2031
+                echo "✅ ${GREEN}Found${NC} requested \"$board${shield:+" ($shield)"}\" board!"; echo
+            else
+                # shellcheck disable=2031
+                echo "📢 ${YELLOW}Skipping${NC} building \"$board${shield:+" ($shield)"}\"!"; echo
+                continue
+            fi
+        fi
+        # shellcheck disable=2031
+        printf "\n%s\n" "🚧 Run west to build \"$board MCU ${shield:+(${CYAN}$shield${NC} keyboard)}\""
+        printf "╰┈┈➤"
+        shield=$(echo "${arr[1]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
+        . "$SCRIPT_DIR"/build_board_matrix.sh
+        printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n"
+    done
+fi
 
-    # shellcheck disable=2129
-    printf "\n%s\n" "🚧 Run west to build \"$board MCU ${shield:+(${CYAN}$shield${NC} keyboard)}\""
-    printf "╰┈┈➤"
-
-    . "$SCRIPT_DIR"/build_board_matrix.sh
-
-    printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n"
-done
-
+    # printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n"
+# done
+echo
 # Copy firmware files to macOS
 cd "$local_output" || exit
 firmware_files=$(find . -name '*.uf2' | tr '\n' ' ' | sed 's/.\///g' | sed 's/ $//' | sed 's/ /  /')
-if [[ -n $REMOTE_DOCKER ]]; then
-  cp  ./*.uf2 ~/Downloads >/dev/null && echo "🗄 Copied all firmwares file to ${GREEN}Download${NC} folder."
+
+if scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null; then
+    echo "🗄 Sent all firmware files to ${GREEN}macOS${NC}."
 else
-    if scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null; then
-        echo "🗄 Sent all firmware files to ${GREEN}macOS${NC}."
-    else
-        echo "${RED}🔴 Error: couldn't copy to remote computer!"
-    fi
+    echo "${RED}🔴 Error: couldn't copy to remote computer!"
 fi
 printf "%s" "╰┈┈┈┈┈┈➤ $firmware_files"
 echo

@@ -4,10 +4,31 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build Quick",
+            "label": "Build Quick - Single Thread",
             "type": "shell",
             "command": "./scripts/build_on_devcontainer.sh",
-            "args": [],
+            "args": [
+                ""
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "windows": {
+                "command": ".\\scripts\\test.cmd"
+            },
+        },
+        {
+            "label": "Build Quick - Multi-Thread",
+            "type": "shell",
+            "command": "./scripts/build_on_devcontainer.sh",
+            "args": [
+                "--multithread"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -24,7 +45,11 @@
             "label": "Build Clean",
             "type": "shell",
             "command": "./scripts/build_on_devcontainer.sh",
-            "args": ["-c", "--", "-p"],
+            "args": [
+                "-c",
+                "--",
+                "-p"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": false

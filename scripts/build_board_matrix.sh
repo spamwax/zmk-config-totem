@@ -8,23 +8,36 @@ if [ -t 1 ]; then
     NC=$'\e[0m'
 fi
 
+# shellcheck disable=2295
+function msg_() {
+    if [[ $MTHREAD != "yes" ]]; then
+        # string="$@"
+        string="$*"
+        del='\\n'
+        while test "${string#*$del}" != "$string" ; do
+          echo "${string%%$del*}"
+          string="${string#*$del}"
+        done
+        echo "$string"
+    fi
+}
+
 # usage: compile_board board shield
 compile_board () {
     board="$1"
     shield="$2"
     LOGFILE="$LOG_DIR/zmk_build_$artifact_name.log"
 
-    echo "west build -s $DOCKER_ZMK_DIR/app -d build/$BUILD_DIR -b $1 $WEST_OPTS \
-        -- -DZMK_CONFIG=$CONFIG_DIR $extra_args -Wno-dev > $LOGFILE 2>&1"
-    echo -en "\n${GREEN}Building $1... ${NC}"
+    msg_ "west build -s $DOCKER_ZMK_DIR/app -d build/$BUILD_DIR -b $1 $WEST_OPTS \
+        -- -DZMK_CONFIG=$CONFIG_DIR $extra_args -Wno-dev > $LOGFILE 2>&1\n"
+    msg_ "\n${GREEN}Building $1... ${NC}"
     west build -s "$DOCKER_ZMK_DIR/app" -d "build/$BUILD_DIR" -b "$1" "$WEST_OPTS" \
         -- -DZMK_CONFIG="$CONFIG_DIR" "$extra_args" -Wno-dev > "$LOGFILE" 2>&1
     # shellcheck disable=2181
     if [[ $? -eq 0 ]]
     then
-        echo
-        echo "Build log saved to \"$LOGFILE\"."; echo
-        echo "💪 ${GREEN}$artifact_name was built succesfully!${NC}"
+        msg_ "\nBuild log saved to \"$LOGFILE\".\n\n"
+        msg_ "💪 ${GREEN}$artifact_name was built succesfully!${NC}\n"
         if [[ -f $DOCKER_ZMK_DIR/app/build/$BUILD_DIR/zephyr/zmk.uf2 ]]
         then
             TYPE="uf2"
@@ -37,7 +50,7 @@ compile_board () {
         [[ $artifact_name == *"_right"* ]] && artifact_name=RIGHT-${artifact_name//_right/}
         OUTPUT="$DOCKER_CONFIG_DIR/$OUTPUT_DIR/$artifact_name.$TYPE"
         # TODO: Use git tags to create a better extension than .bak
-        echo "💾 Renaming & backing up firmware file & CONFIG_* file..."
+        msg_ "💾 Renaming & backing up firmware file & CONFIG_* file...\n"
         [[ -f $OUTPUT ]] && [[ ! -L $OUTPUT ]] && mv "$OUTPUT" "$OUTPUT.bak"
 
         # Also copy CONFIG_* settings for possible debugging purposes.
@@ -50,11 +63,11 @@ compile_board () {
             "$DOCKER_ZMK_DIR/app/build/$BUILD_DIR/zephyr/$artifact_name.$TYPE"
 
         cp "$DOCKER_ZMK_DIR/app/build/$BUILD_DIR/zephyr/zmk.$TYPE" "$OUTPUT" \
-            && echo "⚙️ Copied firmware file to host folder."
+            && msg_ "⚙️ Copied firmware file to host folder.\n"
     else
         echo
         cat "$LOGFILE"
-        echo "${RED}🔴 Error: $artifact_name failed${NC} ⛑️ "
+        printf "\n%s\n" "${RED}🔴 Error: $artifact_name failed${NC} ⛑️ "
         exit 1
     fi
 }
@@ -62,8 +75,8 @@ compile_board () {
 prev_dir=$(pwd)
 
 # Update west if needed
-echo $DOCKER_ZMK_DIR
-cd $DOCKER_ZMK_DIR || exit
+# echo "$DOCKER_ZMK_DIR"
+cd "$DOCKER_ZMK_DIR" || exit
 
 # ls $(pwd)
 # ls -la ./app/west.yml
@@ -73,12 +86,12 @@ cd $DOCKER_ZMK_DIR || exit
 
 OLD_WEST="/root/west.yml.old"
 if [[ ! -f "${DOCKER_ZMK_DIR}"/.west/config ]]; then
-    printf "🚀 Initializing the app... 🚀\n\n"
+    msg_ "🚀 Initializing the app... 🚀\n\n"
     west init -l app/
     cd "${DOCKER_ZMK_DIR}" || exit
     west update
 else
-    printf "✅ app is already initialized!\n\n"
+    msg_ "\n✅ app is already initialized!\n\n"
 fi
 
 cd "$DOCKER_ZMK_DIR/app" || exit
@@ -87,14 +100,14 @@ if [[ -f $OLD_WEST ]]; then
     md5_old=$(md5sum $OLD_WEST | cut -d' ' -f1)
 fi
 if [[ $md5_old != $(md5sum ./west.yml | cut -d' ' -f1) ]]; then
-    printf "\n🚀 Found fresh app/west.yml, Running 'west update' 🚀\n\n"
+    msg_ "\n🚀 Found fresh app/west.yml, Running 'west update' 🚀\n\n"
     cp ./west.yml $OLD_WEST
     west update
 else
-    printf "✅ ${DOCKER_ZMK_DIR}/app/west.yml hasn't changed!\n\n"
+    msg_ "✅ ${DOCKER_ZMK_DIR}/app/west.yml hasn't changed!\n\n"
 fi
 
-west zephyr-export
+west zephyr-export >/dev/null
 
 
 artifact_name=${shield:+$shield-}${board}-zmk
@@ -102,10 +115,10 @@ extra_args=${shield:+-DSHIELD="$shield"}
 BUILD_DIR="${artifact_name}_$SUFFIX"
 if [ -d "$DOCKER_ZMK_DIR"/app/build/"$BUILD_DIR" ]; then
     rm -rf "$DOCKER_ZMK_DIR/app/build/$BUILD_DIR"
-    printf "♻ Removed old build directory before starting the build process.\n"
+    msg_ "♻ Removed old build directory before starting the build process.\n"
 fi
 
 compile_board "$board" "$shield"
 
-cd "$prev_dir"
+cd "$prev_dir" || exit
 
