@@ -43,6 +43,7 @@
 					"--external-sources"
 				],
 				"files.insertFinalNewline": true,
+				"terminal.integrated.scrollback": 50000,
 				// "workbench.colorTheme": "Monokai Pro (Filter Machine)"
 				"workbench.colorTheme": "An Old Hope Classic"
 			}
