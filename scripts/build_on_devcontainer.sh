@@ -105,7 +105,8 @@ else
     echo; echo "${CYAN}Selected${NC} boards to build:" "${BOARDS[@]}"
     readarray -t avails < <(grep '^[[:space:]]*\-[[:space:]]*board:' build.yaml | sed 's/^.*: *//')
     for item  in "${BOARDS[@]}"; do
-        if [[ " ${avails[*]} " =~ " ${item} " ]]; then
+        # if [[ " ${avails[*]} " =~ " ${item} " ]]; then
+        if [[ " ${avails[*]} " == *" ${item} "* ]]; then
             echo "    ${GREEN}$item${NC} will be built."
         else
             echo "    ${RED}$item${NC} is not a valid board in build.yaml"
@@ -192,7 +193,8 @@ if [[ $MTHREAD == "yes" ]]; then
         board=$(echo "${arr[0]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
         shield=$(echo "${arr[1]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
         if [ $build_all = "no" ]; then
-            if [[ " ${BOARDS[*]} " =~ " ${board} " ]]; then
+            # if [[ " ${BOARDS[*]} " =~ " ${board} " ]]; then
+            if [[ " ${BOARDS[*]} " == *" ${board} "* ]]; then
                 echo "✅ ${GREEN}Found${NC} requested \"$board${shield:+" ($shield)"}\" board!"; echo
             else
                 echo "📢 ${YELLOW}Skipping${NC} building \"$board${shield:+" ($shield)"}\"!"; echo
@@ -239,7 +241,8 @@ else
         board=$(echo "${arr[0]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
         shield=$(echo "${arr[1]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
         if [ $build_all = "no" ]; then
-            if [[ " ${BOARDS[*]} " =~ " ${board} " ]]; then
+            # if [[ " ${BOARDS[*]} " =~ " ${board} " ]]; then
+            if [[ " ${BOARDS[*]} " == *" ${board} "* ]]; then
                 # shellcheck disable=2031
                 echo "✅ ${GREEN}Found${NC} requested \"$board${shield:+" ($shield)"}\" board!"; echo
             else
