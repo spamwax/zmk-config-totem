@@ -242,7 +242,7 @@ label= "NUM"                               ; // 6
                 &kp LG(R)    &kp LG(H)    &kp LG(P)     &kp LG(N)     &kp LG(S)         &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
                 &kp LGUI     &kp LSHFT    &kp LALT      &kp LCTRL     &appswmac         &kp PLUS    &kp N4      &kp N5      &kp N6      &kp MINUS
     &to BASE    &kp LG(Z)    &kp LG(X)    &kp LG(C)     &kp LG(V)     &kp LS(LG(Z))     &kp PRCNT   &kp N1      &kp N2      &kp N3      &kp EQUAL    &kp BSPC
-                                          &trans        &trans        &kp LG(O)            &kp SPC     &kp N0      &kp DOT
+                                          &trans        &trans        &kp LG(O)         &kp SPC     &kp N0      &kp DOT
                         >;
                 };
 
@@ -359,7 +359,7 @@ label= "COMMON_SHORTCUTS"                  ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┓    ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃           ┃           ┃            ┃    ┃           ┃           ┃           ┃           ┃           ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃           ┃   CMD+H   ┃   CMD+P   ┃   CMD+N   ┃            ┃    ┃           ┃           ┃           ┃           ┃           ┃
+//             ┃           ┃   CMD+H   ┃   CMD+P   ┃   CMD+N   ┃    CMD+O   ┃    ┃           ┃           ┃           ┃           ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃           ┃           ┃           ┃           ┃           ┃            ┃    ┃           ┃           ┃           ┃           ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -369,7 +369,7 @@ label= "COMMON_SHORTCUTS"                  ;
 // ╷           ╷           ╷           ╷           ╷           ╷            ╷    ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &trans      &trans      &trans      &trans      &trans            &trans      &trans      &trans      &trans      &trans
-                &trans      &kp LG(H)   &kp LG(P)   &kp LG(N)   &trans            &trans      &trans      &trans      &trans      &trans
+                &trans      &kp LG(H)   &kp LG(P)   &kp LG(N)   &kp LG(O)         &trans      &trans      &trans      &trans      &trans
     &trans      &trans      &trans      &trans      &trans      &trans            &trans      &trans      &trans      &trans      &trans      &to BASE
                                         &trans      &trans      &trans            &trans      &trans      &trans
                         >;
@@ -388,7 +388,7 @@ label= "THENWIN_NUM"                       ;
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃  TO BASE  ┃   UNDO    ┃    CUT    ┃    COPY   ┃   PASTE   ┃     REDO     ┃    ┃           ┃           ┃           ┃           ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃           ┃           ┃              ┃    ┃           ┃           ┃           ┃
+//                                     ┃           ┃           ┃    CTRL+O    ┃    ┃           ┃           ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━━━━┛    ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷              ╷    ╷           ╷           ╷           ╷           ╷           ╷           ╷
@@ -396,7 +396,7 @@ label= "THENWIN_NUM"                       ;
                 &kp LC(R)   &kp LC(H)   &kp LC(P)   &kp LC(N)   &kp LC(S)           &trans      &trans      &trans      &trans      &trans
                 &trans      &trans      &trans      &trans      &appswwin           &trans      &trans      &trans      &trans      &trans
     &to BASE    &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LS(LC(Z))       &trans      &trans      &trans      &trans      &trans      &trans
-                                        &trans      &trans      &trans              &trans      &trans      &trans
+                                        &trans      &trans      &kp LC(O)           &trans      &trans      &trans
                         >;
                 };
 
@@ -459,7 +459,7 @@ label= "THENWIN_SHORTCUTS"                 ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┓    ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃           ┃           ┃            ┃    ┃           ┃           ┃           ┃           ┃           ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃           ┃  CTRL+H   ┃   CTRL+P  ┃  CTRL+N   ┃            ┃    ┃           ┃           ┃           ┃           ┃           ┃
+//             ┃           ┃  CTRL+H   ┃   CTRL+P  ┃  CTRL+N   ┃   CTRL+O   ┃    ┃           ┃           ┃           ┃           ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃           ┃           ┃           ┃           ┃           ┃            ┃    ┃           ┃           ┃           ┃           ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -469,7 +469,7 @@ label= "THENWIN_SHORTCUTS"                 ;
 // ╷           ╷           ╷           ╷           ╷           ╷            ╷    ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &trans      &trans      &trans      &trans      &trans            &trans      &trans      &trans      &trans      &trans
-                &trans      &kp LC(H)   &kp LC(P)   &kp LC(N)   &trans            &trans      &trans      &trans      &trans      &trans
+                &trans      &kp LC(H)   &kp LC(P)   &kp LC(N)   &kp LC(O)         &trans      &trans      &trans      &trans      &trans
     &trans      &trans      &trans      &trans      &trans      &trans            &trans      &trans      &trans      &trans      &trans      &to BASE
                                         &trans      &trans      &trans            &trans      &trans      &trans
                         >;
