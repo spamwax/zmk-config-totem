@@ -234,7 +234,7 @@ label= "NUM"                               ; // 6
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━┓
 // ┃  TO BASE  ┃  UNDO      ┃    CUT     ┃    COPY     ┃    PASTE    ┃    REDO   ┃     ┃     %     ┃     1     ┃     2     ┃     3     ┃     =      ┃  BKSPC  ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━┻━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━━┻━━━━━━━━━┛
-//                                       ┃             ┃             ┃           ┃     ┃    SPC    ┃     0     ┃    DOT    ┃
+//                                       ┃             ┃             ┃   CMD+O   ┃     ┃    SPC    ┃     0     ┃    DOT    ┃
 //                                       ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷            ╷            ╷             ╷             ╷            ╷    ╷           ╷           ╷           ╷           ╷            ╷         ╷
@@ -242,7 +242,7 @@ label= "NUM"                               ; // 6
                 &kp LG(R)    &kp LG(H)    &kp LG(P)     &kp LG(N)     &kp LG(S)         &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
                 &kp LGUI     &kp LSHFT    &kp LALT      &kp LCTRL     &appswmac         &kp PLUS    &kp N4      &kp N5      &kp N6      &kp MINUS
     &to BASE    &kp LG(Z)    &kp LG(X)    &kp LG(C)     &kp LG(V)     &kp LS(LG(Z))     &kp PRCNT   &kp N1      &kp N2      &kp N3      &kp EQUAL    &kp BSPC
-                                          &trans        &trans        &trans            &kp SPC     &kp N0      &kp DOT
+                                          &trans        &trans        &kp LG(O)            &kp SPC     &kp N0      &kp DOT
                         >;
                 };
 
