@@ -34,7 +34,8 @@
 				"rogalmic.bash-debug",
 				"monokai.theme-monokai-pro-vscode",
 				"timonwong.shellcheck",
-				"mads-hartmann.bash-ide-vscode"
+				"mads-hartmann.bash-ide-vscode",
+				"plorefice.devicetree"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
