@@ -71,13 +71,13 @@ secrets:
 
 volumes:
   zmk_root_user:
-    name: zmk-root-user-3.2.0
+    name: zmk-root-user-3.5.0
   zmk_zephyr:
-    name: zmk-zephyr-3.2.0
+    name: zmk-zephyr-3.5.0
   zmk_zephyr_modules:
-    name: zmk-zephyr-modules-3.2.0
+    name: zmk-zephyr-modules-3.5.0
   zmk_zephyr_tools:
-    name: zmk-zephyr-tools-3.2.0
+    name: zmk-zephyr-tools-3.5.0
   my_zmk:
     name: my_zmk
     external: true

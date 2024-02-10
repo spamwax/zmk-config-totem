@@ -76,7 +76,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Set defaults
-[[ -z $ZEPHYR_VERSION ]] && ZEPHYR_VERSION="3.2.0"
+[[ -z $ZEPHYR_VERSION ]] && ZEPHYR_VERSION="3.5.0"
 
 local_config="$SCRIPT_DIR"/.. 
 local_zmk="$local_config"/../zmk
@@ -201,6 +201,7 @@ if [[ $MTHREAD == "yes" ]]; then
                 continue
             fi
         fi
+        # shellcheck source=build_board_matrix.sh
         . "$SCRIPT_DIR"/build_board_matrix.sh &
         sleep 0.75
         eval "T${counter}=\${!}"
@@ -255,6 +256,7 @@ else
         printf "\n%s\n" "🚧 Run west to build \"$board MCU ${shield:+(${CYAN}$shield${NC} keyboard)}\""
         printf "╰┈┈➤"
         shield=$(echo "${arr[1]}" | cut -d ':' -f 2 | sed 's/["{}}]//g')
+        # shellcheck source=build_board_matrix.sh
         . "$SCRIPT_DIR"/build_board_matrix.sh
         printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n"
     done

@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 ARG zmk_type=dev
-ARG zmk_tag=stable
+ARG zmk_tag=3.5
 
 FROM docker.io/zmkfirmware/zmk-${zmk_type}-arm:${zmk_tag}
 
@@ -12,10 +12,10 @@ ENV USER_ID=$USERUID
 ENV GROUP_ID=$USERGID 
 ENV USER_NAME=$USERNAME
 
-RUN apt -y update && apt -y install jq htop neovim
+RUN apt -y update && apt -y install jq htop neovim openssh-client shellcheck
 # RUN apt install -y python3-pip
 RUN python3 -m pip install remarshal
-RUN apt -y install openssh-client
+
 
 # Create the user
 RUN groupadd --gid $GROUP_ID $USER_NAME \
