@@ -120,18 +120,25 @@
             mods = <(MOD_LGUI|MOD_RGUI)>;
             keep-mods = <(MOD_LGUI|MOD_RGUI)>;
         };
+        dqt_sqt: double_then_single_quote {
+            compatible = "zmk,behavior-mod-morph";
+            label = "DOUBLE_THEN_SINGLE_QUOTE";
+            #binding-cells = <0>;
+            bindings = <&kp DQT>, <&kp SQT>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
         qtmacnewtab: mac_new_tab {
             compatible = "zmk,behavior-mod-morph";
             label = "MAC_NEW_TAB";
             #binding-cells = <0>;
-            bindings = <&kp DQT>, <&kp LG(T)>;
+            bindings = <&dqt_sqt>, <&kp LG(T)>;
             mods = <(MOD_LGUI|MOD_RGUI)>;
         };
         qtwinnewtab: win_new_tab {
             compatible = "zmk,behavior-mod-morph";
             label = "WIN_NEW_TAB";
             #binding-cells = <0>;
-            bindings = <&kp DQT>, <&kp LC(T)>;
+            bindings = <&dqt_sqt>, <&kp LC(T)>;
             mods = <(MOD_LGUI|MOD_RGUI)>;
         };
         tab_bksp: game_tab_bksp {

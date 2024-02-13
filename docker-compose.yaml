@@ -38,6 +38,9 @@ services:
   build:
     user: "1000:1000"
     image: private/zmk
+    environment:
+      - ZEPHYR_VERSION=${ZEPHYR_VERSION}
+      - zephyr_version=${ZEPHYR_VERSION}
     secrets:
       - khersak_ssh_key
         # target: /home/hamid/.ssh/id_ed25519

@@ -33,6 +33,7 @@
 #define THENWIN_CUR 13
 #define THENWIN_MCR 14
 #define THENWIN_SHORTCUTS 15
+#define QWERTY 16
 
 
 &mt {
@@ -82,9 +83,9 @@ label= "BASE"                              ;
  bindings = <
 // ╷            ╷           ╷           ╷                  ╷                  ╷                ╷   ╷                  ╷                  ╷                ╷           ╷           ╷           ╷
 
-                 &kp B       &kp G       &kp M              &kp L              &qtmacnewtab         &kp SEMI           &kp Y              &kp U            &kp V       &mmt MEH W
-                 &hl LGUI D  &kp S       &hl LALT T         &hl LCTRL N        &hl LSHFT COMMA      &hr RSHFT DOT      &hr RCTRL I        &hr RALT A       &kp E       &hr RGUI O
-    &z_shrt_gr   &kp R       &kp X       &kp C              &kp F              &ltl FUN FSLH        &mmt HYPER UNDER   &kp H              &kp J            &kp K       &kp P       &kp Q
+                 &kp W       &kp G       &kp M              &kp L              &qtmacnewtab         &kp SEMI           &kp Y              &kp U            &kp V       &mmt MEH B
+                 &hl LGUI D  &kp S       &hl LALT T         &hl LCTRL N        &hl LSHFT COMMA      &hr RSHFT DOT      &hr RCTRL A        &hr RALT E       &kp O       &hr RGUI H
+    &z_shrt_gr   &kp F       &kp X       &kp C              &kp R              &ltl FUN FSLH        &mmt HYPER UNDER   &kp I              &kp P            &kp J       &kp K       &kp Q
                                          TMHP CUR ESC       TM_MRPH_DEL NUM 0  &mmt LGUI TAB        &tmb LOW RET       &tmb MCR SPC       TMHP SYM DEL
 
                         >;
@@ -187,10 +188,10 @@ label= "MIR"                               ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp TAB     &kp I       &kp LC(LALT) &kp O      &kp LC(F20)     &trans       &trans       &trans       &trans       &trans
-                &lt CUR L   &kp LEFT    &kp LALT    &kp RIGHT   &kp SPACE       &trans       &trans       &trans       &trans       &trans
-    &to BASE    &kp LSHFT   &kp LC(C)   &kp BSPC    &kp LC(V)   &kp LC(F19)     &trans       &trans       &trans       &trans       &trans       &trans
-                                        &trans      &kp LC(F14) &kp LC(F13)     &trans       &trans       &trans
+                &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y        &kp U        &kp I        &kp O     &kp P   
+                &kp A       &kp S       &kp D       &kp F       &kp G           &kp H        &kp J        &kp K        &kp L     &kp SEMI   
+    &to BASE    &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N        &kp M        &kp COMMA    &kp DOT   &kp FSLH    &kp SQT   
+                                        &trans      &trans      &trans          &trans       &trans       &trans   
                         >;
                 };
 

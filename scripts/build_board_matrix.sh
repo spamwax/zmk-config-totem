@@ -78,6 +78,8 @@ prev_dir=$(pwd)
 # echo "$DOCKER_ZMK_DIR"
 cd "$DOCKER_ZMK_DIR" || exit
 
+export ZEPHYR_VERSION="$ZEPHYR_VERSION"
+
 # ls $(pwd)
 # ls -la ./app/west.yml
 
