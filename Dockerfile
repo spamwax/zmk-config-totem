@@ -30,4 +30,4 @@ RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCd+h7PYcF4n3FgAX7roJHMTmytsBp2/F
 RUN mkdir /.ccache \
   && chown -R ${USER_ID}:${GROUP_ID} /.ccache \
   && mkdir /.cache \
-  && chown -R ${USER_ID}:${GROUP_ID} /.cache \
+  && chown -R ${USER_ID}:${GROUP_ID} /.cache
