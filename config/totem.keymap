@@ -78,14 +78,14 @@ label= "BASE"                              ;
 // ┏━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃Z(SHORTCUTS)┃     J     ┃     X     ┃     K            ┃     G            ┃     / (FUN)    ┃   ┃      _ (HYPER)   ┃      R           ┃     M          ┃     F     ┃     P     ┃     Q     ┃
 // ┗━━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                      ┃   ESC (Cursor)   ┃    BSPC (Num)    ┃   TAB (GUI)    ┃   ┃   ENTER(Lower)   ┃    SPC (Macro)   ┃   DEL (Symbols)┃
+//                                      ┃   ESC (Cursor)   ┃    BSPC (Num)    ┃   TAB (GUI)    ┃   ┃   ENTER(Lower)   ┃    SPC (Macro)   ┃  DEL (Symbols) ┃
 //                                      ┗━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┛
  bindings = <
 // ╷            ╷           ╷           ╷                  ╷                  ╷                ╷   ╷                  ╷                  ╷                ╷           ╷           ╷           ╷
 
-                 &kp W       &kp G       &kp M              &kp L              &qtmacnewtab         &kp SEMI           &kp Y              &kp U            &kp V       &mmt MEH B
-                 &hl LGUI D  &kp S       &hl LALT T         &hl LCTRL N        &hl LSHFT COMMA      &hr RSHFT DOT      &hr RCTRL A        &hr RALT E       &kp O       &hr RGUI H
-    &z_shrt_gr   &kp F       &kp X       &kp C              &kp R              &ltl FUN FSLH        &mmt HYPER UNDER   &kp I              &kp P            &kp J       &kp K       &kp Q
+                 &kp W       &kp G       &kp M              &kp L              &qtmacnewtab         &kp SEMI           &kp U              &kp O            &kp B       &mmt MEH V
+                 &hl LGUI D  &kp S       &hl LALT T         &hl LCTRL N        &hl LSHFT COMMA      &hr RSHFT DOT      &hr RCTRL A        &hr RALT E       &kp I       &hr RGUI H
+    &z_shrt_gr   &kp F       &kp X       &kp C              &kp R              &ltl FUN FSLH        &mmt HYPER UNDER   &kp P              &kp Y            &kp J       &kp K       &kp Q
                                          TMHP CUR ESC       TM_MRPH_DEL NUM 0  &mmt LGUI TAB        &tmb LOW RET       &tmb MCR SPC       TMHP SYM DEL
 
                         >;
@@ -101,19 +101,19 @@ label= "LOW"                               ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃    L0     ┃    L2     ┃     L3    ┃    L4     ┃    L5     ┃   ┃    L6     ┃    L7     ┃    L8     ┃    L9     ┃    L10    ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃   CMD+Q   ┃           ┃   CMD+H   ┃    CMD+P  ┃   CMD+N   ┃   ┃           ┃  Alfred   ┃ &capswrd  ┃ &num_word ┃           ┃
+//             ┃           ┃           ┃           ┃           ┃   CMD+N   ┃   ┃           ┃  Alfred   ┃ &capswrd  ┃ &num_word ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃   L0      ┃           ┃           ┃           ┃           ┃    L8     ┃   ┃           ┃ HYP_F7    ┃ HYP_F8    ┃  HYP_F9   ┃           ┃           ┃
+// ┃   L0      ┃           ┃           ┃           ┃           ┃    FUN    ┃   ┃           ┃ HYP_F7    ┃ HYP_F8    ┃  HYP_F9   ┃           ┃           ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃           ┃     L6    ┃           ┃   ┃           ┃    L7     ┃           ┃
+//                                     ┃           ┃    NUM    ┃           ┃   ┃           ┃    CUR    ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &to 0       &to 2       &to 3       &to 4       &to 5           &to 6       &to 7       &to 8       &to 9       &tog 10
-                &kp LG(Q)   &trans      &kp LG(H)   &kp LG(P)   &kp LG(N)       &trans      ALFRED      &caps_word  &num_word   &trans
+                &trans      &trans      &trans      &trans      &kp LG(N)       &trans      ALFRED      &caps_word  &num_word   &trans
     &to BASE    &trans      &trans      &trans      &trans      &to FUN         &trans      HYPF7       HYPF8       HYPF9       &trans      &trans
-                                        &trans      &to CUR     &trans          &trans      &to NUM     &to SYM
+                                        &trans      &to NUM     &trans          &trans      &to CUR     &to SYM
                         >;
                 };
 
@@ -229,20 +229,20 @@ label= "SYM"                               ;
 label= "NUM"                               ; // 6
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┓     ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┓
-//             ┃  CMD+R     ┃    CMD+H   ┃    CMD+P    ┃    CMD+N    ┃    SAVE   ┃     ┃     *     ┃     7     ┃     8     ┃     9     ┃     /      ┃
+//             ┃            ┃            ┃             ┃             ┃    SAVE   ┃     ┃     *     ┃     7     ┃     8     ┃     9     ┃     /      ┃
 //             ┣━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫
 //             ┃  LGUI      ┃   LSHFT    ┃    LALT     ┃    LCTRL    ┃  CMD+TAB  ┃     ┃     +     ┃     4     ┃     5     ┃     6     ┃     -      ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━┓
-// ┃  TO BASE  ┃  UNDO      ┃    CUT     ┃    COPY     ┃    PASTE    ┃    REDO   ┃     ┃     %     ┃     1     ┃     2     ┃     3     ┃     =      ┃  BKSPC  ┃
+// ┃  TO BASE  ┃  UNDO      ┃    CUT     ┃    COPY     ┃    PASTE    ┃    REDO   ┃     ┃     ,     ┃     1     ┃     2     ┃     3     ┃     =      ┃  BKSPC  ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━┻━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫     ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━━┻━━━━━━━━━┛
 //                                       ┃             ┃             ┃   CMD+O   ┃     ┃    SPC    ┃     0     ┃    DOT    ┃
 //                                       ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷            ╷            ╷             ╷             ╷            ╷    ╷           ╷           ╷           ╷           ╷            ╷         ╷
                             
-                &kp LG(R)    &kp LG(H)    &kp LG(P)     &kp LG(N)     &kp LG(S)         &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
+                &trans       &trans       &trans        &trans        &kp LG(S)         &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
                 &kp LGUI     &kp LSHFT    &kp LALT      &kp LCTRL     &appswmac         &kp PLUS    &kp N4      &kp N5      &kp N6      &kp MINUS
-    &to BASE    &kp LG(Z)    &kp LG(X)    &kp LG(C)     &kp LG(V)     &kp LS(LG(Z))     &kp PRCNT   &kp N1      &kp N2      &kp N3      &kp EQUAL    &kp BSPC
+    &to BASE    &kp LG(Z)    &kp LG(X)    &kp LG(C)     &kp LG(V)     &kp LS(LG(Z))     &kp COMMA   &kp N1      &kp N2      &kp N3      &kp EQUAL    &kp BSPC
                                           &trans        &trans        &kp LG(O)         &kp SPC     &kp N0      &kp DOT
                         >;
                 };
@@ -358,7 +358,7 @@ label= "SYS"                               ;
 label= "COMMON_SHORTCUTS"                  ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┓    ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃           ┃           ┃           ┃           ┃            ┃    ┃           ┃           ┃           ┃           ┃           ┃
+//             ┃           ┃           ┃   CMD+R   ┃           ┃            ┃    ┃           ┃           ┃           ┃           ┃           ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃           ┃   CMD+H   ┃   CMD+P   ┃   CMD+N   ┃    CMD+O   ┃    ┃           ┃           ┃           ┃           ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
@@ -369,7 +369,7 @@ label= "COMMON_SHORTCUTS"                  ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷            ╷    ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &trans      &trans      &trans      &trans      &trans            &trans      &trans      &trans      &trans      &trans
+                &trans      &trans      &kp LG(R)   &trans      &trans            &trans      &trans      &trans      &trans      &trans
                 &trans      &kp LG(H)   &kp LG(P)   &kp LG(N)   &kp LG(O)         &trans      &trans      &trans      &trans      &trans
     &trans      &trans      &trans      &trans      &trans      &trans            &trans      &trans      &trans      &trans      &trans      &to BASE
                                         &trans      &trans      &trans            &trans      &trans      &trans
@@ -383,7 +383,7 @@ label= "COMMON_SHORTCUTS"                  ;
 label= "THENWIN_NUM"                       ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┓    ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃   CTRL+R  ┃  CTRL+H   ┃  CTRL+P   ┃  CTRL+N   ┃     SAVE     ┃    ┃           ┃           ┃           ┃           ┃           ┃
+//             ┃           ┃           ┃           ┃           ┃     SAVE     ┃    ┃           ┃           ┃           ┃           ┃           ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃           ┃           ┃           ┃           ┃    ALT+TAB   ┃    ┃           ┃           ┃           ┃           ┃           ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
@@ -394,7 +394,7 @@ label= "THENWIN_NUM"                       ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷              ╷    ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp LC(R)   &kp LC(H)   &kp LC(P)   &kp LC(N)   &kp LC(S)           &trans      &trans      &trans      &trans      &trans
+                &trans      &trans      &trans      &trans      &kp LC(S)           &trans      &trans      &trans      &trans      &trans
                 &trans      &trans      &trans      &trans      &appswwin           &trans      &trans      &trans      &trans      &trans
     &to BASE    &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &kp LS(LC(Z))       &trans      &trans      &trans      &trans      &trans      &trans
                                         &trans      &trans      &kp LC(O)           &trans      &trans      &trans
@@ -469,7 +469,7 @@ label= "THENWIN_SHORTCUTS"                 ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷            ╷    ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &trans      &trans      &trans      &trans      &trans            &trans      &trans      &trans      &trans      &trans
+                &trans      &trans      &kp LC(R)   &trans      &trans            &trans      &trans      &trans      &trans      &trans
                 &trans      &kp LC(H)   &kp LC(P)   &kp LC(N)   &kp LC(O)         &trans      &trans      &trans      &trans      &trans
     &trans      &trans      &trans      &trans      &trans      &trans            &trans      &trans      &trans      &trans      &trans      &to BASE
                                         &trans      &trans      &trans            &trans      &trans      &trans
