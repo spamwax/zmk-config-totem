@@ -308,7 +308,7 @@ firmware_files=$(find . -name '*.uf2' | tr '\n' ' ' | sed 's/.\///g' | sed 's/ $
 if [[ -n $REMOTE_DOCKER ]]; then
   cp  ./*.uf2 ~/Downloads >/dev/null && echo "🗄 Copied all firmwares file to ${GREEN}Download${NC} folder."
 else
-  scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null && echo "🗄 Sent all firmware files to ${GREEN}macOS${NC}."
+  scp ./*.uf2 192.168.13.200:~/Downloads >/dev/null && echo "🗄 Sent all firmware files to ${GREEN}macOS${NC}."
 fi
 printf "%s" "╰┈┈┈┈┈┈➤ $firmware_files"
 echo
