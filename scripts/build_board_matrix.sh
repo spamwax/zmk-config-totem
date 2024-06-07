@@ -63,7 +63,8 @@ compile_board () {
             "$DOCKER_ZMK_DIR/app/build/$BUILD_DIR/zephyr/$artifact_name.$TYPE"
 
         cp "$DOCKER_ZMK_DIR/app/build/$BUILD_DIR/zephyr/zmk.$TYPE" "$OUTPUT" \
-            && msg_ "⚙️ Copied firmware file to host folder.\n"
+            && msg_ "⚙️ Copied firmware file to host folder:\n" && \
+            echo "    -> $OUTPUT"
     else
         echo
         cat "$LOGFILE"

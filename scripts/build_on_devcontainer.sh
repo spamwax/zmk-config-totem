@@ -269,12 +269,12 @@ echo
 cd "$local_output" || exit
 firmware_files=$(find . -name '*.uf2' | tr '\n' ' ' | sed 's/.\///g' | sed 's/ $//' | sed 's/ /  /')
 
-if scp ./*.uf2 10.42.0.2:~/Downloads >/dev/null; then
+if scp ./*.uf2 192.168.13.200:~/Downloads >/dev/null; then
     echo "🗄 Sent all firmware files to ${GREEN}macOS${NC}."
+    printf "Done! 🎉 😎 🎉\n"
 else
     echo "${RED}🔴 Error: couldn't copy to remote computer!"
 fi
 printf "%s" "╰┈┈┈┈┈┈➤ $firmware_files"
 echo
-printf "Done! 🎉 😎 🎉\n"
 printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n"
