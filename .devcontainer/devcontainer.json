@@ -13,6 +13,9 @@
 	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
 	// "service": "change-vol-ownership",
 	"service": "build",
+	// "runServices": [
+	//	"build"
+	//],
 	"onCreateCommand": "cp /run/secrets/khersak_ssh_key /home/hamid/.ssh/id_rsa && chmod 400 /home/hamid/.ssh/id_rsa",
 	// The optional 'workspaceFolder' property is the path VS Code should open by default when
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
@@ -35,9 +38,17 @@
 				"monokai.theme-monokai-pro-vscode",
 				"timonwong.shellcheck",
 				"mads-hartmann.bash-ide-vscode",
-				"plorefice.devicetree"
+				"plorefice.devicetree",
+				"dustinsanders.an-old-hope-theme-vscode",
+				"idleberg.hopscotch"
 			],
 			"settings": {
+				"editor.fontFamily": "LilexNFM-Regular",
+				"editor.fontSize": 13.5,
+				// Controls the line height. Use 0 to compute the lineHeight from the fontSize.
+				"editor.lineHeight": 20,
+				//"editor.letterSpacing": 0.1,
+				"editor.fontLigatures": true,
 				"editor.formatOnSave": true,
 				// "shellcheck.executablePath": "/home/hamid/.local/share/nvim/mason/bin/shellcheck",
 				"shellcheck.customArgs": [
@@ -46,7 +57,7 @@
 				"files.insertFinalNewline": true,
 				"terminal.integrated.scrollback": 50000,
 				// "workbench.colorTheme": "Monokai Pro (Filter Machine)"
-				"workbench.colorTheme": "An Old Hope Classic",
+				"workbench.colorTheme": "Hopscotch",
 				"shellcheck.executablePath": "/usr/bin/shellcheck"
 			}
 		}
