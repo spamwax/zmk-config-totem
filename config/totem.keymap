@@ -255,7 +255,7 @@ label= "NUM"                               ; // 6
 label= "CUR"                               ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓    ┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
-//             ┃           ┃    MUTE    ┃   VOL DN   ┃   VOL UP    ┃     SAVE     ┃    ┃    PG DOWN   ┃   PREV TAB     ┃    UP     ┃   NEXT TAB   ┃     PG UP     ┃
+//             ┃           ┃    MUTE    ┃   VOL DN   ┃   VOL UP    ┃     SAVE     ┃    ┃     PG UP    ┃   PREV TAB     ┃    UP     ┃   NEXT TAB   ┃    PG DOWN    ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━┫
 //             ┃    LGUI   ┃   LSHFT    ┃    LALT    ┃    LCTRL    ┃   CMD+TAB    ┃    ┃      bol     ┃     LEFT       ┃   DOWN    ┃    RIGHT     ┃     eol       ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫    ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━┓
@@ -266,7 +266,7 @@ label= "CUR"                               ;
  bindings = <
  //╷           ╷           ╷           ╷             ╷             ╷              ╷    ╷              ╷                ╷           ╷              ╷               ╷           ╷
 
-                &trans      &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp LG(S)           &kp PG_DN      &kp LS(LC(TAB))  &kp UP      &kp LC(TAB)    &kp PG_UP
+                &trans      &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp LG(S)           &kp PG_UP      &kp LS(LC(TAB))  &kp UP      &kp LC(TAB)    &kp PG_DN
                 &kp LGUI    &kp LSHFT   &kp LALT      &kp LCTRL     &appswmac           &kp LG(LEFT)   &kp LEFT         &kp DOWN    &kp RIGHT      &kp LG(RIGHT)
     &to BASE    &kp LG(Z)   &kp LG(X)   &kp LG(C)     &kp LG(V)     &kp LS(LG(Z))       &trans         &kp LA(B)        &trans      &kp LA(F)      &trans          &to BASE
                                         &trans        &trans        &trans              &trans         &trans           &trans
