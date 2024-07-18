@@ -12,12 +12,14 @@ ENV USER_ID=$USERUID
 ENV GROUP_ID=$USERGID 
 ENV USER_NAME=$USERNAME
 
-RUN apt -y update && apt -y install jq htop neovim openssh-client shellcheck
+RUN apt -y update && apt -y install jq htop neovim openssh-client shellcheck reserialize
 # RUN apt install -y python3-pip
-RUN python3 -m pip install remarshal
+# RUN python3 -m pip install --break-system-packages remarshal
 
 
 # Create the user
+RUN deluser ubuntu || echo
+RUN delgroup ubuntu || echo
 RUN groupadd --gid $GROUP_ID $USER_NAME \
   && useradd --uid $USER_ID --gid $GROUP_ID -d /home/$USER_NAME -m $USER_NAME
 
