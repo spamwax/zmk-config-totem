@@ -69,7 +69,7 @@
 
                 base_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "BASE"                              ;
+display-name= "BASE"                       ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //              ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //              ┃     B     ┃     Y     ┃     O            ┃     U            ┃     " (New TAB)┃   ┃      ;           ┃      L           ┃     D          ┃     W     ┃  V (MEH)  ┃
@@ -86,7 +86,7 @@ label= "BASE"                              ;
                  &kp W       &kp G       &kp M              &kp L              &qtmacnewtab         &kp SEMI           &kp U              &kp O            &kp B       &mmt MEH V
                  &hl LGUI D  &kp S       &hl LALT T         &hl LCTRL N        &hl LSHFT COMMA      &hr RSHFT DOT      &hr RCTRL A        &hr RALT E       &kp I       &hr RGUI H
     &z_shrt_gr   &kp F       &kp X       &kp C              &kp R              &ltl FUN FSLH        &mmt HYPER UNDER   &kp P              &kp Y            &kp J       &kp K       &kp Q
-                                         TMHP CUR ESC       TM_MRPH_DEL NUM 0  &mmt LGUI TAB        &tmb LOW RET       &tmb MCR SPC       TMHP SYM DEL
+                                         TMHP CUR ESC       TM_MRPH_DEL NUM 0  &mmt LGUI TAB        &tmb LOW RET       &tmb MCR SPACE     TMHP SYM DEL
 
                         >;
                  };
@@ -96,7 +96,7 @@ label= "BASE"                              ;
 
                 lower_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "LOW"                               ;
+display-name= "LOW"                        ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃    L0     ┃    L2     ┃     L3    ┃    L4     ┃    L5     ┃   ┃    L6     ┃    L7     ┃    L8     ┃    L9     ┃    L10    ┃
@@ -122,7 +122,7 @@ label= "LOW"                               ;
 
                 game_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "GAM"                               ;
+display-name= "GAM"                        ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //           ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //           ┃           ┃           ┃           ┃           ┃     B     ┃   ┃           ┃           ┃           ┃           ┃           ┃
@@ -139,7 +139,7 @@ label= "GAM"                               ;
                &trans     &trans      &trans      &trans      &kp B           &trans      &trans      &trans      &trans      &trans
                &kp D      &trans      &kp T       &kp N       &kp H           &trans      &trans      &trans      &trans      &trans
     &tab_bksp  &trans     &trans      &trans      &trans      &kp Z           &kp ESC     &trans      &trans      &trans      &trans      &ltl NUM Q
-                                      &kp LALT    &kp LCTRL   &kp SPC         &trans      &trans      &trans
+                                      &kp LALT    &kp LCTRL   &kp SPACE       &trans      &trans      &trans
                         >;
                 };
 
@@ -148,7 +148,7 @@ label= "GAM"                               ;
 
                 windows_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "WIN"                             ;
+display-name= "WIN"                        ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃           ┃           ┃ NEW TAB   ┃   ┃           ┃           ┃           ┃           ┃           ┃
@@ -174,7 +174,7 @@ label= "WIN"                             ;
 
                 mirror_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "MIR"                               ;
+display-name= "MIR"                        ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃ NEXT FILE ┃ MARK IN   ┃ ROTATE    ┃ MARK OUT  ┃ SHOW SNAP ┃   ┃           ┃           ┃           ┃           ┃           ┃
@@ -188,10 +188,10 @@ label= "MIR"                               ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y        &kp U        &kp I        &kp O     &kp P   
-                &kp A       &kp S       &kp D       &kp F       &kp G           &kp H        &kp J        &kp K        &kp L     &kp SEMI   
-    &to BASE    &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N        &kp M        &kp COMMA    &kp DOT   &kp FSLH    &kp SQT   
-                                        &trans      &trans      &trans          &trans       &trans       &trans   
+                &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y        &kp U        &kp I        &kp O     &kp P
+                &kp A       &kp S       &kp D       &kp F       &kp G           &kp H        &kp J        &kp K        &kp L     &kp SEMI
+    &to BASE    &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N        &kp M        &kp COMMA    &kp DOT   &kp FSLH    &kp SQT
+                                        &trans      &trans      &trans          &trans       &trans       &trans
                         >;
                 };
 
@@ -200,7 +200,7 @@ label= "MIR"                               ;
 
                 symbols_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "SYM"                               ;
+display-name= "SYM"                        ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃     [     ┃     ]     ┃     {     ┃     }     ┃     '     ┃   ┃     `     ┃     @     ┃     /     ┃     !     ┃           ┃
@@ -226,7 +226,7 @@ label= "SYM"                               ;
 
                 numbers_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "NUM"                               ; // 6
+display-name= "NUM"                        ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┓     ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┓
 //             ┃            ┃            ┃             ┃             ┃    SAVE   ┃     ┃     *     ┃     7     ┃     8     ┃     9     ┃     /      ┃
@@ -239,11 +239,11 @@ label= "NUM"                               ; // 6
 //                                       ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷            ╷            ╷             ╷             ╷            ╷    ╷           ╷           ╷           ╷           ╷            ╷         ╷
-                            
+
                 &trans       &trans       &trans        &trans        &kp LG(S)         &kp STAR    &kp N7      &kp N8      &kp N9      &kp FSLH
                 &kp LGUI     &kp LSHFT    &kp LALT      &kp LCTRL     &appswmac         &kp PLUS    &kp N4      &kp N5      &kp N6      &kp MINUS
     &to BASE    &kp LG(Z)    &kp LG(X)    &kp LG(C)     &kp LG(V)     &kp LS(LG(Z))     &kp COMMA   &kp N1      &kp N2      &kp N3      &kp EQUAL    &kp BSPC
-                                          &trans        &trans        &kp LG(O)         &kp SPC     &kp N0      &kp DOT
+                                          &trans        &trans        &kp LG(O)         &kp SPACE   &kp N0      &kp DOT
                         >;
                 };
 
@@ -252,7 +252,7 @@ label= "NUM"                               ; // 6
 
                 cursor_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "CUR"                               ;
+display-name= "CUR"                        ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓    ┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
 //             ┃           ┃    MUTE    ┃   VOL DN   ┃   VOL UP    ┃     SAVE     ┃    ┃     PG UP    ┃   PREV TAB     ┃    UP     ┃   NEXT TAB   ┃    PG DOWN    ┃
@@ -278,7 +278,7 @@ label= "CUR"                               ;
 
                 functionkeys_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "FUN"                               ;
+display-name= "FUN"                        ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┓        ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃    MUTE     ┃    VOL DN   ┃    VOL UP   ┃           ┃        ┃    F12    ┃    F7     ┃    F8     ┃    F9     ┃           ┃
@@ -304,7 +304,7 @@ label= "FUN"                               ;
 
                 macros_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "MCR"                             ;
+display-name= "MCR"                        ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃             ┃           ┃   SAVE    ┃   ┃           ┃  neovim   ┃   vimQuit    ┃           ┃           ┃
@@ -330,7 +330,7 @@ label= "MCR"                             ;
 
                 system_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "SYS"                               ;
+display-name= "SYS"                        ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓      ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃TOGGLE OUT   ┃ BT_CLR     ┃ OUT USB   ┃     {     ┃      ┃           ┃           ┃           ┃           ┃  TOG SYS  ┃
@@ -355,7 +355,7 @@ label= "SYS"                               ;
 
               shortcuts_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "COMMON_SHORTCUTS"                  ;
+display-name= "COMMON_SHORTCUTS"           ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┓    ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃   CMD+R   ┃           ┃            ┃    ┃           ┃           ┃           ┃           ┃           ┃
@@ -380,7 +380,7 @@ label= "COMMON_SHORTCUTS"                  ;
 
                 then_numbers_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "THENWIN_NUM"                       ;
+display-name= "THENWIN_NUM"                ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┓    ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃           ┃           ┃     SAVE     ┃    ┃           ┃           ┃           ┃           ┃           ┃
@@ -405,7 +405,7 @@ label= "THENWIN_NUM"                       ;
 
                 then_cursor_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "THENWIN_CUR"                       ;
+display-name= "THENWIN_CUR"                ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┓     ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃           ┃           ┃     SAVE     ┃     ┃           ┃           ┃           ┃          ┃           ┃
@@ -430,7 +430,7 @@ label= "THENWIN_CUR"                       ;
 
                 then_macros_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "THENWIN_MCR"                       ;
+display-name= "THENWIN_MCR"                ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓    ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃           ┃           ┃   SAVE    ┃    ┃           ┃           ┃           ┃           ┃           ┃
@@ -455,7 +455,7 @@ label= "THENWIN_MCR"                       ;
 
               then_shortcuts_layer {
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-label= "THENWIN_SHORTCUTS"                 ;
+display-name= "THENWIN_SHORTCUTS"          ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┓    ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
 //             ┃           ┃           ┃   CTRL+R  ┃           ┃            ┃    ┃           ┃           ┃           ┃           ┃           ┃
