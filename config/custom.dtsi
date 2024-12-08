@@ -25,12 +25,12 @@
 #define LEFT_HAND_KEYS      \
          0  1  2  3  4      \
         10 11 12 13 14      \
-     20 21 22 23 24 25  
+     20 21 22 23 24 25
 
 #define RIGHT_HAND_KEYS     \
                                     5  6  7  8  9    \
                                    15 16 17 18 19    \
-                                   26 27 28 29 30 31 
+                                   26 27 28 29 30 31
 #define LEFT_THUMB_KEYS  32 33 34
 #define RIGHT_THUMB_KEYS 35 36 37
 

@@ -2,7 +2,6 @@
     behaviors {
         appswmac: app_switch_mac {
             compatible = "zmk,behavior-tri-state";
-            label = "TRI-STATE-MAC";
             #binding-cells = <0>;
             bindings = <&kt LGUI>, <&kp TAB>, <&kt LGUI>;
             ignored-key-positions = <14 15>; // Ignort SHIFT key position so we can go back in the window list
@@ -10,7 +9,6 @@
         };
         appswwin: app_switch_win {
             compatible = "zmk,behavior-tri-state";
-            label = "TRI-STATE-WIN";
             #binding-cells = <0>;
             bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
             ignored-key-positions = <14 15>; // Ignort SHIFT key position so we can go back in the window list
@@ -38,7 +36,6 @@
         // };
         hl: hrmod_left {
             compatible = "zmk,behavior-hold-tap";
-            label = "ADVANCED_HRM_L";
             #binding-cells = <2>;
             flavor = "balanced";
             tapping-term-ms = <240>;
@@ -50,7 +47,6 @@
         };
         hr: hrmod_right {
             compatible = "zmk,behavior-hold-tap";
-            label = "ADVANCED_HRM_R";
             #binding-cells = <2>;
             flavor = "balanced";
             tapping-term-ms = <240>;
@@ -62,7 +58,6 @@
         };
         ltr: my_layer_tap_right {
             compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP_RIGHT";
             flavor = "balanced";
             hold-trigger-key-positions = <21 22 23 24 25>; // cut/copy/paste on LEFT side
             tapping-term-ms = <170>;
@@ -73,7 +68,6 @@
         };
         ltl: my_layer_tap_left {
             compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP_LEFT";
             flavor = "balanced";
             hold-trigger-key-positions = <5 6 7 8 15 16 17 18 26 27 28 29>; // Numbers on RIGHT side
             tapping-term-ms = <170>;
@@ -84,7 +78,6 @@
         };
         tmb: miryoku_thumb_layer {
             compatible = "zmk,behavior-hold-tap";
-            label = "MIRYOKU_LAYER_TAP_WITH_REPEAT";
             flavor = THUMB_HOLDING_TYPE;
             tapping-term-ms = <THUMB_HOLDING_TIME>;
             quick-tap-ms = <THUMB_REPEAT_DECAY>; // enable repeat
@@ -95,7 +88,6 @@
         };
         tmb_hold_preferred: thumb_layer_hold_preferred {
             compatible = "zmk,behavior-hold-tap";
-            label = "MIRYOKU_LAYER_TAP_WITH_REPEAT";
             flavor = "hold-preferred";
             tapping-term-ms = <THUMB_HOLDING_TIME>;
             quick-tap-ms = <THUMB_REPEAT_DECAY>; // enable repeat
@@ -106,7 +98,6 @@
         };
         mmt: my_mod_tap {
             compatible = "zmk,behavior-hold-tap";
-            label = "MY_MOD_TAP";
             #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <280>;
@@ -116,7 +107,6 @@
         };
         z_shrt_gr: z_shortcut_cmd_grave {
             compatible = "zmk,behavior-mod-morph";
-            label = "Z_CMD_GRAVE";
             #binding-cells = <0>;
             bindings = <&ltl COMMON_SHORTCUTS Z>, <&kp GRAVE>;
             mods = <(MOD_LGUI|MOD_RGUI)>;
@@ -124,42 +114,36 @@
         };
         dqt_sqt: double_then_single_quote {
             compatible = "zmk,behavior-mod-morph";
-            label = "DOUBLE_THEN_SINGLE_QUOTE";
             #binding-cells = <0>;
             bindings = <&kp DQT>, <&kp SQT>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
         qtmacnewtab: mac_new_tab {
             compatible = "zmk,behavior-mod-morph";
-            label = "MAC_NEW_TAB";
             #binding-cells = <0>;
             bindings = <&dqt_sqt>, <&kp LG(T)>;
             mods = <(MOD_LGUI|MOD_RGUI)>;
         };
         qtwinnewtab: win_new_tab {
             compatible = "zmk,behavior-mod-morph";
-            label = "WIN_NEW_TAB";
             #binding-cells = <0>;
             bindings = <&dqt_sqt>, <&kp LC(T)>;
             mods = <(MOD_LGUI|MOD_RGUI)>;
         };
         tab_bksp: game_tab_bksp {
             compatible = "zmk,behavior-mod-morph";
-            label = "GAME_TAB_BACKSPACE";
             #binding-cells = <0>;
             bindings = <&kp TAB>, <&kp BACKSPACE>;
             mods = <(MOD_LCTL|MOD_RCTL)>;
         };
         shft_bspc: shift_backspace {
             compatible = "zmk,behavior-mod-morph";
-            label = "SHIFT_BACKSPACE";
             #binding-cells = <0>;
             bindings = <&kp BSPC>, <&kp DELETE>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
         tmb_mrph_del: thumb_morph_delete {
             compatible = "zmk,behavior-hold-tap";
-            label = "THUMB_MORPH_DELETE";
             flavor = THUMB_HOLDING_TYPE;
             tapping-term-ms = <THUMB_HOLDING_TIME>;
             quick-tap-ms = <THUMB_REPEAT_DECAY>; // enable repeat
@@ -170,7 +154,6 @@
         };
         skq: sticky_key_quick_release {
             compatible = "zmk,behavior-sticky-key";
-            label = "STICKY_KEY_QUICK_RELEASE";
             #binding-cells = <1>;
             bindings = <&kp>;
             release-after-ms = <1000>;
@@ -185,7 +168,6 @@
           From: https://github.com/urob/zmk-config/
         */
         /omit-if-no-ref/ smart_shift: smart_shift {
-            label = "SMART_SHIFT";
             compatible = "zmk,behavior-mod-morph";
             bindings = <&skq RSHFT>, <&caps_word>;
             mods = <(MOD_RSFT)>;
@@ -199,7 +181,6 @@
           From: https://github.com/urob/zmk-config/
         */
         /omit-if-no-ref/ smart_gui: smart_gui_layer_change {
-            label = "SMART_GUI_WITH_LAYER_CHANGE";
             compatible = "zmk,behavior-mod-morph";
             bindings = <&skq LGUI>, <&to FUN>;
             mods = <(MOD_LGUI)>;
