@@ -1,4 +1,5 @@
 #!/usr/bin/env /usr/bin/bash
+# shellcheck shell=bash
 
 export FOO="fuckyeah"
 
